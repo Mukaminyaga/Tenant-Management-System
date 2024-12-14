@@ -1,22 +1,22 @@
-import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
-
-  const isLoggedIn = useSelector( state => state.auth.isAuthenticated);
   const navigate = useNavigate();
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
 
-  //Restric user access
-  useEffect(() => {
-    if (!isLoggedIn){
-      navigate("/Login");
-    }
-  },[])
+  // Render only if authenticated
+  if (!isAuthenticated) {
+    navigate("/Login");
+  }
 
   return (
-    <h1 className='display-1'>Welcome to Tenant Hub</h1>
-  )
-}
+    <div>
+      <h1 className="display-1">Welcome to Tenant Hub</h1>
+      {user && <p className="lead">Hello, {user.name}!</p>}
+    </div>
+  );
+};
 
-export default Dashboard
+export default Dashboard;

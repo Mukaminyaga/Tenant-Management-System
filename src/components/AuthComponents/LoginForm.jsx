@@ -24,7 +24,7 @@ const LoginForm = () => {
 
   React.useEffect(() => {
     if (success) {
-      navigate("/dashboard");  // Navigate to the Dashboard after successful login
+      navigate("/Dashboard");  // Navigate to the Dashboard after successful login
     }
   }, [success, navigate]);
 
