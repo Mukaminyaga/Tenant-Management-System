@@ -1,0 +1,35 @@
+.roleContainer {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    color: rgba(30, 30, 30, 1);
+  }
+  
+  .roleLabel {
+    font-size: 20px;
+    line-height: 1;
+  }
+  
+  .roleSelector {
+    border-radius: 10px;
+    background-color: rgba(226, 245, 255, 1);
+    display: flex;
+    gap: 9px;
+    font-size: 14px;
+    line-height: 1;
+    padding: 6px 12px;
+    border: 1px solid rgba(0, 0, 0, 1);
+    align-items: center;
+  
+  }
+  
+  .roleIcon {
+    width: 19px;
+    aspect-ratio: 0.95;
+    object-fit: contain;
+
+  }
+  
+  .roleName {
+    white-space: nowrap;
+  }

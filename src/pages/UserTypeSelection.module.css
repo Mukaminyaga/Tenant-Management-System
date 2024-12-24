@@ -1,0 +1,137 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    align-items: center;
+    padding: 56px 80px 471px;
+    height: 100vh;
+  }
+  
+  .wrapper {
+    display: flex;
+    width: 100%;
+    max-width: 1030px;
+    flex-direction: column;
+  }
+  
+  .menuIcon {
+    align-self: end;
+    display: flex;
+    min-height: 15px;
+    width: 25px;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+  }
+  
+  .menuBar {
+    border-radius: 49px;
+    background-color: rgb(26, 28, 30);
+    display: flex;
+    min-height: 3px;
+    width: 100%;
+  }
+  
+  .content {
+    border-radius: 20px;
+    background-color: #fff;
+    display: flex;
+    margin-top: 36px;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px 80px 19px;
+  }
+  
+  .header {
+    display: flex;
+    width: 549px;
+    max-width: 100%;
+    flex-direction: column;
+  }
+  
+  .title {
+    color: #000;
+    align-self: center;
+    font: 500 24px Poppins, sans-serif;
+  }
+  
+  .subtitle {
+    color: rgb(125, 120, 120);
+    margin: 5px 14px 0;
+    font: 400 14px Poppins, sans-serif;
+  }
+  
+  .cardsContainer {
+    margin-top: 30px;
+  }
+  
+  .cardsWrapper {
+    gap: 20px;
+    display: flex;
+  }
+  
+  .cardColumn {
+    display: flex;
+    flex-direction: column;
+    line-height: normal;
+    width: 50%;
+  }
+  
+  .cardColumn:last-child {
+    margin-left: 20px;
+  }
+  
+  .progressIndicator {
+    aspect-ratio: 2.3;
+    object-fit: contain;
+    object-position: center;
+    width: 23px;
+    align-self: center;
+    margin-top: 45px;
+  }
+  
+  @media (max-width: 991px) {
+    .container {
+      padding: 0 20px 100px;
+    }
+  
+    .wrapper {
+      max-width: 100%;
+    }
+  
+    .menuIcon {
+      margin-right: 10px;
+    }
+  
+    .content {
+      max-width: 100%;
+      padding: 0 20px;
+    }
+  
+    .subtitle {
+      max-width: 100%;
+      margin-right: 10px;
+    }
+  
+    .cardsContainer {
+      max-width: 100%;
+    }
+  
+    .cardsWrapper {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+    }
+  
+    .cardColumn {
+      width: 100%;
+    }
+  
+    .cardColumn:last-child {
+      margin-left: 0;
+    }
+  
+    .progressIndicator {
+      margin-top: 40px;
+    }
+  }

@@ -1,0 +1,60 @@
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  
+  .inputLabel {
+    align-self: start;
+    font-size: 14px;
+    color: rgb(30, 30, 30);
+    line-height: 1;
+    padding-top: 2px;
+  }
+  
+  .inputField {
+    border: none;
+    border-bottom: 1px solid rgb(0, 0, 0);
+    min-height: 42px;
+    font-size: 10px;
+    color: rgb(183, 182, 182);
+    line-height: 19px;
+    padding: 0 29px 2px 0;
+    
+  }
+  .inputContainer {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-bottom: 20px; /* Add spacing between fields */
+  }
+  
+  .inputLabel {
+    align-self: flex-start;
+    font-size: 14px;
+    color: rgb(30, 30, 30); /* Dark color for label */
+    line-height: 1;
+    padding-top: 2px;
+  }
+  
+  .inputField {
+    border: none;
+    border-bottom: 1px solid rgb(0, 0, 0); /* Underline style */
+    min-height: 42px;
+    font-size: 14px; /* Adjusted for better readability */
+    color: rgb(30, 30, 30); /* Darker text color */
+    line-height: 1.5;
+    padding: 0 10px 2px 0; /* Adjusted padding */
+    width: 100%;
+    transition: border-color 0.3s ease;
+  }
+  
+  .inputField:focus {
+    border-bottom-color: #007bff; /* Blue color for focus */
+    outline: none;
+  }  
+  @media (max-width: 991px) {
+    .inputField {
+      padding-right: 20px;
+    }
+  }
