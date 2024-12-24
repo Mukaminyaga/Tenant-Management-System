@@ -1,0 +1,38 @@
+  .Container-fluid{
+    background-color: rgb(230, 245, 255);
+    height: 100vh;
+    padding-top: 40px;
+  }
+  
+  .row {
+    width: 100%;
+    padding: 30px;
+  }
+  
+  .col-md-5 {
+    background-color: #ffffff; /* White background for the login form */
+    padding: 2rem;
+    padding-left: 30px!important;
+    padding-right: 30px!important;
+    border-radius: 10px;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1); /* Soft shadow for the form container */
+  }
+  
+  .col-md-5 .LoginForm {
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Link Styling (Sign Up link) */
+  .small {
+    color: #003874!important; /* Blue color for the link */
+    text-decoration: none!important;
+    transition: color 0.3s ease!important;
+  }
+  
+  .small:hover {
+    color: #00172e!important; /* Darker blue on hover */
+    text-decoration: underline!important;
+  }
+  
+
+  

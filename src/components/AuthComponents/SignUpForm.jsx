@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import { signUpUser } from '../../redux/ActionCreators/authActionsCreator';
 import { useNavigate } from 'react-router-dom';
+import "./LoginForm.css";
 
 const SignUpForm = () => {
     const [name, setName] = React.useState('');
