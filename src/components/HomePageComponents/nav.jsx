@@ -29,10 +29,10 @@ const NavigationComponent = () => {
         </>
       ) : (<>
             <li className='navItem'>
-            <Link className='btn btn-primary btn-sm mx-2' to='/login'>Login</Link>
+            <Link className='btn btn-primary btn-sm mx-2' to='/SignInPage'>Login</Link>
           </li>
           <li>
-            <Link className='btn btn-success btn-sm' to='/signup'>Sign Up</Link>
+            <Link className='btn btn-success btn-sm' to='/UserTypeSelection'>Sign Up</Link>
           </li>
           </>)
       }

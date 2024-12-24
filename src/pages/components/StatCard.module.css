@@ -1,0 +1,29 @@
+.statCard {
+    display: flex;
+    flex-direction: column;
+    font-family: Barlow, sans-serif;
+    color: rgba(0, 0, 0, 1);
+  }
+  
+  .statNumber {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.54px;
+  }
+  
+  .statSuffix {
+    color: rgba(25, 69, 105, 1);
+  }
+  
+  .statLabel {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: -0.22px;
+    margin-top: 8px;
+  }
+  
+  @media (max-width: 991px) {
+    .statCard {
+      margin-top: 40px;
+    }
+  }

@@ -1,4 +1,12 @@
-export {default as Login} from "./Auth/Login/Login"
-export {default as SignUp} from "./Auth/SignUp/SignUp"
-export {default as HomePage} from "./HomePage"
-export {default as Dashboard} from "./Dashboard/Dashboard"
+export { default as Login } from './Auth/Login/Login';
+export { default as SignUp } from './Auth/SignUp/SignUp';
+export { default as HomePage } from './HomePage';
+export { default as Dashboard } from './Dashboard/Dashboard';
+export { default as SignUpTenant } from './SignUpTenant';
+export { default as SignUpManager } from './SignUpManager';
+export { default as SignInPage } from './SignInPage'
+export { default as HowItWorks } from './HowItWorks'
+export { default as UserTypeSelection } from './UserTypeSelection'
+export { default as LandingPage } from './LandingPage';
+export { default as LogoutPage } from './LogoutPage';
+export { default as ResetPasswordForm } from './ResetPasswordForm';
