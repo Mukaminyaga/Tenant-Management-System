@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Nav from '../../components/DashboardComponents/Nav';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -12,10 +13,10 @@ const Dashboard = () => {
   }
 
   return (
-    <div>
-      <h1 className="display-1">Welcome to Tenant Hub</h1>
-      {user && <p className="lead">Hello, {user.name}!</p>}
-    </div>
+    <>
+      <Nav/>
+      {/* <Link to= '/Upload'>Upload</Link> */}
+    </>
   );
 };
 
