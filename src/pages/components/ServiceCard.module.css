@@ -1,0 +1,39 @@
+.serviceCard {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .serviceHeader {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  
+  .serviceIcon {
+    aspect-ratio: 1;
+    object-fit: contain;
+    width: 40px;
+  }
+  
+  .serviceTitle {
+    font-size: 29px;
+    font-weight: 600;
+    letter-spacing: -0.49px;
+    font-family: Barlow, sans-serif;
+    color: rgba(0, 0, 0, 1);
+  }
+  
+  .serviceDescription {
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: -0.26px;
+    margin-top: 13px;
+    font-family: Barlow, sans-serif;
+    color: rgba(0, 0, 0, 1);
+  }
+  
+  @media (max-width: 991px) {
+    .serviceCard {
+      margin-top: 40px;
+    }
+  }

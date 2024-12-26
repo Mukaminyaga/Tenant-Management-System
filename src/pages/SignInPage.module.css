@@ -1,0 +1,190 @@
+/* SignInPage.module.css */
+
+.signInContainer {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  align-items: center;
+  padding: 25px 70px 262px;
+  height: 100vh;
+}
+
+.contentWrapper {
+  margin-left: 34px;
+  width: 100%;
+  max-width: 881px;
+  display: flex;
+  gap: 20px;
+}
+
+.formSection {
+  width: 42%;
+}
+
+.formContent {
+  display: flex;
+  margin-top: 75px;
+  width: 100%;
+  flex-direction: column;
+  font-family: Inter, sans-serif;
+  font-weight: 500;
+}
+
+.title {
+  color: #000;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 2;
+  letter-spacing: -1.92px;
+}
+
+.form {
+  width: 100%;
+  
+}
+
+.inputGroup {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.input {
+  border: 1px solid rgba(91, 91, 91, 1);
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 14px;
+  width: 100%;
+}
+
+.submitButton {
+  width: 100%;
+  border-radius: 8px;
+  background-color: rgba(30, 30, 30, 1);
+  min-height: 40px;
+  font-size: 16px;
+  color: #fcfcfc;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1;
+  padding: 11px 20px;
+  border: 1px solid rgba(91, 91, 91, 1);
+  margin-top: 23px;
+  cursor: pointer;
+}
+
+.sideSection {
+  width: 58%;
+  display: flex;
+  flex-direction: column;
+}
+
+.signUpPrompt {
+  position: relative;
+  border-radius: 15px 0 0 15px;
+  min-height: 491px;
+  margin-top: 39px;
+  width: 475px;
+  max-width: 100%;
+  display: flex;
+  align-items: end;
+  font-family: Inter, sans-serif;
+  text-align: center;
+  justify-content: center;
+  padding: 134px 80px;
+  background: url('your-image-url.jpg') no-repeat center center;
+  background-size: cover;
+  clip-path: polygon(100% 0, 100% 100%, 50% 100%, 0 75%, 0 0);
+  /* Wave effect on right side */
+}
+
+.backgroundImage {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.signUpContent {
+  position: relative;
+  border-radius: 50%;
+  display: flex;
+  margin-bottom: -30px;
+  flex-direction: column;
+  padding: 64px 37px;
+}
+
+.promptText {
+  color: #fcfcfc;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 2;
+}
+
+.signUpText {
+  color: #fff;
+  font-size: 35px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -1.4px;
+  margin-top: 29px;
+}
+.forgotPasswordLink {
+  display: block;
+  margin-top: 13px;
+  color: #357abd;
+  text-align: right;
+  text-decoration: none;
+
+}
+
+.forgotPasswordLink:hover {
+  text-decoration: underline;
+}
+
+
+@media (max-width: 991px) {
+  .signInContainer {
+    padding: 0 20px 100px;
+    margin-left: -20px;
+  }
+
+  .contentWrapper {
+    max-width: 100%;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .formSection {
+    width: 100%;
+  }
+
+  .formContent {
+    margin-top: 40px;
+  }
+
+  .sideSection {
+    width: 100%;
+    margin-top: 40px;
+  }
+
+  .signUpPrompt {
+    margin-right: 3px;
+    padding: 100px 20px;
+  }
+
+  .signUpContent {
+    margin-bottom: 10px;
+    padding: 0 20px;
+  }
+}

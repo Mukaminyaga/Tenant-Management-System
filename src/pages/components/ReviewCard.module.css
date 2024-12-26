@@ -1,0 +1,46 @@
+.reviewCard {
+    border-radius: 10px;
+    background-color: rgba(240, 240, 240, 0);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 38px 35px 14px;
+    border: 2px dashed rgba(203, 150, 4, 1);
+  }
+  
+  .reviewText {
+    font-size: 18px;
+    letter-spacing: -0.31px;
+    font-family: Barlow, sans-serif;
+    color: rgba(0, 0, 0, 1);
+    font-weight: 400;
+  }
+  
+  .reviewName {
+    font-size: 15px;
+    letter-spacing: -0.26px;
+    margin-top: 121px;
+    font-family: Barlow, sans-serif;
+    color: rgba(0, 0, 0, 1);
+    font-weight: 400;
+  }
+  
+  .reviewTitle {
+    color: rgba(25, 69, 105, 1);
+    font-size: 12px;
+    letter-spacing: -0.2px;
+    font-family: Barlow, sans-serif;
+    font-weight: 400;
+  }
+  
+  @media (max-width: 991px) {
+    .reviewCard {
+      margin-top: 40px;
+      padding: 0 20px;
+    }
+    
+    .reviewName {
+      margin-top: 40px;
+    }
+  }
