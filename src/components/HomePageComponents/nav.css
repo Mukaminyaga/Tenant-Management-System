@@ -1,0 +1,87 @@
+/* Navbar Styling */
+.navbar {
+    padding: 15px 30px;
+  }
+  
+  .navTitle {
+    font-size: 1.8rem;
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+  }
+  
+  .navTitle:hover {
+    color: #0096c0; /* Blue color on hover */
+    text-decoration: underline;
+  }
+  
+  /* Navbar Items */
+  .navbar-nav {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navItem {
+    margin: 0 15px;
+  }
+  
+  .navItem .btn-primary {
+    font-size: 0.9rem!important;
+    padding: 8px 15px!important;
+    border-radius: 70px!important;
+    border: 1px solid #0096c0!important;
+    color: #0096c0!important;
+    background-color: transparent!important;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease!important;
+  }
+
+  .btn-secondary{
+    font-size: 0.9rem!important;
+    padding: 8px 15px!important;
+    border-radius: 70px!important;
+    border: 1px solid #0096c0 !important;
+    color: #0096c0!important;
+    background-color: transparent!important;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease!important;
+  }
+  
+  .navItem .btn-primary:hover {
+    background-color: #0096c062!important;
+    color: rgb(0, 0, 0)!important;
+    transform: translateY(-2px)!important;
+  }
+
+  .btn-secondary:hover{
+    background-color: #0096c062!important;
+    color: rgb(0, 0, 0)!important;
+    transform: translateY(-2px)!important;
+  }
+  
+  /* Authenticated User Styles */
+  .navItem .username {
+    font-size: 1.3rem;
+    color: #000000; /* Blue color for username */
+    font-weight: bold;
+  }
+  
+  .btn-sm {
+    font-size: 0.85rem;
+  }
+  
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .navbar-nav {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .navItem {
+      margin: 10px 0;
+    }
+  }
+  
