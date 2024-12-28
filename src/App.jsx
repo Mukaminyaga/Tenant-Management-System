@@ -19,6 +19,7 @@ import TermsAndDocs from "./pages/TermsAndDocs";
 import { useDispatch } from 'react-redux';
 import { checkIsLoggedIn } from './redux/ActionCreators/authActionsCreator';
 import { useEffect } from 'react';
+import ReportMaintenance from './pages/Maintenance/ReportMaintenance'
 
 const App = () => {
   const dispatch = useDispatch();
@@ -51,6 +52,7 @@ const App = () => {
         <Route path="/MaintenanceDescription" element={<MaintenanceDescription/>} />
         <Route path="/PaymentTenant" element={<PaymentTenant/>} />
         <Route path="/TermsAndDocs" element={<TermsAndDocs/>} />
+        <Route path='/Report Issue' element={<ReportMaintenance/>}/> 
       </Routes>
     </div>
   );
