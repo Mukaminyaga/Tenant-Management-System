@@ -1,0 +1,57 @@
+.successModal {
+    border-radius: 15px;
+    background-color: rgba(226, 245, 255, 1);
+    display: flex;
+    /* max-width: 550px; */
+    width: 100%;
+    flex-direction: column;
+    overflow: hidden;
+    align-items: center;
+    font-weight: 400;
+    text-align: center;
+    padding: 33px 0 103px;
+  }
+  
+  @media (max-width: 991px) {
+    .successModal {
+      padding-bottom: 100px;
+    }
+  }
+  
+  .successImage {
+    aspect-ratio: 2.92;
+    object-fit: contain;
+    object-position: center;
+    width: 100%;
+    align-self: stretch;
+  }
+  
+  @media (max-width: 991px) {
+    .successImage {
+      max-width: 100%;
+    }
+  }
+  
+  .successMessage {
+    color: rgba(0, 0, 0, 1);
+    margin-top: 5px;
+    font: 20px Barlow Semi Condensed, -apple-system, Roboto, Helvetica, sans-serif;
+  }
+  
+  .dismissText {
+    color: rgba(25, 69, 105, 1);
+    margin-top: 25px;
+    font: 10px Barlow, sans-serif;
+  }
+  
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }

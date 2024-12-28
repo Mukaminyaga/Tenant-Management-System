@@ -1,0 +1,238 @@
+/* General Styling */
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f7fc;
+  color: #333;
+}
+
+.maintenanceRequest {
+  background: #F4F5F7;
+  overflow: hidden;
+  max-height: 120vh;
+}
+
+.layoutWrapper {
+  display: flex;
+  gap: 20px;
+  position: relative;
+}
+
+.sidebarToggle {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  background: rgb(45, 100, 150);
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.sidebarToggle:hover {
+  background-color: rgb(35, 80, 120);
+  transform: scale(1.1);
+}
+
+.hamburger {
+  display: block;
+  width: 24px;
+  height: 3px;
+  background: white;
+  position: relative;
+  border-radius: 2px;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 3px;
+  background: white;
+  border-radius: 2px;
+  left: 0;
+}
+
+.hamburger::before {
+  top: -8px;
+}
+
+.hamburger::after {
+  bottom: -8px;
+}
+
+.sidebar {
+  background-color: rgb(29, 35, 52);
+  width: 22%;
+  min-height: 100vh;
+  padding: 60px 20px;
+  color: rgb(217, 217, 217);
+  font: 400 18px 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebarOpen {
+  transform: translateX(0);
+}
+
+.sidebarTitle {
+  font-size: 28px;
+  color: white;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.sidebarItem {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 18px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.sidebarItem:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateX(6px);
+}
+
+.sidebarLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.sidebarIcon {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.mainContent {
+  width: 78%;
+  margin-left: 20px;
+  transition: margin-left 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+}
+
+.pageHeader {
+  background: #FFF;
+  display: flex;
+  gap: 10px;
+  color: #25325C;
+  padding: 25px 30px;
+  font: 400 24px 'Inter', sans-serif;
+  border-bottom: 2px solid #E5E5E5;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.headerTitle {
+  color: rgb(37, 50, 92);
+  font-size: 24px;
+  margin-left: 12px;
+  font-weight: 500;
+}
+
+.maintenanceForm {
+  padding: 40px 30px;
+  background-color: #FFF;
+  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.formHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.formTitle {
+  color: #333;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.descriptionInput {
+  background: #FFF;
+  width: 100%;
+  padding: 20px;
+  min-height: 150px;
+  color: #333;
+  font: 400 18px 'Inria Sans', sans-serif;
+  border: 1px solid #E5E5E5;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.descriptionInput:focus {
+  border-color: rgba(128, 128, 128, 0.6);
+  box-shadow: 0 0 10px rgba(128, 128, 128, 0.4);
+}
+
+.submitButton {
+  background: rgb(45, 100, 150);
+  color: #FFF;
+  font: 600 18px 'Inter', sans-serif;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: rgb(35, 80, 120);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Media Queries */
+@media (max-width: 991px) {
+  .layoutWrapper {
+    flex-direction: column;
+  }
+
+  .sidebarToggle {
+    display: block;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 70%;
+    max-width: 300px;
+    transform: translateX(-100%);
+    z-index: 999;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .sidebarOpen {
+    transform: translateX(0);
+  }
+
+  .mainContent {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .submitButton {
+    width: 100%;
+    margin: 20px 0;
+  }
+}
