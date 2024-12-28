@@ -10,3 +10,11 @@ export { default as UserTypeSelection } from './UserTypeSelection'
 export { default as LandingPage } from './LandingPage';
 export { default as LogoutPage } from './LogoutPage';
 export { default as ResetPasswordForm } from './ResetPasswordForm';
+export { default as DashboardLayout } from './DashboardLayout';
+export { default as MessageDashboard} from './MessageDashboard';
+export { default as Settings} from './Settings';
+export { default as SuccessModal} from './SuccessModal';
+export { default as MaintenanceDashboard} from './MaintenanceDashboard';
+export { default as MaintenanceDescription} from './MaintenanceDescription';
+export { default as PaymentTenant} from './PaymentTenant';
+export { default as TermsAndDocs} from './TermsAndDocs';

@@ -1,0 +1,26 @@
+.requestItem {
+    display: flex;
+    align-items: start;
+    gap: 20px;
+    margin: 20px 0;
+  }
+  
+  .requestIcon {
+    background-color: rgba(211, 208, 208, 1);
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    margin-top: 19px;
+  }
+  
+  .requestImage {
+    aspect-ratio: 0.94;
+    object-fit: contain;
+    object-position: center;
+    width: 94px;
+  }
+  
+  .requestText {
+    flex-basis: auto;
+    max-width: 100%;
+  }

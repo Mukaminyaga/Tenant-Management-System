@@ -85,7 +85,9 @@ const SignInPage = () => {
             />
             <div className={styles.signUpContent}>
               <p className={styles.promptText}>Don't have an Account yet?</p>
-              <h2 className={styles.signUpText}>Sign Up</h2>
+              <Link to="/UserTypeSelection" className={styles.signUpLink}>
+        <h2 className={styles.signUpText}>Sign Up</h2>
+      </Link>
             </div>
           </div>
         </div>
