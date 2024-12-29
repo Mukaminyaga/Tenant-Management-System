@@ -9,7 +9,7 @@ import {
   setDoc
 } from "firebase/firestore";
 import styles from "./SignUpPage.module.css";
-import Signup from "../Images/Signup.png";
+import Signup from "../AuthImages/Signup.png";
 
 // Firebase Configuration
 const firebaseConfig = {
