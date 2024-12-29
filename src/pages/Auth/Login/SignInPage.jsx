@@ -5,7 +5,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
 import { auth, db } from "../../../config/firebaseConfig"; // Ensure correct paths
 import styles from "./SignInPage.module.css";
-import SignupImage from "../Images/Signup.png";
+import SignupImage from "../AuthImages/Signup.png";
 
 const SignInPage = () => {
   const [formData, setFormData] = useState({
