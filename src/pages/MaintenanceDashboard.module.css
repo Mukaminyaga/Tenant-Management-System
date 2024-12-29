@@ -1,0 +1,254 @@
+/* General container styling */
+.maintenanceContainer {
+  background-color: rgb(245, 245, 245); /* Softer background */
+  overflow: hidden;
+  min-height: 100vh;
+  padding: 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Layout styles */
+.layoutWrapper {
+  display: flex;
+  gap: 20px;
+  position: relative;
+}
+
+.mainContent {
+  width: 78%;
+  margin-left: 0;
+  transition: margin-left 0.3s ease-in-out;
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Sidebar toggle button */
+.sidebarToggle {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  background: rgb(29, 35, 52);
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.hamburger {
+  width: 24px;
+  height: 2px;
+  background: white;
+  position: relative;
+  border-radius: 1px;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background: white;
+  border-radius: 1px;
+}
+
+.hamburger::before {
+  top: -6px;
+}
+
+.hamburger::after {
+  top: 6px;
+}
+
+/* Header styles */
+.header {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.headerIcon {
+  width: 36px;
+  height: 36px;
+  margin-right: 12px;
+}
+
+.headerTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: rgba(37, 50, 92, 0.9);
+}
+
+/* Sidebar styles */
+.sidebar {
+  background-color: rgb(29, 35, 52);
+  width: 22%;
+  min-height: 100vh;
+  padding: 60px 24px;
+  color: rgb(217, 217, 217);
+  font: 400 16px 'Inter', sans-serif;
+  flex-direction: column;
+  justify-content: flex-start;
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebarOpen {
+  transform: translateX(0);
+}
+
+.sidebarLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.sidebarItem {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 12px 0;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease;
+  border-radius: 6px;
+}
+
+.sidebarItem:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.02);
+}
+
+.sidebarItem img {
+  width: 28px;
+}
+
+.sidebarTitle {
+  font-size: 18px;
+  color: white;
+  margin-bottom: 24px;
+}
+
+/* Form container styles */
+.maintenanceForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-family: 'Inria Sans', sans-serif;
+  padding: 16px;
+}
+
+.formTitle {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.requestContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 20px;
+  margin-top: 16px;
+  gap: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.requestContainer p {
+  font-size: 15px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.maintenanceRequest {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.maintenanceRequest img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.maintenanceRequest .content {
+  flex-grow: 1;
+  font-size: 14px;
+  color: #444;
+}
+
+/* Buttons */
+.nextButton {
+  padding: 12px 24px;
+  background-color: rgb(45, 100, 150);
+  color: white !important;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin: 20px auto;
+  display: block;
+  max-width: 180px;
+}
+
+.nextButton:hover {
+  background-color: rgb(35, 80, 120);
+}
+
+.nextButton:active {
+  transform: scale(0.98);
+}
+
+.nextButton:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.75);
+}
+
+/* Progress bar styles */
+.progressBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px ;
+  width: 50%;
+  max-width: 900px;
+  gap: 12px;
+ 
+}
+
+.progressStep {
+  flex: 1;
+  text-align: center;
+}
+
+.progressIndicator {
+  background-color: rgba(57, 122, 176, 1);
+  height: 10px;
+  border-radius: 5px;
+}
+
+.inactiveIndicator {
+  background-color: #999;
+  height: 10px;
+  border-radius: 5px;
+}
+
+.stepLabel {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #666;
+}

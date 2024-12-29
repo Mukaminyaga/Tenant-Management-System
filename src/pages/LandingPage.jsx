@@ -66,6 +66,7 @@ const LandingPage = () => {
       <main className={styles.mainContent}>
         <section className={styles.heroSection}>
           <div className={styles.heroContent}>
+          {/* <h2 className={styles.tenantEaseHeading}>TenantEase</h2> */}
             <h1 className={styles.heroTitle}>
               <span className={styles.regularText}>Making it feel more like </span>
               <span className={styles.highlightText}>home</span>
@@ -121,7 +122,7 @@ const LandingPage = () => {
         <div className={styles.footerContent}>
           <div className={styles.footerBranding}>
             <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/a3089ba908370f806f14b18b7293beb1b9bce52acda949fcde818800c662c082?placeholderIfAbsent=true&apiKey=febb6e01b7be4e54a81beb5e9ff50628" alt="Haven Heights logo" className={styles.footerLogo} />
-            <span className={styles.footerBrandName}>Haven Heights</span>
+            <span className={styles.footerBrandName}>TenantEase</span>
           </div>
           
           <div className={styles.footerLinks}>
@@ -129,12 +130,12 @@ const LandingPage = () => {
               <a href="#home" className={styles.footerLink}>Home</a>
               <a href="#about" className={styles.footerLink}>About Us</a>
               <a href="#services" className={styles.footerLink}>Our Services</a>
-              <a href="#signin" className={styles.footerLink}>Sign in</a>
+              <a href="/SignInPage" className={styles.footerLink}>Sign in</a>
             </nav>
             
             <div className={styles.footerContact}>
-              <a href="tel:1234567892" className={styles.footerPhone}>1234567892</a>
-              <a href="mailto:haven@gmail.com" className={styles.footerEmail}>haven@gmail.com</a>
+              <a href="tel:1234567892" className={styles.footerPhone}>+254796789413</a>
+              <a href="mailto:haven@gmail.com" className={styles.footerEmail}>tenantease24@gmail.com</a>
             </div>
           </div>
         </div>

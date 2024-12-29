@@ -1,0 +1,238 @@
+.dashboardContainer {
+  background: #fff;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+}
+
+.contentWrapper {
+  display: flex;
+  gap: 20px;
+  position: relative;
+}
+
+.sidebar {
+  background-color: rgb(29, 35, 52);
+  width: 22%;
+  min-height: 100vh;
+  padding: 80px 20px; /* Adjusted padding for better layout */
+  color: rgb(217, 217, 217);
+  font: 400 18px 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  transition: transform 0.3s ease-in-out;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebarOpen {
+  transform: translateX(0);
+}
+
+.mainColumn {
+  flex: 1;
+  margin-left: 0px;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.sidebarToggle {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  background: rgb(29, 35, 52);
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.hamburger {
+  width: 24px;
+  height: 2px;
+  background: white;
+  position: relative;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background: white;
+  left: 0;
+}
+
+.hamburger::before {
+  top: -6px;
+}
+
+.hamburger::after {
+  bottom: -6px;
+}
+
+.mainContent {
+  flex: 1;
+  margin-left: 0px;
+  transition: margin-left 0.3s ease-in-out;
+  padding: 20px; /* Added padding for spacing */
+}
+
+.headerSettingsTitle {
+  color: #25325C;
+  font: 500 24px 'Inter', sans-serif;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.headerSettings {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 10px 20px;
+  border-bottom: 2px solid #ddd;
+}
+
+.headerSettingsIcon {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.formContainer {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  max-width: 772px;
+  margin: 40px auto; /* Centered container */
+  padding: 30px 50px;
+}
+
+.profileForm {
+  width: 100%;
+}
+
+.formColumns {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.formColumn {
+  flex: 1;
+  min-width: 250px; /* Ensures responsive layout */
+}
+
+.contentTitle {
+  color: black; /* Matches the primary color scheme */
+  font: 550 22px 'Barlow', sans-serif; /* Slightly larger and bold for emphasis */
+  margin-bottom: 0px; 
+  padding-left: 20px; /* Aligns title with content padding */
+  padding-top: 20px;
+}
+
+.profileTitle {
+  color: #0B3A60;
+  font: 500 30px 'Barlow', sans-serif;
+  margin-bottom: 30px;
+  text-align: center; /* Centered title */
+}
+
+.inputGroup {
+  margin: 20px 0;
+}
+
+.inputLabel {
+  color: #000;
+  font: 500 15px 'Barlow', sans-serif;
+  display: block;
+  margin-bottom: 11px;
+}
+
+.inputField {
+  width: 100%;
+  height: 40px; /* Standardized height */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.2s ease-in-out;
+}
+
+.inputField:focus {
+  border-color: #0B3A60;
+  outline: none;
+}
+
+.editButton {
+  color: #0B3A60;
+  font: 500 14px 'Barlow', sans-serif;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.saveButton {
+  background: #1D2334;
+  color: #fff;
+  font: 600 14px 'Barlow', sans-serif;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.saveButton:hover {
+  background: #0B3A60;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991px) {
+  .contentWrapper {
+    flex-direction: column;
+  }
+
+  .sidebarToggle {
+    display: block;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 80%;
+    max-width: 300px;
+    transform: translateX(-100%);
+    z-index: 999;
+    transition: transform 0.3s ease-in-out;
+    height: 100vh;
+  }
+
+  .sidebarOpen {
+    transform: translateX(0);
+  }
+
+  .formContainer {
+    margin: 20px auto;
+    padding: 20px;
+  }
+
+  .formColumns {
+    flex-direction: column;
+  }
+
+  .saveButton {
+    margin-top: 20px;
+  }
+
+  .dashboardTitle {
+    margin-left: 10px;
+  }
+
+  .settingsTitle {
+    padding: 0 20px;
+  }
+}
