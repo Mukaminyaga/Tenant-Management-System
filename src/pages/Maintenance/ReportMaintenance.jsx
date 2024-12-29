@@ -1,7 +1,18 @@
 import React, { useState } from "react";
 import emailjs from "emailjs-com";
+import { Navigate, useLocation } from "react-router-dom";
 
 const ReportMaintenance = () => {
+
+  const location = useLocation();
+  // Check if the user navigated from /Dashboard
+  const referrer = location.state?.from;
+  if (referrer !== "/Tenant Dashboard") {
+    // Redirect to Dashboard if the referrer is not correct
+    return <Navigate to="/Dashboard" replace />;
+  }
+
+
   const [selectedIssues, setSelectedIssues] = useState([]);
   const [otherIssue, setOtherIssue] = useState("");
   const [tenantName, setTenantName] = useState("");

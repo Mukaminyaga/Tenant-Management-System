@@ -57,7 +57,7 @@ const LandingPage = () => {
           <Link to="/Services" className={styles.navLink}>Our Services</Link>
           <Link to="/HowItWorks" className={styles.navLink}>How it works</Link>
           </div>
-          <Link to="/SignInPage" className={styles.signInButton}>
+          <Link to="/Login" className={styles.signInButton}>
             Sign in
           </Link>
         </nav>

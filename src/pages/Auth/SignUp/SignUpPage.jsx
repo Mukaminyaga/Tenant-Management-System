@@ -1,42 +1,76 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
-import { signUpUser } from '../redux/ActionCreators/authActionsCreator';
-import styles from './SignUpTenant.module.css';
-import Homeicon from '../Images/Homeicon.png';
-import Signup from '../Images/Signup.png';
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
+import { initializeApp } from "firebase/app";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getFirestore,
+  doc,
+  setDoc
+} from "firebase/firestore";
+import styles from "./SignUpPage.module.css";
+import Signup from "../Images/Signup.png";
 
-const SignUpTenant = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [success, setSuccess] = useState('');
+// Firebase Configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyB_s2DQ86GMDe1XiVfOT7T9fPA5LAxVFN0",
+  authDomain: "tenant-management-system-64046.firebaseapp.com",
+  projectId: "tenant-management-system-64046",
+  storageBucket: "tenant-management-system-64046.appspot.com",
+  messagingSenderId: "388402906664",
+  appId: "1:388402906664:web:ee3a92e6098288b432171d",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const SignUpPage = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [role, setRole] = useState("tenant");
+  const [success, setSuccess] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
 
     if (!firstName || !lastName || !email || !password || !confirmPassword) {
-      alert('Please fill in all fields!');
+      alert("Please fill in all fields!");
       return;
     }
 
     if (password !== confirmPassword) {
-      alert('Passwords do not match!');
+      alert("Passwords do not match!");
       return;
     }
 
-    // Combine firstName and lastName as name
-    const name = `${firstName} ${lastName}`;
-    dispatch(signUpUser(name, email, password, setSuccess));
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      await setDoc(doc(db, "users", user.uid), {
+        name: `${firstName} ${lastName}`,
+        email: user.email,
+        role,
+      });
+
+      setSuccess(true);
+      alert("User registered successfully!");
+    } catch (error) {
+      console.error("Error signing up:", error.message);
+      alert("Error signing up: " + error.message);
+    }
   };
 
   useEffect(() => {
     if (success) {
-      navigate('/Dashboard'); // Redirect to Dashboard on successful signup
+      navigate("/Dashboard"); // Redirect to Dashboard on successful signup
     }
   }, [success, navigate]);
 
@@ -44,7 +78,7 @@ const SignUpTenant = () => {
     <div className={styles.signUpContainer}>
       <div className={styles.contentWrapper}>
         <div className={styles.formSection}>
-          <form className={styles.signUpForm} onSubmit={handleSubmit}>
+          <form className={styles.signUpForm} onSubmit={handleSignUp}>
             <h1 className={styles.formTitle}>Create an account</h1>
 
             <div className={styles.nameFields}>
@@ -118,12 +152,19 @@ const SignUpTenant = () => {
               />
             </div>
 
-            <div className={styles.roleSelector}>
-              <span className={styles.roleLabel}>Role:</span>
-              <div className={styles.roleButton}>
-                <img src={Homeicon} alt="Home" className={styles.roleIcon} />
-                <span className={styles.roleName}>Tenant</span>
-              </div>
+            <div className={styles.formGroup}>
+              <label htmlFor="role" className={styles.formLabel}>
+                Role
+              </label>
+              <select
+                id="role"
+                className={styles.formInput}
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+              >
+                <option value="tenant">Tenant</option>
+                <option value="admin">Admin</option>
+              </select>
             </div>
 
             <button type="submit" className={styles.submitButton}>
@@ -142,7 +183,7 @@ const SignUpTenant = () => {
             <img src={Signup} alt="Signup" className={styles.backgroundImage} />
             <div className={styles.promptContent}>
               <p className={styles.promptText}>Already have an account?</p>
-              <Link to="/SignInPage" className={styles.signInText}>
+              <Link to="/Login" className={styles.signInText}>
                 Sign In
               </Link>
             </div>
@@ -153,4 +194,4 @@ const SignUpTenant = () => {
   );
 };
 
-export default SignUpTenant;
+export default SignUpPage;

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Nav from "../../components/DashboardComponents/Nav";
 
-const Dashboard = () => {
+const TenantDashboard = () => {
   const { isAuthenticated } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
@@ -17,16 +17,14 @@ const Dashboard = () => {
     <>
       <Nav />
       <div className="dashboard-content">
-        <h3>Welcome Admin</h3>
+        <h3>Welcome Tenant</h3>
         <Link
-          to="/Send Alert"
-          state={{ from: "/Dashboard" }} // Pass state to restrict access
-        >
-          Send Alert
-        </Link>
+            to="/Report Issue"
+            state={{ from: "/Tenant Dashboard" }} // Pass state to restrict access
+          >Report Issue</Link>
       </div>
     </>
   );
 };
 
-export default Dashboard;
+export default TenantDashboard;

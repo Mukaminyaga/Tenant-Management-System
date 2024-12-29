@@ -10,7 +10,7 @@ const ResetPasswordForm = () => {
   return (
     <div className={styles.resetPasswordContainer}>
       <div className={styles.contentWrapper}>
-        <Link to="/SignInPage" className={styles.backLink}>  {/* Wrap the image with a Link component */}
+        <Link to="/Login" className={styles.backLink}>  {/* Wrap the image with a Link component */}
           <img
             loading="lazy"
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/a2e4a46e6ee426956475cf5f309693b3ac7ed42646306bbb67301d658b6acb72?placeholderIfAbsent=true&apiKey=febb6e01b7be4e54a81beb5e9ff50628"
