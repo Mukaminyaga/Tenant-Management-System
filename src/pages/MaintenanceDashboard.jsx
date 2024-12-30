@@ -17,13 +17,13 @@ import messageIcon from '../Images/messageIcon.png';
 import repair from '../Images/repair.png';
 
 const sidebarItems = [
-    { icon: profileIcon, label: 'PROFILE', link: '/DashboardTenant' },
-    { icon: termsIcon, label: 'TERMS AND DOCS', link: '/TermsAndDocs' },
-    { icon: messagesIcon, label: 'MESSAGES', link: '/MessageTenant' },
-    { icon: maintenanceIcon, label: 'MAINT . & REPAIRS', link: '/MaintenanceDashboard' },
-    { icon: paymentsIcon, label: 'PAYMENTS', link: '/PaymentTenant' },
-    { icon: settingsIcon, label: 'SETTINGS', link: '/Settings' },
-    { icon: logoutIcon, label: 'LOGOUT', link: '/LogoutPage' } 
+  { icon: profileIcon, label: 'PROFILE', link: '/DashboardTenant' },
+  { icon: termsIcon, label: 'TERMS AND DOCS', link: '/TermsAndDocs' },
+  { icon: messagesIcon, label: 'MESSAGES', link: '/MessageTenant' },
+  { icon: maintenanceIcon, label: 'MAINT . & REPAIRS', link: '/MaintenanceDashboard' },
+  { icon: paymentsIcon, label: 'PAYMENTS', link: '/PaymentTenant' },
+  { icon: settingsIcon, label: 'SETTINGS', link: '/Settings' },
+  { icon: logoutIcon, label: 'LOGOUT', link: '/LogoutPage' } 
 ];
 
 const maintenanceRequests = [
@@ -133,12 +133,12 @@ const MaintenanceDashboard = () => {
                 <div key={index} className={styles.requestItem}>
                   <input
                     type="checkbox"
-                    id={`request-${index}`}
+                    id={`request-${index}`} // Fix string interpolation
                     checked={selectedRequests.includes(index)}
                     onChange={() => handleRequestSelect(index)}
                     className={styles.requestCheckbox}
                   />
-                  <label htmlFor={`request-${index}`} className={styles.requestLabel}>
+                  <label htmlFor={`request-${index}`} className={styles.requestLabel}> {/* Fix string interpolation */}
                     <MaintenanceRequest image={request.image}>
                       {request.content}
                     </MaintenanceRequest>

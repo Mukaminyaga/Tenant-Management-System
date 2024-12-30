@@ -15,7 +15,7 @@ const sidebarItems = [
     { icon: profileIcon, label: 'PROFILE', link: '/DashboardTenant' },
     { icon: termsIcon, label: 'TERMS AND DOCS', link: '/TermsAndDocs' },
     { icon: messagesIcon, label: 'MESSAGES', link: '/MessageTenant' },
-    { icon: maintenanceIcon, label: 'MAINT . & REPAIRS', link: '/MaintenanceDashboard' },
+    { icon: maintenanceIcon, label: 'MAINT . & REPAIRS', link: '/Report Issue' },
     { icon: paymentsIcon, label: 'PAYMENTS', link: '/PaymentTenant' },
     { icon: settingsIcon, label: 'SETTINGS', link: '/Settings' },
     { icon: logoutIcon, label: 'LOGOUT', link: '/LogoutPage' } 
@@ -78,7 +78,7 @@ const MessageDashboard = () => {
               If you have an emergency or fire-related situation, please
               call 911 immediately. <br />
               For any maintenance concerns, kindly submit a maintenance
-              request <a href="/maintenance" className={styles.link}>here</a>.
+              request <a href="/Report Issue" className={styles.link}>here</a>.
             </p>
 
             <form onSubmit={handleSubmit} className={styles.messageForm}>
@@ -90,7 +90,7 @@ const MessageDashboard = () => {
                   id="tenancyInput"
                   type="text"
                   className={styles.formInput}
-                  placeholder="Enter your tenancy and name first"
+                  placeholder="Enter your name and apartment number first"
                   required
                   aria-required="true"
                 />

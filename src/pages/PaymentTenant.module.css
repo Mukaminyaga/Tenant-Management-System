@@ -184,9 +184,10 @@
   }
   
   .headerText {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
+    font: 500 23px Inter, sans-serif ;
+    color:#333;
+    margin: 0;
+    
   }
   
   /* Mobile & Tablet Styles */
