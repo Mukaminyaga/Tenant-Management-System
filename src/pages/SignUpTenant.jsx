@@ -12,6 +12,8 @@ const SignUpTenant = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [apartmentNumber, setApartmentNumber] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [success, setSuccess] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -19,7 +21,8 @@ const SignUpTenant = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!firstName || !lastName || !email || !password || !confirmPassword) {
+    // Validate input fields
+    if (!firstName || !lastName || !email || !password || !confirmPassword || !apartmentNumber) {
       alert('Please fill in all fields!');
       return;
     }
@@ -29,9 +32,16 @@ const SignUpTenant = () => {
       return;
     }
 
+    // Password validation (at least 8 characters, 1 number, 1 special character)
+    const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
+    if (!passwordRegex.test(password)) {
+      alert('Password must be at least 8 characters long and contain a number and a special character.');
+      return;
+    }
+
     // Combine firstName and lastName as name
     const name = `${firstName} ${lastName}`;
-    dispatch(signUpUser(name, email, password, setSuccess));
+    dispatch(signUpUser(name, email, password, apartmentNumber, setSuccess));
   };
 
   useEffect(() => {
@@ -96,12 +106,19 @@ const SignUpTenant = () => {
               </label>
               <input
                 id="password"
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 className={styles.formInput}
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+              <button
+                type="button"
+                className={styles.showPasswordBtn}
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? 'Hide Password' : 'Show Password'}
+              </button>
             </div>
 
             <div className={styles.formGroup}>
@@ -110,11 +127,25 @@ const SignUpTenant = () => {
               </label>
               <input
                 id="confirmPassword"
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 className={styles.formInput}
                 placeholder="Confirm your password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label htmlFor="apartmentNumber" className={styles.formLabel}>
+                Apartment Number
+              </label>
+              <input
+                id="apartmentNumber"
+                type="text"
+                className={styles.formInput}
+                placeholder="Enter your apartment number"
+                value={apartmentNumber}
+                onChange={(e) => setApartmentNumber(e.target.value)}
               />
             </div>
 
