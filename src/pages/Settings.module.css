@@ -79,19 +79,20 @@
   padding: 20px; /* Added padding for spacing */
 }
 
-.headerSettingsTitle {
-  color: #25325C;
-  font: 500 24px 'Inter', sans-serif;
-  padding: 10px 0;
-  text-align: center;
-}
-
 .headerSettings {
   display: flex;
-  align-items: center;
+  align-items: center; /* Vertically aligns the icon and title */
   background-color: white;
   padding: 10px 20px;
   border-bottom: 2px solid #ddd;
+}
+
+.headerSettingsTitle {
+  font: 500 23px Inter, sans-serif;
+  color: #333;
+  padding: 10px 0;
+  margin: 0; /* Remove any default margins */
+  text-align: center;
 }
 
 .headerSettingsIcon {
@@ -99,6 +100,7 @@
   height: 30px;
   margin-right: 10px;
 }
+
 
 .formContainer {
   background: #fff;

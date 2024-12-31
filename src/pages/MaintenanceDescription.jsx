@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { SidebarItem } from './components/SideBarItem';
-import { MaintenanceForm } from './components/MaintenanceForm';
+import emailjs from 'emailjs-com';
+import { useLocation } from 'react-router-dom';
 import styles from './MaintenanceDescription.module.css';
 import { Link } from 'react-router-dom';
 
@@ -25,44 +25,64 @@ const sidebarItems = [
 ];
 
 const MaintenanceDescription = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const location = useLocation();
+  const { selectedIssues = [], otherIssue = '' } = location.state || {};
+  const [tenantName, setTenantName] = useState('');
+  const [apartmentNumber, setApartmentNumber] = useState('');
+  const [messageSent, setMessageSent] = useState(false);
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const issuesToSend = [...selectedIssues];
+    if (otherIssue) {
+      issuesToSend.push(`Other: ${otherIssue}`);
+    }
+
+    const templateParams = {
+      tenant_name: tenantName,
+      apartment_number: apartmentNumber,
+      issues: issuesToSend.join(', '),
+      to_email: 'tenantease24@gmail.com',
+    };
+
+    emailjs
+      .send('service_p2qlcyf', 'template_nk1fb0t', templateParams, 'Dh4Ug8jsugp-UA63S')
+      .then(() => {
+        setMessageSent(true);
+        setTenantName('');
+        setApartmentNumber('');
+      })
+      .catch((err) => {
+        console.error('Failed to send email:', err);
+      });
   };
 
   return (
-    <div className={styles.maintenanceRequest}>
-      <div className={styles.layoutWrapper}>
-        {/* Sidebar Toggle Button */}
-        <button className={styles.sidebarToggle} onClick={toggleSidebar}>
-          <div className={styles.hamburger}></div>
-        </button>
-
-        {/* Sidebar */}
-        <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.sidebarOpen : ''}`}>
-          <h1 className={styles.sidebarTitle}>DASHBOARD</h1>
-          {sidebarItems.map((item, index) => (
-            <Link key={index} to={item.link} className={styles.sidebarLink}>
-              <SidebarItem {...item} />
-            </Link>
-          ))}
-        </aside>
-
-        {/* Main Content */}
-        <main className={styles.mainContent}>
-          <header className={styles.pageHeader}>
-           <img
-            src={repair} // <-- Use imported image
-             className={styles.headerIcon}
-            alt=""
-             loading="lazy"
-             />
-            <h1 className={styles.headerTitle}>MAINTENANCE AND REPAIRS</h1>
-          </header>
-          <MaintenanceForm />
-        </main>
-      </div>
+    <div className={styles.container}>
+      <h2>Maintenance Request Details</h2>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Name:
+          <input
+            type="text"
+            value={tenantName}
+            onChange={(e) => setTenantName(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          Apartment Number:
+          <input
+            type="text"
+            value={apartmentNumber}
+            onChange={(e) => setApartmentNumber(e.target.value)}
+            required
+          />
+        </label>
+        <button type="submit">Submit</button>
+      </form>
+      {messageSent && <p>Request sent successfully!</p>}
     </div>
   );
 };

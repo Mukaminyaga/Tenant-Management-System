@@ -15,6 +15,7 @@ import MaintenanceDashboard from "./pages/MaintenanceDashboard";
 import MaintenanceDescription from "./pages/MaintenanceDescription";
 import PaymentTenant from "./pages/PaymentTenant";
 import TermsAndDocs from "./pages/TermsAndDocs";
+import LandlordDashboardLayout from "./pages/LandlordDashboardLayout";
 import { useDispatch } from 'react-redux';
 import { checkIsLoggedIn } from './redux/ActionCreators/authActionsCreator';
 import { useEffect } from 'react';
@@ -55,6 +56,7 @@ const App = () => {
         <Route path='/Send Alert' element={<SendAlert/>} />
         <Route path='/Tenant Dashboard' element={<TenantDashboard/>}/> 
 
+        <Route path='/LandlordDashboard' element={<LandlordDashboardLayout/>}/> 
       </Routes>
     </div>
   );

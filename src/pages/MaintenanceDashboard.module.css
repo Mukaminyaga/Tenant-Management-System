@@ -69,22 +69,21 @@
   display: flex;
   align-items: center;
   background-color: white;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  padding: 10px 20px;
+  border-bottom: 2px solid #ddd;
 }
 
 .headerIcon {
-  width: 36px;
-  height: 36px;
-  margin-right: 12px;
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
 }
 
-.headerTitle {
-  font-size: 20px;
-  font-weight: 600;
-  color: rgba(37, 50, 92, 0.9);
+.headerText {
+  font: 500 23px Inter, sans-serif ;
+  color:#333;
+  margin: 0;
+  
 }
 
 /* Sidebar styles */
@@ -223,11 +222,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 20px ;
+  margin: 20px;
   width: 50%;
   max-width: 900px;
   gap: 12px;
- 
 }
 
 .progressStep {
@@ -252,3 +250,54 @@
   font-size: 14px;
   color: #666;
 }
+
+/* Tenant Details Section */
+.tenantDetails {
+  background-color: #fff;
+  padding: 20px;
+  margin-top: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.inputField {
+  padding: 12px;
+  margin-bottom: 16px;
+  font-size: 16px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
+}
+
+.inputField:focus {
+  border-color: rgb(45, 100, 150);
+  outline: none;
+}
+
+.submitButton {
+  padding: 12px 24px;
+  background-color: rgb(45, 100, 150);
+  color: white !important;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin-top: 20px;
+}
+
+.submitButton:hover {
+  background-color: rgb(35, 80, 120);
+}
+
+.successMessage {
+  margin-top: 20px;
+  color: rgb(34, 193, 34); /* Soft green color */
+  font-weight: bold;
+}
+

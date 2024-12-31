@@ -1,0 +1,149 @@
+/* Global Styles */
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f2f0f0;
+}
+
+/* Sidebar Container */
+.sidebarContainer {
+  background-color: #1d2334;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: #d9d9d9;
+  width: 100%;
+  padding: 96px 59px 428px 25px;
+  font-size: 21px;
+  line-height: 1.5;
+}
+
+/* Main Content */
+.mainContent {
+  background-color: #f2f0f0;
+  overflow: hidden;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Content Wrapper */
+.contentWrapper {
+  display: flex;
+  gap: 20px;
+}
+
+/* Sidebar Column */
+.sidebarColumn {
+  display: flex;
+  flex-direction: column;
+  line-height: normal;
+  width: 23%;
+  margin-left: 0;
+}
+
+/* Main Content Column */
+.mainColumn {
+  display: flex;
+  flex-direction: column;
+  line-height: normal;
+  width: 77%;
+  margin-left: 20px;
+}
+
+/* Page Header */
+.pageHeader {
+  background-color: #fff;
+  color: #25325c;
+  padding: 22px 24px;
+  font-size: 22px;
+  font-weight: 400;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Stats Container */
+.statsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 30px;
+  padding: 0 39px 0 14px;
+}
+
+/* Stats Wrapper */
+.statsWrapper {
+  background-color: #fff;
+  padding: 56px 80px 12px 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Action Cards Container */
+.actionCardsContainer {
+  width: 826px;
+  max-width: 100%;
+  margin-top: 61px;
+  padding-left: 27px;
+}
+
+/* Menu Button */
+.menuButton {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 400;
+  padding: 10px 0;
+  text-align: left;
+  width: 100%;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.menuButton:hover {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.menuButton:focus {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991px) {
+  .sidebarContainer {
+    padding: 0 20px 100px;
+  }
+
+  .contentWrapper {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .sidebarColumn,
+  .mainColumn {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .pageHeader {
+    padding: 0 20px;
+    font-size: 18px;
+  }
+
+  .statsContainer {
+    padding-right: 20px;
+  }
+
+  .statsWrapper {
+    padding-right: 20px;
+  }
+
+  .actionCardsContainer {
+    margin-top: 40px;
+  }
+}
