@@ -6,15 +6,15 @@ import styles from './Dashboard.module.css';
 import { Link } from 'react-router-dom';
 
 // Import local images
-import profileIcon from '../Images/profile.png';
-import termsIcon from '../Images/terms.png';
-import messagesIcon from '../Images/messages.png';
-import maintenanceIcon from '../Images/maintenance.png';
-import paymentsIcon from '../Images/payments.png';
-import settingsIcon from '../Images/settings.png';
-import logoutIcon from '../Images/logout.png';
-import maintenance from '../Images/maintenanceIcon.png';
-import messageIcon from '../Images/messageIcon.png';
+import profileIcon from './Images/profile.png';
+import termsIcon from './Images/terms.png';
+import messagesIcon from './Images/messages.png';
+import maintenanceIcon from './Images/maintenance.png';
+import paymentsIcon from './Images/payments.png';
+import settingsIcon from './Images/settings.png';
+import logoutIcon from './Images/logout.png';
+import maintenance from './Images/maintenanceIcon.png';
+import messageIcon from './Images/messageIcon.png';
 
 const sidebarItems = [
     { icon: profileIcon, label: 'PROFILE', link: '/DashboardTenant' },

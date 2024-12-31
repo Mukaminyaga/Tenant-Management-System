@@ -96,7 +96,7 @@ const HomePage = () => {
             <li><a href="/">Home</a></li>
             <li><a href="/about">About Us</a></li>
             <li><a href="/services">Our Services</a></li>
-            <li><a href="/signin">Sign in</a></li>
+            <li><a href="/Login">Sign in</a></li>
           </ul>
           <ul className="contact-info">
             <li><a href="tel:+254759191326">call us</a></li>

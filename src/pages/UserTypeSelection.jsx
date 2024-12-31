@@ -12,7 +12,7 @@ export default function UserTypeSelection() {
       title: 'Tenant',
       iconSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/39e3f9023c0aa06b74c860b48310808abf00fd38c9cc87bb85f700e828961bcc?placeholderIfAbsent=true&apiKey=febb6e01b7be4e54a81beb5e9ff50628',
       type: 'tenant',
-      redirectTo: '/SignUpTenant', // Route for Tenant
+      redirectTo: '/', // Route for Tenant
     },
     {
       title: 'Property Manager',

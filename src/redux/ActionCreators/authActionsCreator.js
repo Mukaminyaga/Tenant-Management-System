@@ -4,7 +4,9 @@ import {
   updateProfile,
   onAuthStateChanged,
 } from "firebase/auth";
-import { auth } from "../../config/firebase"; // Import firebase auth
+import { auth } from "../../config/firebase"; // Firebase auth
+import { db } from "../../config/firebaseConfig";
+import { doc, setDoc, getDoc } from "firebase/firestore"; // Firestore functions
 
 // Action types
 const SIGN_IN = "SIGN_IN";
@@ -26,16 +28,25 @@ export const signInUser = (email, password, setSuccess) => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-      dispatch(
-        loginUser({
-          uid: user.uid,
-          email: user.email,
-          displayName: user.displayName || "User",
-        })
-      );
-      setSuccess(true); // Notify success
+
+      // Fetch user details from Firestore
+      const userDoc = await getDoc(doc(db, "users", user.uid));
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        dispatch(
+          loginUser({
+            uid: user.uid,
+            email: user.email,
+            displayName: userData.name || "User", // Fetch the name from Firestore
+          })
+        );
+      } else {
+        throw new Error("User data not found in Firestore.");
+      }
+
+      setSuccess(true);
     } catch (error) {
-      alert("Login failed: " + error.message); // Show error message
+      alert("Login failed: " + error.message);
       setSuccess(false);
     }
   };
@@ -47,45 +58,66 @@ export const signUpUser = (name, email, password, setSuccess) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-      await updateProfile(user, { displayName: name });
+
+      // Save user details to Firestore
+      await setDoc(doc(db, "users", user.uid), {
+        name,
+        email,
+        uid: user.uid,
+      });
+
       dispatch(
         loginUser({
           uid: user.uid,
-          name: user.displayName,
-          email: user.email,
+          displayName: name,
+          email,
         })
       );
+
       setSuccess(true);
     } catch (error) {
-      alert("Sign up failed: " + error.message); // Show error message
+      alert("Sign up failed: " + error.message);
       setSuccess(false);
     }
   };
 };
 
+// Action creator for checking if the user is logged in
+export const checkIsLoggedIn = () => (dispatch) => {
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      try {
+        // Fetch user details from Firestore
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          dispatch(
+            loginUser({
+              uid: user.uid,
+              email: user.email,
+              displayName: userData.name || "User",
+            })
+          );
+        } else {
+          dispatch(logoutUser());
+        }
+      } catch (error) {
+        console.error("Failed to fetch user details:", error);
+        dispatch(logoutUser());
+      }
+    } else {
+      dispatch(logoutUser());
+    }
+  });
+};
+
+// Action creator for signing out
 export const signOutUser = () => (dispatch) => {
   auth.signOut()
     .then(() => {
       dispatch(logoutUser());
     })
     .catch((error) => {
-      alert("Sign out failed: " + error.message); // Handle sign-out errors
+      alert("Sign out failed: " + error.message);
     });
-};
-
-// Action creator for checking if the user is logged in
-export const checkIsLoggedIn = () => (dispatch) => {
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      dispatch(
-        loginUser({
-          uid: user.uid,
-          email: user.email,
-          displayName: user.displayName || "User",
-        })
-      );
-    } else {
-      dispatch(logoutUser());
-    }
-  });
 };

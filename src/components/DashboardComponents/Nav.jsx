@@ -33,7 +33,7 @@ const Nav = () => {
             <Link className='btn btn-primary btn-sm mx-2' to='/login'>Login</Link>
           </li>
           <li className='navItem'>
-            <Link className='btn btn-primary btn-sm' to='/signup'>Sign Up</Link>
+            <Link className='btn btn-primary btn-sm' to='/SignUp'>Sign Up</Link>
           </li>
           </>)
       }
