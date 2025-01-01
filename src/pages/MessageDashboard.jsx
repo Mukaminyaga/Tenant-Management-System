@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { firestore, auth } from "../config/firebase"; // Ensure proper Firebase config
+import { doc, getDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 import { SidebarItem } from './components/SideBarItem';
 import styles from './MessageDashboard.module.css';
 
@@ -9,20 +12,57 @@ import maintenanceIcon from './Images/maintenance.png';
 import paymentsIcon from './Images/payments.png';
 import settingsIcon from './Images/settings.png';
 import logoutIcon from './Images/logout.png';
-import sendIcon from './Images/send.png';
 
 const sidebarItems = [
-    { icon: profileIcon, label: 'PROFILE', link: '/DashboardTenant' },
-    { icon: termsIcon, label: 'TERMS AND DOCS', link: '/TermsAndDocs' },
-    { icon: messagesIcon, label: 'MESSAGES', link: '/MessageTenant' },
-    { icon: maintenanceIcon, label: 'MAINT . & REPAIRS', link: '/Report Issue' },
-    { icon: paymentsIcon, label: 'PAYMENTS', link: '/PaymentTenant' },
-    { icon: settingsIcon, label: 'SETTINGS', link: '/Settings' },
-    { icon: logoutIcon, label: 'LOGOUT', link: '/LogoutPage' } 
+  { icon: profileIcon, label: 'PROFILE', link: '/DashboardTenant' },
+  { icon: termsIcon, label: 'TERMS AND DOCS', link: '/TermsAndDocs' },
+  { icon: messagesIcon, label: 'MESSAGES', link: '/MessageTenant' },
+  { icon: maintenanceIcon, label: 'MAINT . & REPAIRS', link: '/MaintenanceDashboard' },
+  { icon: paymentsIcon, label: 'PAYMENTS', link: '/PaymentTenant' },
+  { icon: settingsIcon, label: 'SETTINGS', link: '/Settings' },
+  { icon: logoutIcon, label: 'LOGOUT', link: '/LogoutPage' }
 ];
 
 const MessageDashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [role, setRole] = useState(null); // To store user role
+  const [userId, setUserId] = useState(null); // To store user ID
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkUserRole = async () => {
+      const currentUser = auth.currentUser;
+      if (currentUser) {
+        setUserId(currentUser.uid);
+        try {
+          const userDoc = await getDoc(doc(firestore, "users", currentUser.uid));
+          if (userDoc.exists()) {
+            const userData = userDoc.data();
+            setRole(userData.role);
+            if (userData.role !== "tenant") {
+              alert("Access denied. Tenants only.");
+              navigate("/Dashboard");
+            }
+          } else {
+            alert("User not found.");
+            navigate("/Login");
+          }
+        } catch (error) {
+          console.error("Error fetching user role:", error);
+          navigate("/");
+        }
+      } else {
+        alert("You do not have access to this page.");
+        navigate("/Dashboard");
+      }
+    };
+
+    checkUserRole();
+  }, [navigate]);
+
+  if (role !== "tenant") {
+    return null; // Optional: Add a loading spinner or placeholder
+  }
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -35,7 +75,6 @@ const MessageDashboard = () => {
   return (
     <div className={styles.messageDashboard}>
       <div className={styles.container}>
-        {/* Sidebar Toggle Button */}
         <button className={styles.sidebarToggle} onClick={toggleSidebar}>
           <div className={styles.hamburger}></div>
         </button>
@@ -51,7 +90,7 @@ const MessageDashboard = () => {
                   key={index}
                   icon={item.icon}
                   label={item.label}
-                  link={item.link} // Pass the link to SidebarItem
+                  link={item.link}
                 />
               ))}
             </nav>
@@ -63,7 +102,7 @@ const MessageDashboard = () => {
             <img
               loading="lazy"
               src={messagesIcon}
-              alt="Send Icon"
+              alt="Messages Icon"
               className={styles.headermessageIcon}
             />
             <h2 className={styles.headermessageTitle}>MESSAGES</h2>
