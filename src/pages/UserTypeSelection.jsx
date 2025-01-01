@@ -12,13 +12,13 @@ export default function UserTypeSelection() {
       title: 'Tenant',
       iconSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/39e3f9023c0aa06b74c860b48310808abf00fd38c9cc87bb85f700e828961bcc?placeholderIfAbsent=true&apiKey=febb6e01b7be4e54a81beb5e9ff50628',
       type: 'tenant',
-      redirectTo: '/', // Route for Tenant
+      redirectTo: '/SignUp', // Route for Tenant
     },
     {
       title: 'Property Manager',
       iconSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/5543db38f89823642ef7b8ec1bdaea95209fbc016b5247b4efda824c9a6906c5?placeholderIfAbsent=true&apiKey=febb6e01b7be4e54a81beb5e9ff50628',
       type: 'manager',
-      redirectTo: '/SignUpManager', // Route for Property Manager
+      redirectTo: '/SignUp', // Route for Property Manager
     },
   ];
 

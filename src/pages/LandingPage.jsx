@@ -66,7 +66,7 @@ const LandingPage = () => {
       <main className={styles.mainContent}>
         <section className={styles.heroSection}>
           <div className={styles.heroContent}>
-          {/* <h2 className={styles.tenantEaseHeading}>TenantEase</h2> */}
+          <h2 className={styles.tenantEaseHeading}>TenantEase</h2>
             <h1 className={styles.heroTitle}>
               <span className={styles.regularText}>Making it feel more like </span>
               <span className={styles.highlightText}>home</span>

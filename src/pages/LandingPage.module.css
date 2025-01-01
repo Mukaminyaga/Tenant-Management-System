@@ -20,12 +20,13 @@
 }
 
 .tenantEaseHeading {
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   font-weight: bold;
-  color: #333333;
-  margin-bottom: 1rem;
-  padding-top: 5px;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+  color: rgb(8, 8, 8);
+  text-decoration: none;
+  flex-grow: 1; 
+  margin-right: auto;
+
 }
 
 .topBar {
@@ -92,14 +93,14 @@
 
 .mainContent {
   flex: 1;
-  padding: 0 80px;
+  padding:80px;
 }
 
 .heroSection {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
-  margin-top: 80px;
+  margin-top: 60px;
   position: relative;
   z-index: 1;
 }
@@ -154,6 +155,7 @@
   padding: 15px;
   font-family: 'Barlow', sans-serif;
   font-size: 15px;
+  text-align: center;
   letter-spacing: -0.26px;
   cursor: pointer;
   width: 60%;

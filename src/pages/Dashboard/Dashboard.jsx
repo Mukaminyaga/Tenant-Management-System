@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { collection, getDocs, doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
-import { auth, db } from "../../config/firebaseConfig";
-import { onAuthStateChanged, setPersistence, browserLocalPersistence } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
-import styles from "./AdminDashboard.module.css";
-import Nav from "../../components/DashboardComponents/Nav";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { signOutUser } from "../../redux/ActionCreators/authActionsCreator";
+import "./Dashboard.css"; // Import the CSS
+import DashboardImage from "../../pages/Images/Dashboard.jpg"; // Importing the image
 
 const Dashboard = () => {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [authorized, setAuthorized] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // Local authentication state
+  const { isAuthenticated, user } = useSelector((state) => state.auth); // Access auth state
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -115,46 +112,49 @@ const Dashboard = () => {
   }
 
   return (
-    <div className={styles.dashboardContainer}>
-      <Nav />
-      <h1 className={styles.dashboardTitle}>Admin Dashboard</h1>
-      <table className={styles.userTable}>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Verified</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user) => (
-            <tr key={user.id}>
-              <td>{user.name || "N/A"}</td>
-              <td>{user.email}</td>
-              <td>{user.role}</td>
-              <td>{user.verified ? "Yes" : "No"}</td>
-              <td>
-                {!user.verified && (
-                  <button
-                    className={styles.verifyButton}
-                    onClick={() => handleVerify(user.id)}
-                  >
-                    Verify
-                  </button>
-                )}
-                <button
-                  className={styles.deleteButton}
-                  onClick={() => handleDelete(user.id)}
-                >
-                  Remove
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div
+      className="dashboard-container"
+      style={{ backgroundImage: `url(${DashboardImage})` }} 
+    >
+<nav className="dashboard-nav">
+  {/* TenantEase Title on the far left */}
+  <Link className="nav-title" to="/">
+    TENANTEASE
+  </Link>
+
+  {/* Buttons container for proper alignment */}
+  <div className="nav-buttons">
+    <Link className="dashboard-button" to="/LandlordDashboard">
+      Dashboard
+    </Link>
+    <button
+      className="logout-button"
+      onClick={() => dispatch(signOutUser())}
+    >
+      Logout
+    </button>
+  </div>
+</nav>
+
+
+      {/* Dashboard Content */}
+      <div className="dashboard-content">
+        <div className="welcome-message">
+          <h1>Welcome, {user?.displayName}!</h1> {/* Display user's name dynamically */}
+          <p>Manage your properties and tenants with ease.</p>
+        </div>
+        <div className="dashboard-links">
+          <Link to="/Send Alert" className="dashboard-link">
+            Send Alert
+          </Link>
+          <Link to="/Manage Properties" className="dashboard-link">
+            Manage Properties
+          </Link>
+          <Link to="/View Tenants" className="dashboard-link">
+            View Tenants
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };

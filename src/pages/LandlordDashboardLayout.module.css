@@ -15,7 +15,7 @@ body {
   color: #d9d9d9;
   width: 100%;
   padding: 96px 59px 428px 25px;
-  font-size: 21px;
+  font-size: 22px;
   line-height: 1.5;
 }
 
@@ -23,7 +23,7 @@ body {
 .mainContent {
   background-color: #f2f0f0;
   overflow: hidden;
-  padding: 20px;
+  /* padding: 20px; */
   display: flex;
   flex-direction: column;
 }
@@ -94,7 +94,7 @@ body {
   border: none;
   color: inherit;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 400;
   padding: 10px 0;
   text-align: left;

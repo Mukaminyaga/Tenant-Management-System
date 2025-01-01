@@ -9,8 +9,9 @@ const menuItems = [
   { name: 'PROPERTIES', path: '/properties' },
   { name: 'TENANTS & LEASES', path: '/tenants-leases' },
   { name: 'MAINT . & REPAIRS', path: '/maintenance-repairs' },
+  { name: 'NOTICES', path: '/Send Alert' },
   { name: 'PAYMENTS', path: '/payments' },
-  { name: 'SETTINGS', path: '/settings' },
+  { name: 'SETTINGS', path: '/Settings' },
   { name: 'LOGOUT', path: '/logout' }
 ];
 

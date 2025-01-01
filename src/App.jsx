@@ -57,6 +57,7 @@ const App = () => {
         <Route path='/Tenant Dashboard' element={<TenantDashboard/>}/> 
         <Route path='/Access Denied' element={<accessDenied/>}/> 
 
+
         <Route path='/LandlordDashboard' element={<LandlordDashboardLayout/>}/> 
       </Routes>
     </div>
