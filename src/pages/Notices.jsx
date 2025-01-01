@@ -3,6 +3,7 @@ import emailjs from "emailjs-com";
 import { getFirestore, collection, getDocs, query, where } from "firebase/firestore";
 import { useSelector } from "react-redux";
 import { Link, useLocation, Navigate, useNavigate } from "react-router-dom";
+import styles from './Notices.module.css';
 
 // Initialize Firebase Firestore
 const db = getFirestore();
@@ -89,15 +90,55 @@ export const SendAlert = () => {
   };
 
   return (
-    <div>
-      <h1>Send Rent Due Alert</h1>
-      <textarea
-        placeholder="Type your announcement here..."
-        value={announcement}
-        onChange={(e) => setAnnouncement(e.target.value)}
-      />
-      <button onClick={handleSendAlert}>Send to All Tenants</button>
-      <Link to="/Dashboard">Back</Link>
+    <div className={styles.mainContent}>
+      <div className={styles.contentWrapper}>
+        {/* Sidebar */}
+        <div className={styles.sidebarColumn}>
+          <nav className={styles.sidebarContainer}>
+            <Link to="/dashboard" className={styles.menuButton}>
+              DASHBOARD
+            </Link>
+            <Link to="/properties" className={styles.menuButton}>
+              PROPERTIES
+            </Link>
+            <Link to="/tenants-leases" className={styles.menuButton}>
+              TENANTS & LEASES
+            </Link>
+            <Link to="/maintenance-repairs" className={styles.menuButton}>
+              MAINT . & REPAIRS
+            </Link>
+            <Link to="/send-alert" className={styles.menuButton}>
+              NOTICES
+            </Link>
+            <Link to="/payments" className={styles.menuButton}>
+              PAYMENTS
+            </Link>
+            <Link to="/Settings" className={styles.menuButton}>
+              SETTINGS
+            </Link>
+            <Link to="/logout" className={styles.menuButton}>
+              LOGOUT
+            </Link>
+          </nav>
+        </div>
+
+        {/* Main Content */}
+        <div className={styles.mainColumn}>
+          <div className={styles.pageHeader}>SEND RENT DUE ALERT</div>
+          <div className={styles.alertContainer}>
+            <textarea
+              placeholder="Type your announcement here..."
+              value={announcement}
+              onChange={(e) => setAnnouncement(e.target.value)}
+              className={styles.announcementTextarea}
+            />
+            <button onClick={handleSendAlert} className={styles.sendButton}>
+              Send to All Tenants
+            </button>
+            {/* <Link to="/dashboard" className={styles.backLink}>Back</Link> */}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

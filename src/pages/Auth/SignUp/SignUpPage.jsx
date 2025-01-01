@@ -10,6 +10,7 @@ import {
 } from "firebase/firestore";
 import styles from "./SignUpPage.module.css";
 import Signup from "../AuthImages/Signup.png";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 // Firebase Configuration
 const firebaseConfig = {
@@ -33,6 +34,8 @@ const SignUpPage = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [role, setRole] = useState("tenant");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [success, setSuccess] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -45,21 +48,44 @@ const SignUpPage = () => {
       return;
     }
 
+    console.log("Password:", password);
+    console.log("Confirm Password:", confirmPassword);
+
+    // Manual password validation
+    const hasNumber = /\d/;
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/;
+
+    if (password.length < 8) {
+      alert("Password must be at least 8 characters long.");
+      return;
+    }
+    if (!hasNumber.test(password)) {
+      alert("Password must contain at least one number.");
+      return;
+    }
+    if (!hasSpecialChar.test(password)) {
+      alert("Password must contain at least one special character.");
+      return;
+    }
+
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
 
     try {
+      // Attempt to create the user with email and password
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
+      // Set user data in Firestore
       await setDoc(doc(db, "users", user.uid), {
         name: `${firstName} ${lastName}`,
         email: user.email,
         role,
       });
 
+      // Successful sign up
       setSuccess(true);
       alert("User registered successfully!");
     } catch (error) {
@@ -128,28 +154,44 @@ const SignUpPage = () => {
               <label htmlFor="password" className={styles.formLabel}>
                 Password
               </label>
-              <input
-                id="password"
-                type="password"
-                className={styles.formInput}
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <div className={styles.passwordContainer}>
+                <input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  className={styles.formInput}
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <span
+                  className={styles.eyeIcon}
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </span>
+              </div>
             </div>
 
             <div className={styles.formGroup}>
               <label htmlFor="confirmPassword" className={styles.formLabel}>
                 Confirm Password
               </label>
-              <input
-                id="confirmPassword"
-                type="password"
-                className={styles.formInput}
-                placeholder="Confirm your password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
+              <div className={styles.passwordContainer}>
+                <input
+                  id="confirmPassword"
+                  type={showConfirmPassword ? "text" : "password"}
+                  className={styles.formInput}
+                  placeholder="Confirm your password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+                <span
+                  className={styles.eyeIcon}
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                >
+                  {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                </span>
+              </div>
             </div>
 
             <div className={styles.formGroup}>

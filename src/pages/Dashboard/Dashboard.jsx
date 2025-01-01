@@ -1,10 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import Nav from "../../components/DashboardComponents/Nav";
+import { signOutUser } from "../../redux/ActionCreators/authActionsCreator";
+import "./Dashboard.css"; // Import the CSS
+import DashboardImage from "../../pages/Images/Dashboard.jpg"; // Importing the image
 
 const Dashboard = () => {
-  const { isAuthenticated } = useSelector((state) => state.auth);
+  const { isAuthenticated, user } = useSelector((state) => state.auth); // Access auth state
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   // Ensure only authenticated users can access the Dashboard
@@ -14,18 +17,50 @@ const Dashboard = () => {
   }
 
   return (
-    <>
-      <Nav />
+    <div
+      className="dashboard-container"
+      style={{ backgroundImage: `url(${DashboardImage})` }} 
+    >
+<nav className="dashboard-nav">
+  {/* TenantEase Title on the far left */}
+  <Link className="nav-title" to="/">
+    TENANTEASE
+  </Link>
+
+  {/* Buttons container for proper alignment */}
+  <div className="nav-buttons">
+    <Link className="dashboard-button" to="/LandlordDashboard">
+      Dashboard
+    </Link>
+    <button
+      className="logout-button"
+      onClick={() => dispatch(signOutUser())}
+    >
+      Logout
+    </button>
+  </div>
+</nav>
+
+
+      {/* Dashboard Content */}
       <div className="dashboard-content">
-        <h3>Welcome Admin</h3>
-        <Link
-          to="/Send Alert"
-          state={{ from: "/Dashboard" }} // Pass state to restrict access
-        >
-          Send Alert
-        </Link>
+        <div className="welcome-message">
+          <h1>Welcome, {user?.displayName}!</h1> {/* Display user's name dynamically */}
+          <p>Manage your properties and tenants with ease.</p>
+        </div>
+        <div className="dashboard-links">
+          <Link to="/Send Alert" className="dashboard-link">
+            Send Alert
+          </Link>
+          <Link to="/Manage Properties" className="dashboard-link">
+            Manage Properties
+          </Link>
+          <Link to="/View Tenants" className="dashboard-link">
+            View Tenants
+          </Link>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

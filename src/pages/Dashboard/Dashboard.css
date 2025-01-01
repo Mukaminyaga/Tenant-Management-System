@@ -1,0 +1,248 @@
+/* Container for the dashboard page */
+/* Dashboard Container */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  background-image: url(${DashboardImage}); /* Background image */
+  background-size: cover;
+  background-position: center;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  padding: 0;
+  margin: 0;
+  overflow: hidden; /* Prevents any overflow */
+}
+
+/* Content Section Inside Dashboard */
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 40px;
+  background: rgba(0, 0, 0, 0.5); /* Slightly darker background for better text visibility */
+  border-radius: 12px; /* Rounded corners for a soft look */
+  width: 80%;
+  max-width: 1200px;
+  margin-top: 60px; /* Ensures content is below the navigation bar */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Softer shadow for depth */
+  transition: all 0.3s ease; /* Smooth transition on hover and active */
+}
+
+/* Welcome Message Styling */
+.welcome-message h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  font-weight: 700; /* Bold for emphasis */
+  letter-spacing: 1px; /* Slight letter spacing for elegance */
+}
+
+.welcome-message p {
+  font-size: 1.25rem;
+  margin-bottom: 40px; /* More space below the paragraph */
+  font-weight: 400;
+  line-height: 1.5; /* Improved line height for readability */
+  opacity: 0.9; /* Slight opacity for a soft look */
+}
+
+/* Dashboard Links Container */
+.dashboard-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* Wrap links for responsive design */
+  gap: 24px; /* Larger gap between links */
+  margin-top: 30px;
+}
+
+/* Shared Styling for Links */
+.dashboard-link {
+  padding: 16px 32px; /* Larger padding for better touch targets */
+  background-color: #f0f0f0; /* Soft light background */
+  color: #333333 !important; /* Darker text for contrast */
+  font-size: 1.1rem;
+  font-weight: 600; /* Bold text for prominence */
+  text-transform: capitalize;
+  text-decoration: none;
+  border-radius: 14px; /* Larger border radius for a smoother look */
+  border: 2px solid #f0f0f0; /* Subtle border for definition */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Light but defined shadow */
+  transition: all 0.3s ease;
+  display: inline-block;
+  text-align: center;
+  min-width: 180px; /* Ensures uniform size */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Soft text shadow */
+  cursor: pointer; /* Ensures links are clickable */
+}
+
+/* Hover Effect for Links */
+.dashboard-link:hover {
+  background-color: #e0e0e0; /* Slightly darker background on hover */
+  color: #333; /* Darker text on hover */
+  transform: translateY(-4px); /* More noticeable lift effect */
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2); /* Deeper shadow for hover */
+  transition: all 0.3s ease;
+}
+
+/* Active Link Effect */
+.dashboard-link:active {
+  transform: scale(0.98); /* Slight shrink effect */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Softer shadow when clicked */
+  transition: all 0.1s ease; /* Quick transition for active state */
+}
+
+/* Optional focus styling for accessibility */
+.dashboard-link:focus,
+.dashboard-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.6); /* Blue outline on focus */
+}
+
+.dashboard-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  color: white;
+  font-family: 'Inter', sans-serif;
+}
+
+/* TenantEase title styling */
+.nav-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  flex-grow: 1; 
+  text-align: left;
+  padding-right: 850px;
+}
+
+/* Links container */
+.nav-links {
+  gap: 15px; 
+  display: flex;
+  justify-content: flex-end ;
+
+}
+
+.dashboard-button{
+  border-radius: 10px;
+  background-color: #0b3a60;
+  color: #ffffff !important;
+  padding: 11px  15px;
+  margin-right: 12px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.logout-button {
+  border-radius: 10px;
+  background-color: #0b3a60;
+  color: #ffffff !important;
+  padding:  8px 15px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.dashboard-button:hover,
+.logout-button:hover {
+  background-color: #0d4675;
+  transform: scale(1.05);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Active link styling for focus or click */
+.dashboard-link:active {
+  transform: scale(0.98); /* Shrinks slightly when clicked */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Slightly reduced shadow */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 20px;
+  }
+
+  .dashboard-content {
+    width: 90%;
+    padding: 20px; /* Adjust padding for smaller screens */
+  }
+
+  .welcome-message h1 {
+    font-size: 2rem;
+  }
+
+  .welcome-message p {
+    font-size: 1rem;
+  }
+
+  .dashboard-links {
+    gap: 15px;
+  }
+
+  .dashboard-link {
+    padding: 12px 25px;
+    font-size: 1rem;
+    min-width: 140px;
+  }
+  
+
+  /* Navigation bar styling adjustments */
+  .dashboard-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 20px; /* Adjust padding for small screens */
+  }
+
+  /* Adjusting the nav-title for small screens */
+  .nav-title {
+    font-size: 1.5rem;
+    padding-right: 0;
+    text-align: center; /* Center align title for smaller screens */
+    flex-grow: 0;
+    margin-bottom: 10px;
+  }
+
+  .nav-links {
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  /* Buttons adjustments for smaller screens */
+  .dashboard-button,
+  .logout-button {
+    padding: 10px 15px;
+    font-size: 1rem; /* Smaller font size */
+  }
+
+  /* Further responsiveness for even smaller devices */
+  @media (max-width: 480px) {
+    .dashboard-button,
+    .logout-button {
+      padding: 8px 12px;
+      font-size: 0.9rem; /* Even smaller font size */
+    }
+
+    .welcome-message h1 {
+      font-size: 1.8rem;
+    }
+
+    .welcome-message p {
+      font-size: 0.9rem;
+    }
+
+    .dashboard-link {
+      font-size: 0.9rem; /* Smaller font size for mobile screens */
+      min-width: 120px; /* Reduced width for smaller screens */
+    }
+  }
+}

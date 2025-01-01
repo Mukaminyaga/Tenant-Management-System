@@ -56,6 +56,7 @@ const App = () => {
         <Route path='/Send Alert' element={<SendAlert/>} />
         <Route path='/Tenant Dashboard' element={<TenantDashboard/>}/> 
 
+
         <Route path='/LandlordDashboard' element={<LandlordDashboardLayout/>}/> 
       </Routes>
     </div>
