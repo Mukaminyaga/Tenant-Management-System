@@ -1,0 +1,90 @@
+.metricCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+  color: #25325c;
+  font-weight: 400;
+  padding: 30px 20px;  /* Balanced padding for spacing */
+  background-color: #fff;
+  border-radius: 10px;  /* Rounded corners for card */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Subtle shadow for depth */
+  transition: all 0.3s ease-in-out;
+}
+
+.metricCard:hover {
+  transform: translateY(-5px);  /* Slight lift effect on hover */
+}
+
+.title {
+  font-size: 28px;
+  text-align: center;
+  font-weight: 600;  /* Slightly bold title */
+  margin-bottom: 15px;  /* Add space between title and value */
+  color: #2c3e50;  /* Darker color for better contrast */
+}
+
+.value {
+  font-size: 52px;
+  font-weight: 700;  /* Bold value for emphasis */
+  margin-top: 20px;  /* Adjust margin for better spacing */
+  color: #397ab0;  /* Add a distinct color for the value */
+}
+
+.viewButton {
+  margin-top: 30px;
+  font-size: 20px;
+  color: #397ab0;
+  font-weight: 600;
+  padding: 12px 40px;
+  border: 1px solid #6750a4;
+  background: none;
+  border-radius: 5px;  /* Rounded corners for button */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.viewButton:hover {
+  background-color: rgba(57, 122, 176, 0.1);
+  transform: translateY(-2px);  /* Slight lift effect on hover */
+}
+
+.viewButton:focus {
+  outline: 2px solid #397ab0;
+  outline-offset: 3px;
+}
+
+@media (max-width: 991px) {
+  .metricCard {
+    margin-top: 20px;
+    padding: 25px 20px;  /* Adjusted padding for smaller screens */
+  }
+
+  .value {
+    font-size: 40px;  /* Smaller value font size on mobile */
+  }
+
+  .viewButton {
+    padding: 10px 30px;  /* Adjusted padding for smaller screens */
+    font-size: 18px;  /* Slightly smaller font size for button */
+  }
+}
+
+@media (max-width: 576px) {
+  .metricCard {
+    padding: 20px 15px;  /* Further reduced padding for very small screens */
+  }
+
+  .title {
+    font-size: 24px;  /* Smaller title on very small screens */
+  }
+
+  .value {
+    font-size: 36px;  /* Further reduced value size for small screens */
+  }
+
+  .viewButton {
+    width: 100%;  /* Button takes full width on very small screens */
+    font-size: 16px;  /* Adjusted font size for small screens */
+  }
+}

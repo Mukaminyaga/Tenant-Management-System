@@ -217,6 +217,7 @@ const TermsAndDocs = () => {
           <img
             loading="lazy"
             src={termsIcon}
+            src={termsIcon}
             alt="Terms Icon"
             className={styles.headermessageIcon}
           />

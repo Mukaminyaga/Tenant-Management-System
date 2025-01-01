@@ -164,6 +164,51 @@ body {
   font-size: 24px;
   font-weight: 600;
 }
+.textInput,
+.textArea {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.textInput:focus,
+.textArea:focus {
+  border-color: #2d6496;
+  box-shadow: 0 0 6px rgba(45, 100, 150, 0.3);
+}
+
+.inputLabel {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.textArea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+form {
+  margin: 0 auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+form > * {
+  display: block;
+  width: 100%;
+}
+
 
 .descriptionInput {
   background: #FFF;
