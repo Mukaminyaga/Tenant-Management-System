@@ -92,6 +92,7 @@
   border-radius: 15px 0 0 15px;
   min-height: 491px;
   margin-top: 39px;
+  color: #fff;
   width: 475px;
   max-width: 100%;
   display: flex;
@@ -126,7 +127,7 @@
 
 .promptText {
   color: #fcfcfc;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 600;
   line-height: 2;
 }
