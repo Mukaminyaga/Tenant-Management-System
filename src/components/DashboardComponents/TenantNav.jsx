@@ -2,7 +2,6 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { signOutUser } from '../../redux/ActionCreators/authActionsCreator';
-import "./nav.css";
 
 const Nav = () => {
 
