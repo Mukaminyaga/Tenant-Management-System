@@ -1,7 +1,7 @@
 .dashboardContainer {
     background-color: rgb(242, 240, 240);
     overflow: hidden;
-    min-height: 100vh;
+    max-height: 100vh;
   }
   
   .layoutWrapper {
@@ -81,7 +81,7 @@
     background-color: rgb(255, 255, 255);
     display: flex;
     padding: 10px 20px;
-    height: 45px;
+    height: 60px;
     width: 100%;
     align-items: center;
     justify-content: flex-start ;
@@ -94,7 +94,11 @@
  .headerTitle {
     font: 500 16px Inter, sans-serif !important;
  }
-  
+ .headerNav{
+  margin-left: 500px;
+  margin-top: -14px;
+ } 
+
   .headerIcon {
     aspect-ratio: 1.14;
     object-fit: contain;
@@ -117,7 +121,7 @@
   }
 
  .statsTitle{
-    font:400 18px Lao Muang Khong, -apple-system, Roboto, Helvetica, sans-serif ;
+    font:400 16px Lao Muang Khong, -apple-system, Roboto, Helvetica, sans-serif ;
  }
   .statsGrid {
     display: flex;
@@ -228,7 +232,7 @@
 }
 
   .actionCard {
-  width: 550px; /* Set the desired width */
+  width: 650px; /* Set the desired width */
   max-width: 100%; /* Ensure responsiveness */
   padding: 10px; /* Add some padding if needed */
   display: flex;

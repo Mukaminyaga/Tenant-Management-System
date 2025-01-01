@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
-import { useNavigate, Link } from "react-router-dom";
 import { auth, db } from "../../../config/firebaseConfig"; // Ensure correct paths
 import styles from "./SignInPage.module.css";
 import SignupImage from "../AuthImages/Signup.png";
@@ -14,7 +13,6 @@ const SignInPage = () => {
   });
   const [success, setSuccess] = useState(false);
   const [roleRedirect, setRoleRedirect] = useState(null);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleChange = (field, value) => {
@@ -29,7 +27,6 @@ const SignInPage = () => {
     }
 
     try {
-      // Sign in with Firebase Authentication
       const userCredential = await signInWithEmailAndPassword(
         auth,
         formData.email,
@@ -37,13 +34,16 @@ const SignInPage = () => {
       );
       const user = userCredential.user;
 
-      // Fetch user role from Firestore
       const userDoc = await getDoc(doc(db, "users", user.uid));
       if (userDoc.exists()) {
         const userData = userDoc.data();
-        setSuccess(true);
 
-        // Navigate based on role
+        if (!userData.verified) {
+          alert("Your account is not verified yet. Please wait for admin approval.");
+          return;
+        }
+
+        setSuccess(true);
         if (userData.role === "admin") {
           setRoleRedirect("/Dashboard");
         } else if (userData.role === "tenant") {

@@ -1,31 +1,161 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { collection, getDocs, doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
+import { auth, db } from "../../config/firebaseConfig";
+import { onAuthStateChanged, setPersistence, browserLocalPersistence } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import styles from "./AdminDashboard.module.css";
 import Nav from "../../components/DashboardComponents/Nav";
 
 const Dashboard = () => {
-  const { isAuthenticated } = useSelector((state) => state.auth);
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [authorized, setAuthorized] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Local authentication state
   const navigate = useNavigate();
 
-  // Ensure only authenticated users can access the Dashboard
+  useEffect(() => {
+    const configurePersistence = async () => {
+      try {
+        await setPersistence(auth, browserLocalPersistence);
+      } catch (error) {
+        console.error("Error setting persistence:", error.message);
+      }
+    };
+
+    configurePersistence();
+
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        setIsAuthenticated(true);
+        try {
+          const userDoc = await getDoc(doc(db, "users", currentUser.uid));
+          if (userDoc.exists()) {
+            const userData = userDoc.data();
+            if (userData.role === "admin") {
+              setAuthorized(true);
+            } else {
+              alert("Access denied. Admins only.");
+              navigate("/Tenant Dashboard");
+            }
+          } else {
+            alert("User not found.");
+            navigate("/Login");
+          }
+        } catch (error) {
+          console.error("Error fetching user role:", error.message);
+          navigate("/Login");
+        }
+      } else {
+        setIsAuthenticated(false);
+        navigate("/Login");
+      }
+    });
+
+    return () => unsubscribe(); // Cleanup observer on component unmount
+  }, [navigate]);
+
+  useEffect(() => {
+    if (authorized) {
+      const fetchUsers = async () => {
+        try {
+          const usersCollection = collection(db, "users");
+          const usersSnapshot = await getDocs(usersCollection);
+          const usersList = usersSnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setUsers(usersList);
+        } catch (error) {
+          console.error("Error fetching users:", error.message);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchUsers();
+    }
+  }, [authorized]);
+
+  const handleVerify = async (userId) => {
+    try {
+      const userRef = doc(db, "users", userId);
+      await updateDoc(userRef, { verified: true });
+      alert("User verified successfully.");
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user.id === userId ? { ...user, verified: true } : user
+        )
+      );
+    } catch (error) {
+      console.error("Error verifying user:", error.message);
+    }
+  };
+
+  const handleDelete = async (userId) => {
+    try {
+      const userRef = doc(db, "users", userId);
+      await deleteDoc(userRef);
+      alert("User removed successfully.");
+      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
+    } catch (error) {
+      console.error("Error deleting user:", error.message);
+    }
+  };
+
   if (!isAuthenticated) {
-    navigate("/Login");
-    return null; // Prevent further rendering until redirection
+    return <p>Just a moment...</p>; // Display while waiting for authentication state
+  }
+
+  if (loading) {
+    return <p>Loading users...</p>;
+  }
+
+  if (!authorized) {
+    return <p>Unauthorized access.</p>; // Optional fallback
   }
 
   return (
-    <>
+    <div className={styles.dashboardContainer}>
       <Nav />
-      <div className="dashboard-content">
-        <h3>Welcome Admin</h3>
-        <Link
-          to="/Send Alert"
-          state={{ from: "/Dashboard" }} // Pass state to restrict access
-        >
-          Send Alert
-        </Link>
-      </div>
-    </>
+      <h1 className={styles.dashboardTitle}>Admin Dashboard</h1>
+      <table className={styles.userTable}>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Verified</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user) => (
+            <tr key={user.id}>
+              <td>{user.name || "N/A"}</td>
+              <td>{user.email}</td>
+              <td>{user.role}</td>
+              <td>{user.verified ? "Yes" : "No"}</td>
+              <td>
+                {!user.verified && (
+                  <button
+                    className={styles.verifyButton}
+                    onClick={() => handleVerify(user.id)}
+                  >
+                    Verify
+                  </button>
+                )}
+                <button
+                  className={styles.deleteButton}
+                  onClick={() => handleDelete(user.id)}
+                >
+                  Remove
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 
