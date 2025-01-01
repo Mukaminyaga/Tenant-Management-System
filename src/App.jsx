@@ -36,7 +36,7 @@ const App = () => {
       <Routes>
         {/* <Route path="/" element={<HomePage />} /> */}
         <Route path="/" element={<LandingPage />} />
-        <Route path="/Dashboard" element={<Dashboard />} />
+        <Route path="/Dashboard" element={<LandlordDashboardLayout />} />
         <Route path="/Login" element={<SignInPage />} />
         <Route path="/SignUp" element={<SignUpPage/>} />
         <Route path="/ResetPasswordForm" element={<ResetPasswordForm />} />
@@ -56,8 +56,7 @@ const App = () => {
         <Route path='/Send Alert' element={<SendAlert/>} />
         <Route path='/Tenant Dashboard' element={<TenantDashboard/>}/> 
         <Route path='/Access Denied' element={<accessDenied/>}/> 
-
-
+        <Route path='/Tenants' element={<Dashboard/>}/> 
         <Route path='/LandlordDashboard' element={<LandlordDashboardLayout/>}/> 
       </Routes>
     </div>
