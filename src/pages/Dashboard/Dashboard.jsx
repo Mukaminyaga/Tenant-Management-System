@@ -10,7 +10,7 @@ const Dashboard = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [authorized, setAuthorized] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // Local authentication state
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const Dashboard = () => {
               setAuthorized(true);
             } else {
               alert("Access denied. Admins only.");
-              navigate("/Tenant Dashboard");
+              navigate("/TenantDashboard");
             }
           } else {
             alert("User not found.");
@@ -51,7 +51,7 @@ const Dashboard = () => {
       }
     });
 
-    return () => unsubscribe(); // Cleanup observer on component unmount
+    return () => unsubscribe();
   }, [navigate]);
 
   useEffect(() => {
@@ -103,21 +103,25 @@ const Dashboard = () => {
   };
 
   if (!isAuthenticated) {
-    return <p>Just a moment...</p>; // Display while waiting for authentication state
+    return <p>Just a moment...</p>;
   }
 
   if (loading) {
-    return <p>Loading users...</p>;
+    return (
+      <div className={styles.loadingContainer}>
+        <div className={styles.spinner}></div>
+      </div>
+    );
   }
 
   if (!authorized) {
-    return <p>Unauthorized access.</p>; // Optional fallback
+    return <p>Unauthorized access.</p>;
   }
 
   return (
     <div className={styles.dashboardContainer}>
       <Nav />
-      <h1 className={styles.dashboardTitle}>Admin Dashboard</h1>
+      <h3 className={styles.dashboardTitle}>Tenant Management</h3>
       <table className={styles.userTable}>
         <thead>
           <tr>

@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import styles from './LandlordDashboardLayout.module.css';
 import DashboardMetricCard from './DashboardMetricCard';
 import PropertyActionCard from './PropertyActionCard';
+import Nav from '../components/DashboardComponents/TenantNav';
 
 const menuItems = [
-  { name: 'DASHBOARD', path: '/dashboard' },
+  { name: 'DASHBOARD', path: '/Dashboard' },
   { name: 'PROPERTIES', path: '/properties' },
-  { name: 'TENANTS & LEASES', path: '/tenants-leases' },
+  { name: 'TENANTS & LEASES', path: '/Tenants' },
   { name: 'MAINT . & REPAIRS', path: '/maintenance-repairs' },
   { name: 'PAYMENTS', path: '/payments' },
   { name: 'SETTINGS', path: '/settings' },
@@ -55,7 +56,11 @@ export default function LandlordDashboardLayout() {
         
         {/* Main Content */}
         <div className={styles.mainColumn}>
-          <div className={styles.pageHeader}>PROPERTIES</div>
+          <div className={styles.pageHeader}>
+            <div>
+              <Nav/>
+            </div>
+          </div>
           <div className={styles.statsContainer}>
             <div className={styles.statsWrapper}>
               <div className={styles.contentWrapper}>
