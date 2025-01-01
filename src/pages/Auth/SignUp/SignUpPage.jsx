@@ -1,13 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import {
-  getFirestore,
-  doc,
-  setDoc
-} from "firebase/firestore";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 import styles from "./SignUpPage.module.css";
 import Signup from "../AuthImages/Signup.png";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -17,9 +12,9 @@ const firebaseConfig = {
   apiKey: "AIzaSyB_s2DQ86GMDe1XiVfOT7T9fPA5LAxVFN0",
   authDomain: "tenant-management-system-64046.firebaseapp.com",
   projectId: "tenant-management-system-64046",
-  storageBucket: "tenant-management-system-64046.appspot.com",
+  storageBucket: "tenant-management-system-64046.firebasestorage.app",
   messagingSenderId: "388402906664",
-  appId: "1:388402906664:web:ee3a92e6098288b432171d",
+  appId: "1:388402906664:web:ee3a92e6098288b432171d"
 };
 
 // Initialize Firebase
@@ -83,22 +78,19 @@ const SignUpPage = () => {
         name: `${firstName} ${lastName}`,
         email: user.email,
         role,
+        verified: false, // Unverified by default
       });
 
       // Successful sign up
       setSuccess(true);
       alert("User registered successfully!");
+      alert("Registration successful! Please wait for admin verification to log in.");
+      navigate("/");
     } catch (error) {
       console.error("Error signing up:", error.message);
       alert("Error signing up: " + error.message);
     }
   };
-
-  useEffect(() => {
-    if (success) {
-      navigate("/Dashboard"); // Redirect to Dashboard on successful signup
-    }
-  }, [success, navigate]);
 
   return (
     <div className={styles.signUpContainer}>

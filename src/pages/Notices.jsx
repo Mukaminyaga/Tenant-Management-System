@@ -9,17 +9,8 @@ import styles from './Notices.module.css';
 const db = getFirestore();
 
 export const SendAlert = () => {
-  const location = useLocation();
-  const referrer = location.state?.from;
-
-  // Ensure that the user comes from /Dashboard
-  if (referrer !== "/Dashboard") {
-    return <Navigate to="/Tenant Dashboard" replace />;
-  }
-
   const navigate = useNavigate();
   const { isAuthenticated, user } = useSelector((state) => state.auth);
-
   // Redirect to login if not authenticated
   if (!isAuthenticated) {
     return <Navigate to="/Login" replace />;

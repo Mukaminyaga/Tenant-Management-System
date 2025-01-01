@@ -1,8 +1,49 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { firestore, auth } from "../config/firebase"; // Make sure auth is imported
+import { doc, getDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 import styles from './Settings.module.css';
-// import { FormInput } from './FormInput';
 
 export const ProfileForm = () => {
+  const [role, setRole] = useState(null); // Store user role
+  const [userId, setUserId] = useState(null); // Store user ID
+  const navigate = useNavigate(); // For redirection
+
+  useEffect(() => {
+    const checkUserRole = async () => {
+          const currentUser = auth.currentUser;
+          if (currentUser) {
+            setUserId(currentUser.uid);
+            try {
+              const userDoc = await getDoc(doc(firestore, "users", currentUser.uid));
+              if (userDoc.exists()) {
+                const userData = userDoc.data();
+                setRole(userData.role);
+                if (userData.role !== "tenant") {
+                  alert("Access denied. Tenants only.");
+                  navigate("/Dashboard"); // Redirect to login or tenant dashboard
+                }
+              } else {
+                alert("User not found.");
+                navigate("/Login"); 
+              }
+            } catch (error) {
+              console.error("Error fetching user role:", error);
+              navigate("/");
+            }
+          } else {
+            alert("You do not have access to this page.");
+            navigate("/Dashboard");
+          }
+        };
+
+    checkUserRole();
+  }, [navigate]);
+
+  if (role !== "tenant") {
+    return <p></p>;
+  }
+
   return (
     <form className={styles.profileForm}>
       <div className={styles.formColumns}>

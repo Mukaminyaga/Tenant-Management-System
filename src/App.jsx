@@ -7,7 +7,7 @@ import UserTypeSelection from "./pages/UserTypeSelection";
 import LandingPage from "./pages/LandingPage";
 import LogoutPage from "./pages/LogoutPage";
 import ResetPasswordForm from "./pages/ResetPasswordForm";
-import DashboardLayout from "./pages/DashboardLayout";
+// import DashboardLayout from "./pages/DashboardLayout";
 import MessageDashboard from "./pages/MessageDashboard";
 import Settings from "./pages/Settings";
 import SuccessModal from "./pages/SuccessModal";
@@ -44,7 +44,7 @@ const App = () => {
         <Route path="/UserTypeSelection" element={<UserTypeSelection />} />
         <Route path="/LandingPage" element={<LandingPage />} />
         <Route path="/LogoutPage" element={<LogoutPage />} />
-        <Route path="/DashboardTenant" element={<DashboardLayout />} />
+        <Route path="/DashboardTenant" element={<TenantDashboard />} />
         <Route path="/MessageTenant" element={<MessageDashboard/>} />
         <Route path="/Settings" element={<Settings/>} />
         <Route path="/ResetSuccess" element={<SuccessModal/>} />
@@ -55,6 +55,7 @@ const App = () => {
         <Route path='/Report Issue' element={<ReportMaintenance/>}/> 
         <Route path='/Send Alert' element={<SendAlert/>} />
         <Route path='/Tenant Dashboard' element={<TenantDashboard/>}/> 
+        <Route path='/Access Denied' element={<accessDenied/>}/> 
 
 
         <Route path='/LandlordDashboard' element={<LandlordDashboardLayout/>}/> 

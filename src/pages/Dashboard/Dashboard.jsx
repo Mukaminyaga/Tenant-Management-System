@@ -10,10 +10,105 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Ensure only authenticated users can access the Dashboard
+  useEffect(() => {
+    const configurePersistence = async () => {
+      try {
+        await setPersistence(auth, browserLocalPersistence);
+      } catch (error) {
+        console.error("Error setting persistence:", error.message);
+      }
+    };
+
+    configurePersistence();
+
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        setIsAuthenticated(true);
+        try {
+          const userDoc = await getDoc(doc(db, "users", currentUser.uid));
+          if (userDoc.exists()) {
+            const userData = userDoc.data();
+            if (userData.role === "admin") {
+              setAuthorized(true);
+            } else {
+              alert("Access denied. Admins only.");
+              navigate("/Tenant Dashboard");
+            }
+          } else {
+            alert("User not found.");
+            navigate("/Login");
+          }
+        } catch (error) {
+          console.error("Error fetching user role:", error.message);
+          navigate("/Login");
+        }
+      } else {
+        setIsAuthenticated(false);
+        navigate("/Login");
+      }
+    });
+
+    return () => unsubscribe(); // Cleanup observer on component unmount
+  }, [navigate]);
+
+  useEffect(() => {
+    if (authorized) {
+      const fetchUsers = async () => {
+        try {
+          const usersCollection = collection(db, "users");
+          const usersSnapshot = await getDocs(usersCollection);
+          const usersList = usersSnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setUsers(usersList);
+        } catch (error) {
+          console.error("Error fetching users:", error.message);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchUsers();
+    }
+  }, [authorized]);
+
+  const handleVerify = async (userId) => {
+    try {
+      const userRef = doc(db, "users", userId);
+      await updateDoc(userRef, { verified: true });
+      alert("User verified successfully.");
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user.id === userId ? { ...user, verified: true } : user
+        )
+      );
+    } catch (error) {
+      console.error("Error verifying user:", error.message);
+    }
+  };
+
+  const handleDelete = async (userId) => {
+    try {
+      const userRef = doc(db, "users", userId);
+      await deleteDoc(userRef);
+      alert("User removed successfully.");
+      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
+    } catch (error) {
+      console.error("Error deleting user:", error.message);
+    }
+  };
+
   if (!isAuthenticated) {
-    navigate("/Login");
-    return null; // Prevent further rendering until redirection
+    return <p>Just a moment...</p>; // Display while waiting for authentication state
+  }
+
+  if (loading) {
+    return <p>Loading users...</p>;
+  }
+
+  if (!authorized) {
+    return <p>Unauthorized access.</p>; // Optional fallback
   }
 
   return (
