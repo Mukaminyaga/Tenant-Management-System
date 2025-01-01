@@ -11,6 +11,7 @@ const SignInPage = () => {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [roleRedirect, setRoleRedirect] = useState(null);
   const navigate = useNavigate();
@@ -25,6 +26,8 @@ const SignInPage = () => {
       alert("Please fill in all fields!");
       return;
     }
+
+    setLoading(true);
 
     try {
       const userCredential = await signInWithEmailAndPassword(
@@ -57,6 +60,8 @@ const SignInPage = () => {
     } catch (error) {
       console.error("Error signing in:", error.message);
       alert("Error signing in: " + error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -99,8 +104,12 @@ const SignInPage = () => {
                   onChange={(e) => handleChange("password", e.target.value)}
                 />
               </div>
-              <button type="submit" className={styles.submitButton}>
-                Sign In
+              <button type="submit" className={styles.submitButton} disabled={loading}>
+                {loading ? (
+                  <div className={styles.loader}></div>
+                ) : (
+                  "Sign In"
+                )}
               </button>
             </form>
             <Link to="/ResetPasswordForm" className={styles.forgotPasswordLink}>
