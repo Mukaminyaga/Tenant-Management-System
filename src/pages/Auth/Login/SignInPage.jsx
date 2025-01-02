@@ -5,12 +5,14 @@ import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../../../config/firebaseConfig"; // Ensure correct paths
 import styles from "./SignInPage.module.css";
 import SignupImage from "../AuthImages/Signup.png";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const SignInPage = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false); // For toggling password visibility
   const [success, setSuccess] = useState(false);
   const [roleRedirect, setRoleRedirect] = useState(null);
   const navigate = useNavigate();
@@ -45,7 +47,7 @@ const SignInPage = () => {
 
         setSuccess(true);
         if (userData.role === "admin") {
-          setRoleRedirect("/Dashboard");
+          setRoleRedirect("/LandLordHome");
         } else if (userData.role === "tenant") {
           setRoleRedirect("/Tenant Dashboard");
         } else {
@@ -86,19 +88,30 @@ const SignInPage = () => {
                   onChange={(e) => handleChange("email", e.target.value)}
                 />
               </div>
+
+              {/* Password input with visibility toggle */}
               <div className={styles.formGroup}>
                 <label htmlFor="password" className={styles.label}>
                   Password
                 </label>
-                <input
-                  id="password"
-                  type="password"
-                  className={styles.input}
-                  placeholder="Enter your password"
-                  value={formData.password}
-                  onChange={(e) => handleChange("password", e.target.value)}
-                />
+                <div className={styles.passwordContainer}>
+                  <input
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    className={styles.input}
+                    placeholder="Enter your password"
+                    value={formData.password}
+                    onChange={(e) => handleChange("password", e.target.value)}
+                  />
+                  <span
+                    className={styles.eyeIcon}
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </span>
+                </div>
               </div>
+
               <button type="submit" className={styles.submitButton}>
                 Sign In
               </button>

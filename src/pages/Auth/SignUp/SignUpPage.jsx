@@ -6,6 +6,8 @@ import { getFirestore, doc, setDoc } from "firebase/firestore";
 import styles from "./SignUpPage.module.css";
 import Signup from "../AuthImages/Signup.png";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useDispatch } from 'react-redux';
+
 
 // Firebase Configuration
 const firebaseConfig = {
@@ -86,6 +88,7 @@ const SignUpPage = () => {
       alert("User registered successfully!");
       alert("Registration successful! Please wait for admin verification to log in.");
       navigate("/");
+
     } catch (error) {
       console.error("Error signing up:", error.message);
       alert("Error signing up: " + error.message);

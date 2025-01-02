@@ -16,3 +16,5 @@ export { default as MaintenanceDescription} from './MaintenanceDescription';
 export { default as PaymentTenant} from './PaymentTenant';
 export { default as TermsAndDocs} from './TermsAndDocs';
 export { default as LandlordDashboardLayout} from './LandlordDashboardLayout';
+export { default as TenantsPage} from './TenantsPage';
+// export { default as LandLordHome} from './LandLordHome';

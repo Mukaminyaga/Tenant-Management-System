@@ -21,8 +21,10 @@ import { checkIsLoggedIn } from './redux/ActionCreators/authActionsCreator';
 import { useEffect } from 'react';
 import ReportMaintenance from './pages/Maintenance/ReportMaintenance'
 import TenantDashboard from './pages/Dashboard/TenantDashboard';
+import LandLordHome from './pages/Dashboard/LandLordHome';
 import SignUpPage from './pages/Auth/SignUp/SignUpPage';
 import SendAlert from './pages/Notices';
+import TenantsPage from './pages/TenantsPage';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -56,9 +58,9 @@ const App = () => {
         <Route path='/Send Alert' element={<SendAlert/>} />
         <Route path='/Tenant Dashboard' element={<TenantDashboard/>}/> 
         <Route path='/Access Denied' element={<accessDenied/>}/> 
-
-
         <Route path='/LandlordDashboard' element={<LandlordDashboardLayout/>}/> 
+        <Route path='/TenantsPage' element={<TenantsPage/>}/> 
+        <Route path='/LandLordHome' element={<LandLordHome/>}/> 
       </Routes>
     </div>
   );
