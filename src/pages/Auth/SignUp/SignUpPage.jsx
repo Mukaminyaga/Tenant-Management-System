@@ -5,11 +5,11 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import styles from "./SignUpPage.module.css";
 import Signup from "../AuthImages/Signup.png";
+import { useDispatch } from "react-redux";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useDispatch } from 'react-redux';
 
 
-// Firebase Configuration
 const firebaseConfig = {
   apiKey: "AIzaSyB_s2DQ86GMDe1XiVfOT7T9fPA5LAxVFN0",
   authDomain: "tenant-management-system-64046.firebaseapp.com",
@@ -19,7 +19,6 @@ const firebaseConfig = {
   appId: "1:388402906664:web:ee3a92e6098288b432171d"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -33,7 +32,7 @@ const SignUpPage = () => {
   const [role, setRole] = useState("tenant");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -45,23 +44,11 @@ const SignUpPage = () => {
       return;
     }
 
-    console.log("Password:", password);
-    console.log("Confirm Password:", confirmPassword);
-
-    // Manual password validation
     const hasNumber = /\d/;
     const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/;
 
-    if (password.length < 8) {
-      alert("Password must be at least 8 characters long.");
-      return;
-    }
-    if (!hasNumber.test(password)) {
-      alert("Password must contain at least one number.");
-      return;
-    }
-    if (!hasSpecialChar.test(password)) {
-      alert("Password must contain at least one special character.");
+    if (password.length < 8 || !hasNumber.test(password) || !hasSpecialChar.test(password)) {
+      alert("Password must be at least 8 characters long, include a number, and a special character.");
       return;
     }
 
@@ -70,28 +57,27 @@ const SignUpPage = () => {
       return;
     }
 
+    setLoading(true);
+
     try {
-      // Attempt to create the user with email and password
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      // Set user data in Firestore
       await setDoc(doc(db, "users", user.uid), {
         name: `${firstName} ${lastName}`,
         email: user.email,
         role,
-        verified: false, // Unverified by default
+        verified: false,
       });
 
-      // Successful sign up
-      setSuccess(true);
-      alert("User registered successfully!");
-      alert("Registration successful! Please wait for admin verification to log in.");
+      alert("Registration successful! Please wait for admin verification.");
       navigate("/");
 
     } catch (error) {
       console.error("Error signing up:", error.message);
       alert("Error signing up: " + error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -102,7 +88,7 @@ const SignUpPage = () => {
           <form className={styles.signUpForm} onSubmit={handleSignUp}>
             <h1 className={styles.formTitle}>Create an account</h1>
 
-            <div className={styles.nameFields}>
+             <div className={styles.nameFields}>
               <div className={styles.formGroup}>
                 <label htmlFor="firstName" className={styles.formLabel}>
                   First name
@@ -204,8 +190,8 @@ const SignUpPage = () => {
               </select>
             </div>
 
-            <button type="submit" className={styles.submitButton}>
-              Sign Up
+            <button type="submit" className={styles.submitButton} disabled={loading}>
+              {loading ? "Loading..." : "Sign Up"}
             </button>
           </form>
         </div>

@@ -28,6 +28,8 @@ const SignInPage = () => {
       return;
     }
 
+    setLoading(true);
+
     try {
       const userCredential = await signInWithEmailAndPassword(
         auth,
@@ -59,6 +61,8 @@ const SignInPage = () => {
     } catch (error) {
       console.error("Error signing in:", error.message);
       alert("Error signing in: " + error.message);
+    } finally {
+      setLoading(false);
     }
   };
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import emailjs from 'emailjs-com';
 import { Link } from 'react-router-dom';
-import styles from '../MaintenanceDashboard.module.css';
+import styles from '../../pages/MaintenanceDashboard.module.css';
 import { SidebarItem } from '../components/SideBarItem';
 // Import local images
 import profileIcon from '../Images/profile.png';
