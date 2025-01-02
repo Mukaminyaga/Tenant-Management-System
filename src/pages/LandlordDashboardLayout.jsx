@@ -5,16 +5,6 @@ import DashboardMetricCard from './DashboardMetricCard';
 import PropertyActionCard from './PropertyActionCard';
 import Nav from '../components/DashboardComponents/TenantNav';
 
-const menuItems = [
-  { name: 'DASHBOARD', path: '/Dashboard' },
-  { name: 'PROPERTIES', path: '/properties' },
-  { name: 'TENANTS & LEASES', path: '/Tenants' },
-  { name: 'MAINT . & REPAIRS', path: '/maintenance-repairs' },
-  { name: 'NOTICES', path: '/Send Alert' },
-  { name: 'PAYMENTS', path: '/payments' },
-  { name: 'SETTINGS', path: '/Settings' },
-  { name: 'LOGOUT', path: '/logout' }
-];
 
 const metrics = [
   { title: 'Open Maint .', value: '0', onView: () => {} },
@@ -38,22 +28,34 @@ const actions = [
 export default function LandlordDashboardLayout() {
   return (
     <div className={styles.mainContent}>
-      <div className={styles.contentWrapper}>
-        {/* Sidebar */}
-        <div className={styles.sidebarColumn}>
-          <nav className={styles.sidebarContainer}>
-            {menuItems.map((item, index) => (
-              <Link 
-                key={index} 
-                to={item.path} 
-                className={styles.menuButton}
-                aria-label={item.name.toLowerCase()}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </nav>
-        </div>
+         <div className={styles.contentWrapper}>
+           {/* Sidebar */}
+           <div className={styles.sidebarColumn}>
+              <nav className={styles.sidebarContainer}>
+                           <Link to="" className={styles.menuButton}>
+                            DASHBOARD
+                           </Link>
+                           <Link to="/LandlordDashboard" className={styles.menuButton}>
+                             PROPERTIES
+                           </Link>
+                           <Link to="/TenantsPage" className={styles.menuButton}>
+                             TENANTS & LEASES
+                           </Link>
+                           <Link to="/maintenance-repairs" className={styles.menuButton}>
+                             MAINT . & REPAIRS
+                           </Link>
+                           <Link to="/Send Alert" className={styles.menuButton}>
+                             NOTICES
+                           </Link>
+                           <Link to="/payments" className={styles.menuButton}>
+                             PAYMENTS
+                           </Link>
+                           <Link to="/Settings" className={styles.menuButton}>
+                             SETTINGS
+                           </Link>
+                         </nav>
+           </div>
+   
         
         {/* Main Content */}
         <div className={styles.mainColumn}>
