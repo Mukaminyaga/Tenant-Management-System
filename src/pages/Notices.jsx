@@ -104,7 +104,7 @@ export const SendAlert = () => {
             <Link to="/payments" className={styles.menuButton}>
               PAYMENTS
             </Link>
-            <Link to="/Settings" className={styles.menuButton}>
+            <Link to="/Profile Settings" className={styles.menuButton}>
               SETTINGS
             </Link>
             <Link to="/logout" className={styles.menuButton}>

@@ -127,6 +127,7 @@ const Dashboard = () => {
           <tr>
             <th>Name</th>
             <th>Email</th>
+            <th>Apartment Number</th>
             <th>Role</th>
             <th>Verified</th>
             <th>Actions</th>
@@ -137,6 +138,7 @@ const Dashboard = () => {
             <tr key={user.id}>
               <td>{user.name || "N/A"}</td>
               <td>{user.email}</td>
+              <td>{user.apartmentNumber || "N/A"}</td> {/* New Column */}
               <td>{user.role}</td>
               <td>{user.verified ? "Yes" : "No"}</td>
               <td>
