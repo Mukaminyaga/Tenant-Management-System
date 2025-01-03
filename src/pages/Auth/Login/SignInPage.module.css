@@ -64,6 +64,25 @@
   font-size: 14px;
   width: 100%;
 }
+.passwordContainer {
+  display: flex;
+  align-items: center; /* Aligns input and icon vertically */
+  position: relative; /* Ensures the icon can be positioned relative to the container */
+}
+
+.formInput {
+  flex: 1; /* Ensures the input takes the available width */
+  padding-right: 40px; /* Adds space to the right for the icon */
+}
+
+.eyeIcon {
+  position: absolute;
+  right: 10px; /* Adjusts icon position inside the container */
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #888; /* Optional: Customize the icon color */
+}
+
 
 .submitButton {
   width: 100%;

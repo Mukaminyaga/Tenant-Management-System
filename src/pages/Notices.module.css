@@ -39,7 +39,7 @@ body {
     display: flex;
     flex-direction: column;
     line-height: normal;
-    width: 23%;
+    width: 22%;
     margin-left: 0;
   }
   
@@ -48,7 +48,7 @@ body {
     display: flex;
     flex-direction: column;
     line-height: normal;
-    width: 77%;
+    width: 78%;
     margin-left: 20px;
   }
   

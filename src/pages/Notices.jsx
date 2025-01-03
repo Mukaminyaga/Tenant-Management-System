@@ -98,7 +98,7 @@ export const SendAlert = () => {
             <Link to="/maintenance-repairs" className={styles.menuButton}>
               MAINT . & REPAIRS
             </Link>
-            <Link to="/send-alert" className={styles.menuButton}>
+            <Link to="/Send Alert" className={styles.menuButton}>
               NOTICES
             </Link>
             <Link to="/payments" className={styles.menuButton}>

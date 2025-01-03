@@ -1,12 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { collection, getDocs, doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
-import { auth, db } from "../../config/firebaseConfig";
-import { onAuthStateChanged, setPersistence, browserLocalPersistence } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
-import styles from "./AdminDashboard.module.css";
-import Nav from "../../components/DashboardComponents/Nav";
+import {
+  collection,
+  getDocs,
+  doc,
+  getDoc,
+  updateDoc,
+  deleteDoc,
+} from "firebase/firestore";
+import { auth, db } from "../config/firebaseConfig";
+import {
+  onAuthStateChanged,
+  setPersistence,
+  browserLocalPersistence,
+} from "firebase/auth";
+// import { useNavigate } from "react-router-dom";
+// import Sidebar from "../components/Sidebar"; 
+import styles from "./TenantsPage.module.css";
+import { Link, useLocation, Navigate, useNavigate } from "react-router-dom";
 
-const Dashboard = () => {
+
+const TenantsPage = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [authorized, setAuthorized] = useState(false);
@@ -119,50 +132,79 @@ const Dashboard = () => {
   }
 
   return (
-    <div className={styles.dashboardContainer}>
-      <Nav />
-      <h3 className={styles.dashboardTitle}>Tenant Management</h3>
-      <table className={styles.userTable}>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Apartment Number</th>
-            <th>Role</th>
-            <th>Verified</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user) => (
-            <tr key={user.id}>
-              <td>{user.name || "N/A"}</td>
-              <td>{user.email}</td>
-              <td>{user.apartmentNumber || "N/A"}</td> {/* New Column */}
-              <td>{user.role}</td>
-              <td>{user.verified ? "Yes" : "No"}</td>
-              <td>
-                {!user.verified && (
-                  <button
-                    className={styles.verifyButton}
-                    onClick={() => handleVerify(user.id)}
-                  >
-                    Verify
-                  </button>
-                )}
-                <button
-                  className={styles.deleteButton}
-                  onClick={() => handleDelete(user.id)}
-                >
-                  Remove
-                </button>
-              </td>
+    <div className={styles.mainContent}>
+            <div className={styles.contentWrapper}>
+              {/* Sidebar */}
+              <div className={styles.sidebarColumn}>
+                 <nav className={styles.sidebarContainer}>
+                              <Link to="" className={styles.menuButton}>
+                               DASHBOARD
+                              </Link>
+                              <Link to="/LandlordDashboard" className={styles.menuButton}>
+                                PROPERTIES
+                              </Link>
+                              <Link to="/TenantsPage" className={styles.menuButton}>
+                                TENANTS & LEASES
+                              </Link>
+                              <Link to="/maintenance-repairs" className={styles.menuButton}>
+                                MAINT . & REPAIRS
+                              </Link>
+                              <Link to="/Send Alert" className={styles.menuButton}>
+                                NOTICES
+                              </Link>
+                              <Link to="/payments" className={styles.menuButton}>
+                                PAYMENTS
+                              </Link>
+                              <Link to="/Settings" className={styles.menuButton}>
+                                SETTINGS
+                              </Link>
+                            </nav>
+              </div>
+   
+      <div className={styles.mainColumn}>
+        
+                  <div className={styles.pageHeader}> TENANT MANAGEMENT</div>
+        <table className={styles.userTable}>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Verified</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {users.map((user) => (
+              <tr key={user.id}>
+                <td>{user.name || "N/A"}</td>
+                <td>{user.email}</td>
+                <td>{user.role}</td>
+                <td>{user.verified ? "Yes" : "No"}</td>
+                <td>
+                  {!user.verified && (
+                    <button
+                      className={styles.verifyButton}
+                      onClick={() => handleVerify(user.id)}
+                    >
+                      Verify
+                    </button>
+                  )}
+                  <button
+                    className={styles.deleteButton}
+                    onClick={() => handleDelete(user.id)}
+                  >
+                    Remove
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
     </div>
   );
 };
 
-export default Dashboard;
+export default TenantsPage;

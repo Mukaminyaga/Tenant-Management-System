@@ -33,8 +33,7 @@
 }
 
 .actionButton {
-  background-color: #397ab0;
-  align-self: center;
+  background-color: #2c3e50;
   margin-top: 20px;  /* Reduced margin */
   width: 100%;
   max-width: 260px;  /* Maximum width to prevent stretching */
@@ -49,12 +48,12 @@
 }
 
 .actionButton:hover {
-  background-color: #2c5d8a;
+  background-color: #2c3e50;
   transform: translateY(-2px);  /* Slight lift effect on hover */
 }
 
 .actionButton:focus {
-  outline: 2px solid #1d3f5e;
+  outline: 2px solid #2c3e50;
   outline-offset: 3px;
 }
 

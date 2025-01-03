@@ -4,16 +4,16 @@
   align-items: center;
   font-family: 'Inter', sans-serif;
   color: #25325c;
-  font-weight: 400;
+  font-weight: 300;
   padding: 30px 20px;  /* Balanced padding for spacing */
   background-color: #fff;
   border-radius: 10px;  /* Rounded corners for card */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Subtle shadow for depth */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
   transition: all 0.3s ease-in-out;
 }
 
 .metricCard:hover {
-  transform: translateY(-5px);  /* Slight lift effect on hover */
+  transform: translateY(-5px);  
 }
 
 .title {
@@ -28,7 +28,7 @@
   font-size: 52px;
   font-weight: 700;  /* Bold value for emphasis */
   margin-top: 20px;  /* Adjust margin for better spacing */
-  color: #397ab0;  /* Add a distinct color for the value */
+  color: #2c3e50;  /* Add a distinct color for the value */
 }
 
 .viewButton {
