@@ -7,7 +7,6 @@ import styles from "./SignUpPage.module.css";
 import Signup from "../AuthImages/Signup.png";
 import { useDispatch } from "react-redux";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useDispatch } from 'react-redux';
 
 
 const firebaseConfig = {
