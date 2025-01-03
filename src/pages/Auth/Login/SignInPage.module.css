@@ -98,7 +98,37 @@
   border: 1px solid rgba(91, 91, 91, 1);
   margin-top: 23px;
   cursor: pointer;
+  transition: opacity 0.3s ease;
 }
+.spinner {
+  margin: 0 auto;
+  border: 3px solid rgba(0, 0, 0, 0.1); /* Light gray border */
+  border-top: 3px solid #ffffff; /* White border on top */
+  border-radius: 50%;
+  width: 20px; /* Spinner width */
+  height: 20px; /* Spinner height */
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.submitButton:disabled {
+  background-color: #575757; /* Optional: lighter color when disabled */
+  cursor: not-allowed;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Center the spinner */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 
 .sideSection {
   width: 58%;
@@ -171,11 +201,6 @@
 
 .forgotPasswordLink:hover {
   text-decoration: underline;
-}
-
-.submitButton:disabled {
-  background-color: #575757; /* Optional: lighter color when disabled */
-  cursor: not-allowed;
 }
 
 .loader {
