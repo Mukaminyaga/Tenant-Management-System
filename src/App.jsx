@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import { Dashboard } from './pages';
+// import { Dashboard } from './pages';
 import SignInPage from "./pages/Auth/Login/SignInPage";
 import HowItWorks from "./pages/HowItWorks";
 import UserTypeSelection from "./pages/UserTypeSelection";
@@ -12,7 +12,6 @@ import MessageDashboard from "./pages/MessageDashboard";
 import Settings from "./pages/Settings";
 import SuccessModal from "./pages/SuccessModal";
 import MaintenanceDashboard from "./pages/MaintenanceDashboard";
-import MaintenanceDescription from "./pages/MaintenanceDescription";
 import PaymentTenant from "./pages/PaymentTenant";
 import TermsAndDocs from "./pages/TermsAndDocs";
 import LandlordDashboardLayout from "./pages/LandlordDashboardLayout";
@@ -52,7 +51,6 @@ const App = () => {
         <Route path="/Settings" element={<Settings/>} />
         <Route path="/ResetSuccess" element={<SuccessModal/>} />
         <Route path="/MaintenanceDashboard" element={<MaintenanceDashboard/>} />
-        <Route path="/MaintenanceDescription" element={<MaintenanceDescription/>} />
         <Route path="/PaymentTenant" element={<PaymentTenant/>} />
         <Route path="/TermsAndDocs" element={<TermsAndDocs/>} />
         <Route path='/Report Issue' element={<ReportMaintenance/>}/> 
