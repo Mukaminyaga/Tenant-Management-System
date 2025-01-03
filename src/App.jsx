@@ -7,7 +7,7 @@ import UserTypeSelection from "./pages/UserTypeSelection";
 import LandingPage from "./pages/LandingPage";
 import LogoutPage from "./pages/LogoutPage";
 import ResetPasswordForm from "./pages/ResetPasswordForm";
-// import DashboardLayout from "./pages/DashboardLayout";
+import DashboardLayout from "./pages/DashboardLayout";
 import MessageDashboard from "./pages/MessageDashboard";
 import Settings from "./pages/Settings";
 import SuccessModal from "./pages/SuccessModal";
@@ -25,6 +25,7 @@ import LandLordHome from './pages/Dashboard/LandLordHome';
 import SignUpPage from './pages/Auth/SignUp/SignUpPage';
 import SendAlert from './pages/Notices';
 import TenantsPage from './pages/TenantsPage';
+import SettingsManager from './pages/settingsManager';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -46,7 +47,7 @@ const App = () => {
         <Route path="/UserTypeSelection" element={<UserTypeSelection />} />
         <Route path="/LandingPage" element={<LandingPage />} />
         <Route path="/LogoutPage" element={<LogoutPage />} />
-        <Route path="/DashboardTenant" element={<TenantDashboard />} />
+        <Route path="/DashboardTenant" element={<DashboardLayout />} />
         <Route path="/MessageTenant" element={<MessageDashboard/>} />
         <Route path="/Settings" element={<Settings/>} />
         <Route path="/ResetSuccess" element={<SuccessModal/>} />

@@ -2,6 +2,7 @@
   background: #fff;
   overflow: hidden;
   font-family: 'Inter', sans-serif;
+  height: 100vh;
 }
 
 .contentWrapper {
@@ -191,6 +192,72 @@
   background: #0B3A60;
 }
 
+.sidebarColumn {
+  display: flex;
+  flex-direction: column;
+  line-height: normal;
+  width: 100%;
+  margin-left: 0;
+}
+
+.sidebarContainer {
+  background-color: #1d2334;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: #d9d9d9;
+  width: 100%;
+  /* padding: 96px 59px 428px 25px; */
+  font-size: 20px!important;
+  line-height: 1.5;
+}
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+}
+
+.spinner div {
+  border: 4px solid rgba(0, 0, 0, 0.2); /* Outer border */
+  border-top: 4px solid #001f34; /* Top color */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite; /* Animation */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.menuButton {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 400;
+  padding: 10px 0;
+  text-align: left;
+  width: 100%;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.menuButton:hover {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.menuButton:focus {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
 /* Responsive Adjustments */
 @media (max-width: 991px) {
   .contentWrapper {

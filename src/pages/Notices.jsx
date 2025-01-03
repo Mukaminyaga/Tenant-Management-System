@@ -82,33 +82,37 @@ export const SendAlert = () => {
 
   return (
     <div className={styles.mainContent}>
-            <div className={styles.contentWrapper}>
-              {/* Sidebar */}
-              <div className={styles.sidebarColumn}>
-                 <nav className={styles.sidebarContainer}>
-                              <Link to="" className={styles.menuButton}>
-                               DASHBOARD
-                              </Link>
-                              <Link to="/LandlordDashboard" className={styles.menuButton}>
-                                PROPERTIES
-                              </Link>
-                              <Link to="/TenantsPage" className={styles.menuButton}>
-                                TENANTS & LEASES
-                              </Link>
-                              <Link to="/maintenance-repairs" className={styles.menuButton}>
-                                MAINT . & REPAIRS
-                              </Link>
-                              <Link to="/Send Alert" className={styles.menuButton}>
-                                NOTICES
-                              </Link>
-                              <Link to="/payments" className={styles.menuButton}>
-                                PAYMENTS
-                              </Link>
-                              <Link to="/Settings" className={styles.menuButton}>
-                                SETTINGS
-                              </Link>
-                            </nav>
-              </div>
+      <div className={styles.contentWrapper}>
+        {/* Sidebar */}
+        <div className={styles.sidebarColumn}>
+          <nav className={styles.sidebarContainer}>
+            <Link to="/dashboard" className={styles.menuButton}>
+              DASHBOARD
+            </Link>
+            <Link to="/properties" className={styles.menuButton}>
+              PROPERTIES
+            </Link>
+            <Link to="/tenants-leases" className={styles.menuButton}>
+              TENANTS & LEASES
+            </Link>
+            <Link to="/maintenance-repairs" className={styles.menuButton}>
+              MAINT . & REPAIRS
+            </Link>
+            <Link to="/Send Alert" className={styles.menuButton}>
+              NOTICES
+            </Link>
+            <Link to="/payments" className={styles.menuButton}>
+              PAYMENTS
+            </Link>
+            <Link to="/Profile Settings" className={styles.menuButton}>
+              SETTINGS
+            </Link>
+            <Link to="/logout" className={styles.menuButton}>
+              LOGOUT
+            </Link>
+          </nav>
+        </div>
+
         {/* Main Content */}
         <div className={styles.mainColumn}>
           <div className={styles.pageHeader}>SEND RENT DUE ALERT</div>

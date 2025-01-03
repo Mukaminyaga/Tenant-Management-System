@@ -30,6 +30,7 @@ const SignUpPage = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [role, setRole] = useState("tenant");
+  const [apartmentNumber, setApartmentNumber] = useState(""); // New state variable
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -39,7 +40,7 @@ const SignUpPage = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
 
-    if (!firstName || !lastName || !email || !password || !confirmPassword) {
+    if (!firstName || !lastName || !email || !password || !confirmPassword || !apartmentNumber) {
       alert("Please fill in all fields!");
       return;
     }
@@ -67,7 +68,20 @@ const SignUpPage = () => {
         name: `${firstName} ${lastName}`,
         email: user.email,
         role,
+        apartmentNumber,
         verified: false,
+        rentPaid: {
+          JANUARY: false, // Set initial status for each month
+          FEBRUARY: false,
+          MARCH: false,
+          JUNE: false,
+          JULY: false,
+          AUGUST: false,
+          SEPTEMBER: false,
+          OCTOBER: false,
+          NOVEMBER: false,
+          DECEMBER: false,
+        },
       });
 
       alert("Registration successful! Please wait for admin verification.");
@@ -88,7 +102,7 @@ const SignUpPage = () => {
           <form className={styles.signUpForm} onSubmit={handleSignUp}>
             <h1 className={styles.formTitle}>Create an account</h1>
 
-             <div className={styles.nameFields}>
+            <div className={styles.nameFields}>
               <div className={styles.formGroup}>
                 <label htmlFor="firstName" className={styles.formLabel}>
                   First name
@@ -128,6 +142,20 @@ const SignUpPage = () => {
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label htmlFor="apartmentNumber" className={styles.formLabel}>
+                Apartment Number
+              </label>
+              <input
+                id="apartmentNumber"
+                type="text"
+                className={styles.formInput}
+                placeholder="Enter your apartment number e.g. H22"
+                value={apartmentNumber}
+                onChange={(e) => setApartmentNumber(e.target.value)}
               />
             </div>
 
