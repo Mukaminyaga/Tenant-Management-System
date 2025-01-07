@@ -25,6 +25,7 @@ import SignUpPage from './pages/Auth/SignUp/SignUpPage';
 import SendAlert from './pages/Notices';
 import TenantsPage from './pages/TenantsPage';
 import SettingsManager from './pages/settingsManager';
+import PaymentAdmin from './pages/PaymentAdmin';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -60,6 +61,7 @@ const App = () => {
         <Route path='/LandlordDashboard' element={<LandlordDashboardLayout/>}/> 
         <Route path='/TenantsPage' element={<TenantsPage/>}/> 
         <Route path='/LandLordHome' element={<LandLordHome/>}/> 
+        <Route path='/Payment' element={<PaymentAdmin/>}/> 
       </Routes>
     </div>
   );
