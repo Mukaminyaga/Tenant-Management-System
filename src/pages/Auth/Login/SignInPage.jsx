@@ -15,7 +15,7 @@ const SignInPage = () => {
   const [showPassword, setShowPassword] = useState(false); // For toggling password visibility
   const [success, setSuccess] = useState(false);
   const [roleRedirect, setRoleRedirect] = useState(null);
-  const [loading, setLoading] = useState(false); // Added loading state
+  const [loading, setLoading] = useState(false); // Add loading state
   const navigate = useNavigate();
 
   const handleChange = (field, value) => {
@@ -29,7 +29,7 @@ const SignInPage = () => {
       return;
     }
 
-    setLoading(true); // Set loading to true
+    setLoading(true); // Start loading when form is submitted
 
     try {
       const userCredential = await signInWithEmailAndPassword(
@@ -63,7 +63,7 @@ const SignInPage = () => {
       console.error("Error signing in:", error.message);
       alert("Error signing in: " + error.message);
     } finally {
-      setLoading(false); // Set loading to false
+      setLoading(false); // Stop loading after the process
     }
   };
 
@@ -117,16 +117,8 @@ const SignInPage = () => {
                 </div>
               </div>
 
-              <button
-                type="submit"
-                className={styles.submitButton}
-                disabled={loading} // Disable button while loading
-              >
-                {loading ? (
-                  <span className={styles.spinner}></span> // Add spinner when loading
-                ) : (
-                  "Sign In"
-                )}
+              <button type="submit" className={styles.submitButton} disabled={loading}>
+                {loading ? "Signing In..." : "Sign In"}
               </button>
             </form>
             <Link to="/ResetPasswordForm" className={styles.forgotPasswordLink}>

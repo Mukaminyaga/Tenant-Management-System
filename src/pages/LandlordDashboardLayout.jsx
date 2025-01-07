@@ -92,23 +92,35 @@ export default function LandlordDashboardLayout() {
 
   return (
     <div className={styles.mainContent}>
-      <div className={styles.contentWrapper}>
-        {/* Sidebar */}
-        <div className={styles.sidebarColumn}>
-          <nav className={styles.sidebarContainer}>
-            {menuItems.map((item, index) => (
-              <Link
-                key={index}
-                to={item.path}
-                className={styles.menuButton}
-                aria-label={item.name.toLowerCase()}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </nav>
-        </div>
-
+         <div className={styles.contentWrapper}>
+           {/* Sidebar */}
+           <div className={styles.sidebarColumn}>
+              <nav className={styles.sidebarContainer}>
+                           <Link to="" className={styles.menuButton}>
+                            DASHBOARD
+                           </Link>
+                           <Link to="/LandlordDashboard" className={styles.menuButton}>
+                             PROPERTIES
+                           </Link>
+                           <Link to="/TenantsPage" className={styles.menuButton}>
+                             TENANTS & LEASES
+                           </Link>
+                           <Link to="/maintenance-repairs" className={styles.menuButton}>
+                             MAINT . & REPAIRS
+                           </Link>
+                           <Link to="/Send Alert" className={styles.menuButton}>
+                             NOTICES
+                           </Link>
+                           <Link to="/PaymentApproval" className={styles.menuButton}>
+                             PAYMENTS
+                           </Link>
+                           <Link to="/Settings" className={styles.menuButton}>
+                             SETTINGS
+                           </Link>
+                         </nav>
+           </div>
+   
+        
         {/* Main Content */}
         <div className={styles.mainColumn}>
           <div className={styles.pageHeader}>
