@@ -128,7 +128,7 @@ body {
 }
 
 .userTable th {
-  background-color: #2c3e50;
+  background-color: #1d2334;
   color: #ffffff;
 }
 
@@ -164,12 +164,12 @@ button:hover {
 }
 
 .deleteButton {
-  background-color: #e74c3c;
+  background-color: #fb1900;
   color: #ffffff;
 }
 
 .deleteButton:hover {
-  background-color: #c0392b;
+  background-color: #800d00;
 }
 
 /* Loading Spinner */
