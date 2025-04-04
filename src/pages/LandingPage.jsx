@@ -11,6 +11,7 @@ const stats = [
   { number: '7', suffix: '+', label: 'Years in Business' }
 ];
 
+
 const services = [
   {
     icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/bd4faf7a83d7b9c6e181bb272434979334ffeb0c36a3febc88498def4de09a77?placeholderIfAbsent=true&apiKey=febb6e01b7be4e54a81beb5e9ff50628',
@@ -52,7 +53,8 @@ const LandingPage = () => {
     <div className={styles.landingPage}>
       <header className={styles.header}>
         <nav className={styles.navigation}>
-          <div className={styles.navLinks}>
+        <div className={styles.Logo}>Tenant Ease</div>
+        <div className={styles.navLinks}>
           <Link to="/AboutUs" className={styles.navLink}>About Us</Link>
           <Link to="/Services" className={styles.navLink}>Our Services</Link>
           <Link to="/HowItWorks" className={styles.navLink}>How it works</Link>
@@ -66,23 +68,36 @@ const LandingPage = () => {
       <main className={styles.mainContent}>
         <section className={styles.heroSection}>
           <div className={styles.heroContent}>
-          <h2 className={styles.tenantEaseHeading}>TenantEase</h2>
+          {/* <h2 className={styles.tenantEaseHeading}>TenantEase</h2> */}
             <h1 className={styles.heroTitle}>
-              <span className={styles.regularText}>Making it feel more like </span>
+              <span className={styles.regularText}>Making it feel more<br/> like </span>
               <span className={styles.highlightText}>home</span>
             </h1>
             <p className={styles.heroDescription}>
               A simple experience to communicate and process rent payment easily at absolutely no cost.
             </p>
             
-            <div className={styles.statsContainer}>
-              {stats.map((stat, index) => (
-                <StatCard key={index} {...stat} />
-              ))}
+              {/* Stats Section */}
+              <section className={styles.statsSection}>
+                <div className={styles.statsContainer}>
+                  <div className={styles.statCard}>
+                    <div className={styles.statNumber}><span className= {styles.digit}>100</span>+</div>
+                    <div className={styles.statLabel}> Tenants</div>
+                  </div>
+                  <div className={styles.statCard}>
+                    <div className={styles.statNumber}><span className= {styles.digit}>100</span>+</div>
+                    <div className={styles.statLabel}>Properties</div>
+                  </div>
+                  <div className={styles.statCard}>
+                    <div className={styles.statNumber}><span className= {styles.digit}>7</span>+</div>
+                    <div className={styles.statLabel}>Years In Business</div>
+                  </div>
+                </div>
+              </section>
+
               <Link to="/UserTypeSelection" className={styles.ctaButton}>
                 GET STARTED
               </Link>
-            </div>
           </div>
           <div className={styles.heroImage}>
             <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/bfae5e294f366be142520ac4d0b222ce4961236e28fb3485c9e03b84406a16d4?placeholderIfAbsent=true&apiKey=febb6e01b7be4e54a81beb5e9ff50628" alt="Haven Heights property" className={styles.propertyImage} />
