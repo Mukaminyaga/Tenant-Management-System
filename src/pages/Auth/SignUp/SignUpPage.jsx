@@ -73,7 +73,7 @@ const SignUpPage = () => {
           JANUARY: false, // Set initial status for each month
           FEBRUARY: false,
           MARCH: false,
-          APRIL: False,
+          APRIL: false,
           MAY: false,
           JUNE: false,
           JULY: false,
