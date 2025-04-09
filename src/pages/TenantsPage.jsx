@@ -17,6 +17,7 @@ import {
 } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./TenantsPage.module.css";
+import Sidebar from "./Sidebar";
 
 const TenantsPage = () => {
   const [users, setUsers] = useState([]);
@@ -133,7 +134,7 @@ const TenantsPage = () => {
   return (
     <div className={styles.mainContent}>
       <div className={styles.contentWrapper}>
-        <div className={styles.sidebarColumn}>
+        {/* <div className={styles.sidebarColumn}>
           <nav className={styles.sidebarContainer}>
             <Link to="" className={styles.menuButton}>DASHBOARD</Link>
             <Link to="/LandlordDashboard" className={styles.menuButton}>PROPERTIES</Link>
@@ -143,7 +144,8 @@ const TenantsPage = () => {
             <Link to="/payments" className={styles.menuButton}>PAYMENTS</Link>
             <Link to="/Settings" className={styles.menuButton}>SETTINGS</Link>
           </nav>
-        </div>
+        </div> */}
+        <Sidebar />
 
         <div className={styles.mainColumn}>
           <div className={styles.pageHeader}>TENANT MANAGEMENT</div>

@@ -18,9 +18,9 @@ const Nav = () => {
           <span className='username'>{user.displayName}</span> 
           </p>
         </li>
-        <li className='navItem'>
+        {/* <li className='navItem'>
           <Link className='btn btn-primary btn-sm mx-2' to='/Dashboard'>Dashboard</Link>
-        </li>
+        </li> */}
         <li>
           <button className='btn btn-secondary btn-sm' onClick={() => dispatch(signOutUser())}>Logout</button>
         </li>
