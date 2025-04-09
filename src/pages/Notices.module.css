@@ -5,20 +5,7 @@ body {
     padding: 0;
     background-color: #f2f0f0;
   }
-  
-  /* Sidebar Container */
-  .sidebarContainer {
-    background-color: #1d2334;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    color: #d9d9d9;
-    width: 100%;
-    padding: 96px 59px 428px 25px;
-    font-size: 22px;
-    line-height: 1.5;
-  }
-  
+
   /* Main Content */
   .mainContent {
     background-color: #f2f0f0;

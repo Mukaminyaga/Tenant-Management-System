@@ -1,51 +1,58 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { auth, firestore } from '../config/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import styles from './LandlordDashboardLayout.module.css';
 import DashboardMetricCard from './DashboardMetricCard';
 import PropertyActionCard from './PropertyActionCard';
 import Nav from '../components/DashboardComponents/TenantNav';
+import { FiHome, FiUsers, FiTool, FiBell, FiDollarSign, FiSettings, FiLogOut } from 'react-icons/fi';
 
 const menuItems = [
-  { name: 'DASHBOARD', path: '/Dashboard' },
-  { name: 'PROPERTIES', path: '/properties' },
-  { name: 'TENANTS & LEASES', path: '/Tenants' },
-  { name: 'MAINT . & REPAIRS', path: '/maintenance-repairs' },
-  { name: 'NOTICES', path: '/Send Alert' },
-  { name: 'PAYMENTS', path: '/payments' },
-  { name: 'SETTINGS', path: '/Profile Settings' },
-  { name: 'LOGOUT', path: '/logout' },
+  { name: 'Dashboard', path: '/LandlordDashboard', icon: <FiHome /> },
+  { name: 'Properties', path: '/properties', icon: <FiHome /> },
+  { name: 'Tenants & Leases', path: '/TenantsPage', icon: <FiUsers /> },
+  // { name: 'Maintenance', path: '/MaintenanceDashboard', icon: <FiTool /> },
+  { name: 'Notices', path: '/Send Alert', icon: <FiBell /> },
+  { name: 'Payments', path: '/Payment', icon: <FiDollarSign /> },
+  { name: 'Settings', path: '/Profile Settings', icon: <FiSettings /> },
+  // { name: 'Logout', path: '/logout', icon: <FiLogOut /> },
 ];
 
 const metrics = [
-  { title: 'Open Maint .', value: '0', onView: () => {} },
-  { title: 'Late payment', value: '0', onView: () => {} },
-  { title: 'Vacant Units', value: '0', onView: () => {} },
+  { title: 'Open Maintenance', value: '0', trend: 'neutral', onView: () => {} },
+  { title: 'Late Payments', value: '0', trend: 'up', onView: () => {} },
+  { title: 'Vacant Units', value: '0', trend: 'down', onView: () => {} },
+  { title: 'Total Properties', value: '0', trend: 'neutral', onView: () => {} },
 ];
 
 const actions = [
   {
     title: 'Advertise Property',
-    description: 'You have a vacant property\nyou should advertise it',
+    description: 'You have vacant properties that should be advertised',
+    actionText: 'List Property',
+    icon: '📢',
     onAction: () => {},
   },
   {
     title: 'Collect Rent',
-    description: 'You have active tenants\nwithout recurring rent',
+    description: 'You have active tenants without recurring rent setup',
+    actionText: 'Setup Payments',
+    icon: '💰',
     onAction: () => {},
   },
 ];
 
-export default function LandlordDashboardLayout() {
-  const [role, setRole] = useState(null); // Store user role
-  const [isLoading, setIsLoading] = useState(true); // Track loading state
-  const navigate = useNavigate(); // For redirection
+export default function LandlordDashboardLayout({ children }) {
+  const [role, setRole] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const checkUserRole = async () => {
-      setIsLoading(true); // Ensure loading starts
-      auth.onAuthStateChanged(async (currentUser) => {
+      setIsLoading(true);
+      const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
         if (currentUser) {
           try {
             const userDoc = await getDoc(doc(firestore, 'users', currentUser.uid));
@@ -53,90 +60,104 @@ export default function LandlordDashboardLayout() {
               const userData = userDoc.data();
               setRole(userData.role);
               if (userData.role !== 'admin') {
-                alert('Access denied. Admins only.');
-                navigate('/'); // Redirect to home or login page
+                navigate('/');
               }
             } else {
-              alert('User not found.');
-              navigate('/Login'); // Redirect to login if user document doesn't exist
+              navigate('/login');
             }
           } catch (error) {
             console.error('Error fetching user role:', error);
             navigate('/');
           } finally {
-            setIsLoading(false); // End loading state
+            setIsLoading(false);
           }
         } else {
           setIsLoading(false);
-          navigate('/Login'); // Redirect to login if user is not authenticated
+          navigate('/login');
         }
       });
+      return () => unsubscribe();
     };
 
     checkUserRole();
   }, [navigate]);
 
-  // Show loader if loading
   if (isLoading) {
     return (
-      <div className={styles.spinner}>
-        <div className={styles.spinnerCircle}></div>
+      <div className={styles.spinnerOverlay}>
+        <div className={styles.spinner}></div>
+        <p>Loading your dashboard...</p>
       </div>
     );
   }
 
-  // Render nothing if access is denied
   if (role !== 'admin') {
     return null;
   }
 
   return (
-    <div className={styles.mainContent}>
-      <div className={styles.contentWrapper}>
-        {/* Sidebar */}
-        <div className={styles.sidebarColumn}>
-          <nav className={styles.sidebarContainer}>
-            {menuItems.map((item, index) => (
-              <Link
-                key={index}
-                to={item.path}
-                className={styles.menuButton}
-                aria-label={item.name.toLowerCase()}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </nav>
+    <div className={styles.dashboardContainer}>
+      {/* Sidebar */}
+      <aside className={styles.sidebar}>
+        <div className={styles.sidebarHeader}>
+          <h2>Landlord Portal</h2>
         </div>
-
-        {/* Main Content */}
-        <div className={styles.mainColumn}>
-          <div className={styles.pageHeader}>
-            <Nav />
-          </div>
-          <div className={styles.statsContainer}>
-            <div className={styles.statsWrapper}>
-              <div className={styles.contentWrapper}>
-                {metrics.map((metric, index) => (
-                  <div key={index} style={{ width: '33%' }}>
-                    <DashboardMetricCard {...metric} />
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className={styles.actionCardsContainer}>
-              <div className={styles.contentWrapper}>
-                {actions.map((action, index) => (
-                  <div key={index} style={{ width: '50%' }}>
-                    <PropertyActionCard {...action} />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+        <nav className={styles.sidebarNav}>
+          {menuItems.map((item, index) => (
+            <Link
+              key={index}
+              to={item.path}
+              className={`${styles.menuItem} ${
+                location.pathname.includes(item.path.toLowerCase()) ? styles.active : ''
+              }`}
+            >
+              <span className={styles.menuIcon}>{item.icon}</span>
+              {item.name}
+            </Link>
+          ))}
+        </nav>
+        <div className={styles.sidebarFooter}>
+          <p>Need help?</p>
+          <button className={styles.supportButton}>Contact Support</button>
         </div>
-      </div>
+      </aside>
+
+      {/* Main Content */}
+      <main className={styles.mainContent}>
+        <header className={styles.header}>
+          <Nav />
+        </header>
+        
+        <div className={styles.contentArea}>
+          {/* Dashboard Overview */}
+          <section className={styles.dashboardOverview}>
+            <h1 className={styles.welcomeMessage}>Welcome back, Landlord</h1>
+            <p className={styles.subtitle}>Here's what's happening with your properties today</p>
+            
+            {/* Metrics Grid */}
+            <div className={styles.metricsGrid}>
+              {metrics.map((metric, index) => (
+                <DashboardMetricCard key={index} {...metric} />
+              ))}
+            </div>
+          </section>
+
+          {/* Quick Actions */}
+          <section className={styles.quickActions}>
+            <h2>Quick Actions</h2>
+            <div className={styles.actionCards}>
+              {actions.map((action, index) => (
+                <PropertyActionCard key={index} {...action} />
+              ))}
+            </div>
+          </section>
+
+          {/* Page Content */}
+          <section className={styles.pageContent}>
+            {children}
+          </section>
+        </div>
+      </main>
     </div>
   );
 }

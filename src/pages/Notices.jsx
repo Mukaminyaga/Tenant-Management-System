@@ -4,6 +4,7 @@ import { getFirestore, collection, getDocs, query, where } from "firebase/firest
 import { useSelector } from "react-redux";
 import { Link, useLocation, Navigate, useNavigate } from "react-router-dom";
 import styles from './Notices.module.css';
+import Sidebar from "./Sidebar";
 
 // Initialize Firebase Firestore
 const db = getFirestore();
@@ -84,34 +85,7 @@ export const SendAlert = () => {
     <div className={styles.mainContent}>
       <div className={styles.contentWrapper}>
         {/* Sidebar */}
-        <div className={styles.sidebarColumn}>
-          <nav className={styles.sidebarContainer}>
-            <Link to="/dashboard" className={styles.menuButton}>
-              DASHBOARD
-            </Link>
-            <Link to="/properties" className={styles.menuButton}>
-              PROPERTIES
-            </Link>
-            <Link to="/tenants-leases" className={styles.menuButton}>
-              TENANTS & LEASES
-            </Link>
-            <Link to="/maintenance-repairs" className={styles.menuButton}>
-              MAINT . & REPAIRS
-            </Link>
-            <Link to="/Send Alert" className={styles.menuButton}>
-              NOTICES
-            </Link>
-            <Link to="/payments" className={styles.menuButton}>
-              PAYMENTS
-            </Link>
-            <Link to="/Profile Settings" className={styles.menuButton}>
-              SETTINGS
-            </Link>
-            <Link to="/logout" className={styles.menuButton}>
-              LOGOUT
-            </Link>
-          </nav>
-        </div>
+      <Sidebar/>
 
         {/* Main Content */}
         <div className={styles.mainColumn}>

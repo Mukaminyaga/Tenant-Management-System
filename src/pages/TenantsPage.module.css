@@ -1,38 +1,9 @@
-/* General Styling */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Arial', sans-serif;
-  background-color: #f9fafb;
-  color: #333;
-}
-
-/* Sidebar Styling */
-.sidebarContainer {
-  background-color: #1d2334;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  color: #d9d9d9;
-  width: 100%;
-  padding: 96px 25px 428px 25px;
-  font-size: 18px;
-  line-height: 1.6;
-}
-
-.sidebarContainer h3 {
-  margin: 0;
-  color: #f9fafb;
-  font-size: 20px;
-}
-
 /* Main Content Layout */
 .mainContent {
   background-color: #ffffff;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  /* padding: 20px; */
   gap: 20px;
 }
 
