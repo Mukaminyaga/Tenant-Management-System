@@ -46,6 +46,7 @@
   font-size: 1.25rem;
   margin-bottom: 40px; /* More space below the paragraph */
   font-weight: 400;
+  color: #f0f0f0;
   line-height: 1.5; /* Improved line height for readability */
   opacity: 0.9; /* Slight opacity for a soft look */
 }

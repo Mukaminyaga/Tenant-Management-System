@@ -13,7 +13,7 @@ const menuItems = [
   { name: 'TENANTS & LEASES', path: '/Tenants' },
   { name: 'MAINT . & REPAIRS', path: '/maintenance-repairs' },
   { name: 'NOTICES', path: '/Send Alert' },
-  { name: 'PAYMENTS', path: '/payments' },
+  { name: 'PAYMENTS', path: '/Payment' },
   { name: 'SETTINGS', path: '/Profile Settings' },
   { name: 'LOGOUT', path: '/logout' },
 ];
@@ -111,7 +111,7 @@ export default function LandlordDashboardLayout() {
                            <Link to="/Send Alert" className={styles.menuButton}>
                              NOTICES
                            </Link>
-                           <Link to="/PaymentApproval" className={styles.menuButton}>
+                           <Link to="/Payment" className={styles.menuButton}>
                              PAYMENTS
                            </Link>
                            <Link to="/Settings" className={styles.menuButton}>

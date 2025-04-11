@@ -24,6 +24,7 @@ import SendAlert from './pages/Notices';
 import TenantsPage from './pages/TenantsPage';
 import SettingsManager from './pages/settingsManager';
 import PaymentAdmin from './pages/PaymentAdmin';
+import PaymentTenant from './pages/PaymentTenant';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -59,6 +60,7 @@ const App = () => {
         <Route path='/TenantsPage' element={<TenantsPage/>}/> 
         <Route path='/LandLordHome' element={<LandLordHome/>}/> 
         <Route path='/Payment' element={<PaymentAdmin/>}/> 
+        <Route path='/PaymentTenant' element={<PaymentTenant/>}/> 
       </Routes>
     </div>
   );
