@@ -1,26 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { getFirestore, collection, getDocs, updateDoc, doc } from "firebase/firestore";
-import "./PaymentAdmin.css"; // Ensure this points to your CSS file
+import "./PaymentAdmin.css";
+import Sidebar from './Sidebar';
 
 const PaymentAdmin = () => {
   const [tenants, setTenants] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showAll, setShowAll] = useState(false);
+  const tableRef = useRef(null);
   const db = getFirestore();
 
-  // Array to ensure months are ordered correctly
   const MONTHS_ORDER = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December",
   ];
 
   useEffect(() => {
@@ -44,6 +36,22 @@ const PaymentAdmin = () => {
     fetchTenants();
   }, [db]);
 
+  useEffect(() => {
+    const checkTableHeight = () => {
+      if (tableRef.current) {
+        const tableHeight = tableRef.current.clientHeight;
+        const viewportHeight = window.innerHeight;
+      }
+    };
+
+    checkTableHeight();
+    window.addEventListener('resize', checkTableHeight);
+    
+    return () => {
+      window.removeEventListener('resize', checkTableHeight);
+    };
+  }, [tenants]);
+
   const verifyPayment = async (tenantId, month) => {
     try {
       const tenantRef = doc(db, "users", tenantId);
@@ -53,10 +61,7 @@ const PaymentAdmin = () => {
       setTenants((prevTenants) =>
         prevTenants.map((tenant) =>
           tenant.id === tenantId
-            ? {
-                ...tenant,
-                rentPaid: { ...tenant.rentPaid, [month]: true },
-              }
+            ? { ...tenant, rentPaid: { ...tenant.rentPaid, [month]: true } }
             : tenant
         )
       );
@@ -74,6 +79,10 @@ const PaymentAdmin = () => {
       .length;
   };
 
+  const toggleShowAll = () => {
+    setShowAll(!showAll);
+  };
+
   if (loading) {
     return (
       <div className="spinner-container">
@@ -82,51 +91,61 @@ const PaymentAdmin = () => {
     );
   }
 
+  // Determine how many rows to show initially
+  const displayedTenants = showAll ? tenants : tenants.slice(0, Math.min(5, tenants.length));
+
   return (
     <div className="admin-container">
-      <h1>Admin Panel</h1>
-      <table className="admin-table">
-        <thead>
-          <tr>
-            <th>Tenant Name</th>
-            <th>Apartment</th>
-            <th>Rent Status</th>
-            <th>Outstanding Balance</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tenants.map((tenant) => {
-            const sortedRentPaid = Object.entries(tenant.rentPaid || {}).sort(
-              ([monthA], [monthB]) =>
-                MONTHS_ORDER.indexOf(monthA) - MONTHS_ORDER.indexOf(monthB)
-            );
-            return (
-              <tr key={tenant.id}>
-                <td>{tenant.name}</td>
-                <td>{tenant.apartmentNumber}</td>
-                <td>
-                  {sortedRentPaid.map(([month, paid]) => (
-                    <div key={month} style={{ marginBottom: "8px" }}>
-                      <span>
-                        {month}: {paid ? "Paid" : "Not Paid"}
-                      </span>
-                      {!paid && (
-                        <button
-                          className="verify-button"
-                          onClick={() => verifyPayment(tenant.id, month)}
-                        >
-                          Verify
-                        </button>
-                      )}
-                    </div>
-                  ))}
-                </td>
-                <td>{calculateOutstanding(tenant.rentPaid)} months</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <div className="ContentWrapper">
+        <Sidebar />
+        <div className="MainColumn">
+          <h1>Rent Processing</h1>
+          <div className="table-container" ref={tableRef}>
+            <table className="admin-table">
+              <thead>
+                <tr>
+                  <th>Tenant Name</th>
+                  <th>Apartment</th>
+                  <th>Rent Status</th>
+                  <th>Outstanding Balance</th>
+                </tr>
+              </thead>
+              <tbody>
+                {displayedTenants.map((tenant) => {
+                  const sortedRentPaid = Object.entries(tenant.rentPaid || {}).sort(
+                    ([monthA], [monthB]) =>
+                      MONTHS_ORDER.indexOf(monthA) - MONTHS_ORDER.indexOf(monthB)
+                  );
+                  return (
+                    <tr key={tenant.id}>
+                      <td>{tenant.name}</td>
+                      <td>{tenant.apartmentNumber}</td>
+                      <td>
+                        {sortedRentPaid.map(([month, paid]) => (
+                          <div key={month} className="payment-status">
+                            <span className={`status-text ${paid ? 'paid' : 'unpaid'}`}>
+                              {month}: {paid ? "Paid" : "Not Paid"}
+                            </span>
+                            {!paid && (
+                              <button
+                                className="verify-button"
+                                onClick={() => verifyPayment(tenant.id, month)}
+                              >
+                                Verify
+                              </button>
+                            )}
+                          </div>
+                        ))}
+                      </td>
+                      <td>{calculateOutstanding(tenant.rentPaid)} months</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { storage, firestore, auth } from "../config/firebase"; // Ensure auth is imported
-import { collection, query, where, getDocs, doc, getDoc } from "firebase/firestore";
+import { 
+  collection, 
+  query, 
+  where, 
+  getDocs, 
+  doc, 
+  getDoc, 
+  addDoc, 
+  serverTimestamp 
+} from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import {
   ref,

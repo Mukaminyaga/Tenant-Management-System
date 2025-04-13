@@ -1,49 +1,78 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ReviewCard } from './components/ReviewCard';
 import { ServiceCard } from './components/ServiceCard';
 import { StatCard } from './components/StatCard';
-import { Link } from 'react-router-dom'; // Import Link
+import { Link } from 'react-router-dom';
+import { FaArrowRight, FaShieldAlt, FaWifi, FaHome, FaStar, FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
 import styles from './LandingPage.module.css';
 
 const stats = [
-  { number: '100', suffix: '+', label: 'Tenants' },
-  { number: '90', suffix: '+', label: 'Properties' },
-  { number: '7', suffix: '+', label: 'Years in Business' }
+  { number: '100', suffix: '+', label: 'Happy Tenants'},
+  { number: '90', suffix: '+', label: 'Premium Properties'},
+  { number: '7', suffix: '+', label: 'Years of Excellence' }
 ];
 
 const services = [
   {
-    icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/bd4faf7a83d7b9c6e181bb272434979334ffeb0c36a3febc88498def4de09a77?placeholderIfAbsent=true&apiKey=febb6e01b7be4e54a81beb5e9ff50628',
+    icon: <FaHome className={styles.serviceIcon} />,
     title: 'Premium Homes',
-    description: 'Experience luxury living at our executive homes, where modern elegance meets convenience. Our residences are thoughtfully designed to offer the finest amenities, ensuring a comfortable and upscale lifestyle.'
+    description: 'Experience luxury living at our executive homes, where modern elegance meets convenience. Our residences are thoughtfully designed to offer the finest amenities, ensuring a comfortable and upscale lifestyle.',
+    features: ['Luxury furnishings', 'Smart home technology', 'Regular maintenance']
   },
   {
-    icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/7b2c712581b138388ffc7b945cf15c57be4b59aa083ee9756dfff881cfd17d36?placeholderIfAbsent=true&apiKey=febb6e01b7be4e54a81beb5e9ff50628',
-    title: 'Top-notch security',
-    description: 'Enjoy peace of mind with round-the-clock security, featuring state-of-the-art surveillance cameras, secure access points, and highly trained on-site personnel dedicated to ensuring the utmost safety for all residents.'
+    icon: <FaShieldAlt className={styles.serviceIcon} />,
+    title: 'Top-notch Security',
+    description: 'Enjoy peace of mind with round-the-clock security, featuring state-of-the-art surveillance cameras, secure access points, and highly trained on-site personnel dedicated to ensuring the utmost safety for all residents.',
+    features: ['24/7 surveillance', 'Biometric access', 'Emergency response']
   },
   {
-    icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/b1978c5927aa350d6b17f7ffcf4848ed86d06f128b9d952de6c0edd4e59604ba?placeholderIfAbsent=true&apiKey=febb6e01b7be4e54a81beb5e9ff50628',
-    title: 'High-speed internet',
-    description: 'Enjoy peace of mind with round-the-clock security, featuring state-of-the-art surveillance cameras, secure access points, and highly trained on-site personnel dedicated to ensuring the utmost safety for all residents.'
+    icon: <FaWifi className={styles.serviceIcon} />,
+    title: 'High-speed Internet',
+    description: 'Stay connected with our ultra-fast fiber optic internet included in every property. Perfect for remote work, streaming, and smart home devices with guaranteed uptime and dedicated support.',
+    features: ['Fiber optic connection', 'Unlimited bandwidth', 'Tech support included']
   }
 ];
 
 const reviews = [
   {
-    text: 'Best decision I have made. I cannot recommend Haven Heights enough',
-    name: 'Name',
-    title: 'Title'
+    text: 'Moving into my TenantEase property was the best decision I made this year. The entire process was seamless and the management team is incredibly responsive to any needs.',
+    name: 'Sarah Johnson',
+    title: 'Software Developer',
+    rating: 5,
+    date: 'March 2024'
   },
   {
-    text: 'Outstanding service and seamless experience!',
-    name: 'Name',
-    title: 'Title'
+    text: 'Outstanding service and seamless experience! The maintenance team responds within hours, not days, and the online portal makes rent payments and requests so simple.',
+    name: 'Michael Chen',
+    title: 'Marketing Director',
+    rating: 5,
+    date: 'February 2024'
   },
   {
-    text: 'Best decision I have made. I cannot recommend Haven Heights enough',
-    name: 'Name',
-    title: 'Title'
+    text: 'After years of dealing with difficult landlords, TenantEase has been a breath of fresh air. Professional, transparent, and truly cares about tenant experience.',
+    name: 'David Rodriguez',
+    title: 'University Professor',
+    rating: 5,
+    date: 'January 2024'
+  }
+];
+
+const features = [
+  {
+    title: "Easy Rent Processing",
+    description: "Pay your rent securely through our platform with multiple payment options"
+  },
+  {
+    title: "Maintenance Requests",
+    description: "Submit and track maintenance requests with real-time updates"
+  },
+  {
+    title: "Digital Lease Agreements",
+    description: "Sign and manage your lease completely online"
+  },
+  {
+    title: "Community Events",
+    description: "Connect with neighbors through organized community activities"
   }
 ];
 
@@ -52,49 +81,118 @@ const LandingPage = () => {
     <div className={styles.landingPage}>
       <header className={styles.header}>
         <nav className={styles.navigation}>
-          <div className={styles.navLinks}>
-          <Link to="/AboutUs" className={styles.navLink}>About Us</Link>
-          <Link to="/Services" className={styles.navLink}>Our Services</Link>
-          <Link to="/HowItWorks" className={styles.navLink}>How it works</Link>
+          <div className={styles.logoContainer}>
+            <span className={styles.logoText}>TenantEase</span>
           </div>
-          <Link to="/Login" className={styles.signInButton}>
-            Sign in
-          </Link>
+          <div className={styles.navLinks}>
+            <Link to="/AboutUs" className={styles.navLink}>About Us</Link>
+            <Link to="/Services" className={styles.navLink}>Our Services</Link>
+            <Link to="/HowItWorks" className={styles.navLink}>How It Works</Link>
+            <Link to="/Contact" className={styles.navLink}>Contact</Link>
+          </div>
+          <div className={styles.authButtons}>
+            <Link to="/Login" className={styles.signInButton}>
+              Sign In
+            </Link>
+            <Link to="/UserTypeSelection" className={styles.registerButton}>
+              Register <FaArrowRight className={styles.arrowIcon} />
+            </Link>
+          </div>
         </nav>
       </header>
 
       <main className={styles.mainContent}>
+        {/* Hero Section */}
         <section className={styles.heroSection}>
           <div className={styles.heroContent}>
-          <h2 className={styles.tenantEaseHeading}>TenantEase</h2>
             <h1 className={styles.heroTitle}>
-              <span className={styles.regularText}>Making it feel more like </span>
-              <span className={styles.highlightText}>home</span>
+              <span className={styles.regularText}>Making It Feel More Like</span>
+              <span className={styles.highlightText}> Home</span>
             </h1>
             <p className={styles.heroDescription}>
-              A simple experience to communicate and process rent payment easily at absolutely no cost.
+              TenantEase redefines rental living with seamless digital solutions, premium properties, 
+              and exceptional service—all designed to make your life easier.
             </p>
-            
-            <div className={styles.statsContainer}>
-              {stats.map((stat, index) => (
-                <StatCard key={index} {...stat} />
-              ))}
-              <Link to="/UserTypeSelection" className={styles.ctaButton}>
-                GET STARTED
+          
+            {/* Stats Section */}
+            <div className={styles.statsSection}>
+              <div className={styles.statsContainer}>
+                {stats.map((stat, index) => (
+                  <div key={index} className={styles.statCard}>
+                    {stat.icon}
+                    <div className={styles.statNumber}>{stat.number}<span className={styles.suffix}>{stat.suffix}</span></div>
+                    <div className={styles.statLabel}>{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className={styles.ctaContainer}>
+              <Link to="/SignUp" className={styles.primaryButton}>
+                 Get Started  <FaArrowRight className={styles.arrowIcon} />
+              </Link>
+              <Link to="/HowItWorks" className={styles.secondaryButton}>
+                Learn More
               </Link>
             </div>
           </div>
-          <div className={styles.heroImage}>
-            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/bfae5e294f366be142520ac4d0b222ce4961236e28fb3485c9e03b84406a16d4?placeholderIfAbsent=true&apiKey=febb6e01b7be4e54a81beb5e9ff50628" alt="Haven Heights property" className={styles.propertyImage} />
+          
+          <div className={styles.heroImageContainer}>
+            <img 
+              src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" 
+              alt="Luxury apartment" 
+              className={styles.heroImage} 
+            />
+            <div className={styles.imageOverlay}>
+              <div className={styles.overlayCard}>
+                <FaMapMarkerAlt className={styles.overlayIcon} />
+                <div>
+                  <div className={styles.overlayTitle}>Luxury Properties</div>
+                  <div className={styles.overlayText}>Downtown Luxury Lofts</div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
+        {/* Trust Badges */}
+        <section className={styles.trustSection}>
+          <p className={styles.trustText}>Trusted by leading property managers and tenants nationwide</p>
+          <div className={styles.trustLogos}>
+            {/* Replace with actual logo images */}
+            <div className={styles.trustLogo}>REMAX</div>
+            <div className={styles.trustLogo}>Coldwell Banker</div>
+            <div className={styles.trustLogo}>Sotheby's</div>
+            <div className={styles.trustLogo}>Keller Williams</div>
+          </div>
+        </section>
+
+        {/* Features Grid */}
+        <section className={styles.featuresSection}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>Everything You Need in One Platform</h2>
+            <p className={styles.sectionSubtitle}>Our comprehensive solution handles all aspects of your rental experience</p>
+          </div>
+          
+          <div className={styles.featuresGrid}>
+            {features.map((feature, index) => (
+              <div key={index} className={styles.featureCard}>
+                <div className={styles.featureIcon}>{feature.icon}</div>
+                <h3 className={styles.featureTitle}>{feature.title}</h3>
+                <p className={styles.featureDescription}>{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Services Section */}
         <section className={styles.servicesSection}>
           <div className={styles.sectionHeader}>
             <div className={styles.divider} />
-            <h2 className={styles.sectionTitle}>Our Services</h2>
+            <h2 className={styles.sectionTitle}>Premium Services</h2>
             <div className={styles.divider} />
           </div>
+          <p className={styles.sectionSubtitle}>We go beyond basic property management to deliver exceptional living experiences</p>
           
           <div className={styles.servicesGrid}>
             {services.map((service, index) => (
@@ -103,11 +201,11 @@ const LandingPage = () => {
           </div>
         </section>
 
+        {/* Testimonials Section */}
         <section className={styles.reviewsSection}>
           <div className={styles.sectionHeader}>
-            <div className={styles.divider} />
-            <h2 className={styles.sectionTitle}>Verified Reviews</h2>
-            <div className={styles.divider} />
+            <h2 className={styles.sectionTitle}>What Our Tenants Say</h2>
+            <p className={styles.sectionSubtitle}>Don't just take our word for it - hear from our community</p>
           </div>
           
           <div className={styles.reviewsGrid}>
@@ -115,31 +213,111 @@ const LandingPage = () => {
               <ReviewCard key={index} {...review} />
             ))}
           </div>
+          
+          <div className={styles.allReviewsLink}>
+            <Link to="/Testimonials" className={styles.linkWithIcon}>
+              Read all testimonials <FaArrowRight className={styles.smallArrowIcon} />
+            </Link>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className={styles.ctaSection}>
+          <div className={styles.ctaContent}>
+            <h2 className={styles.ctaTitle}>Ready to Get Started?</h2>
+            <p className={styles.ctaText}>
+              Join thousands of happy tenants enjoying stress-free living with TenantEase.
+              Get started today and experience the difference.
+            </p>
+            <div className={styles.ctaButtons}>
+              <Link to="/signUp" className={styles.ctaPrimary}>
+                Sign Up
+              </Link>
+              <Link to="/Contact" className={styles.ctaSecondary}>
+                Contact Our Team
+              </Link>
+            </div>
+          </div>
         </section>
       </main>
 
+      {/* Footer */}
       <footer className={styles.footer}>
         <div className={styles.footerContent}>
-          <div className={styles.footerBranding}>
-            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/a3089ba908370f806f14b18b7293beb1b9bce52acda949fcde818800c662c082?placeholderIfAbsent=true&apiKey=febb6e01b7be4e54a81beb5e9ff50628" alt="Haven Heights logo" className={styles.footerLogo} />
-            <span className={styles.footerBrandName}>TenantEase</span>
-          </div>
-          
-          <div className={styles.footerLinks}>
-            <nav className={styles.footerNav}>
-              <a href="#home" className={styles.footerLink}>Home</a>
-              <a href="#about" className={styles.footerLink}>About Us</a>
-              <a href="#services" className={styles.footerLink}>Our Services</a>
-              <a href="/SignInPage" className={styles.footerLink}>Sign in</a>
-            </nav>
+          <div className={styles.footerMain}>
+            <div className={styles.footerBranding}>
+              <div>
+                <span className={styles.footerBrandName}>TenantEase</span>
+                <p className={styles.footerTagline}>Redefining rental experiences</p>
+              </div>
+            </div>
+            
+            <div className={styles.footerMenus}>
+              <div className={styles.footerMenu}>
+                <h3 className={styles.menuTitle}>Company</h3>
+                <nav className={styles.menuLinks}>
+                  <Link to="/AboutUs" className={styles.footerLink}>About Us</Link>
+                  <Link to="/Careers" className={styles.footerLink}>Careers</Link>
+                  <Link to="/Blog" className={styles.footerLink}>Blog</Link>
+                  <Link to="/Press" className={styles.footerLink}>Press</Link>
+                </nav>
+              </div>
+              
+              <div className={styles.footerMenu}>
+                <h3 className={styles.menuTitle}>Resources</h3>
+                <nav className={styles.menuLinks}>
+                  <Link to="/FAQ" className={styles.footerLink}>FAQ</Link>
+                  <Link to="/Guides" className={styles.footerLink}>Renter's Guides</Link>
+                  <Link to="/Support" className={styles.footerLink}>Support Center</Link>
+                  <Link to="/Community" className={styles.footerLink}>Community</Link>
+                </nav>
+              </div>
+              
+              <div className={styles.footerMenu}>
+                <h3 className={styles.menuTitle}>Legal</h3>
+                <nav className={styles.menuLinks}>
+                  <Link to="/Privacy" className={styles.footerLink}>Privacy Policy</Link>
+                  <Link to="/Terms" className={styles.footerLink}>Terms of Service</Link>
+                  <Link to="/Accessibility" className={styles.footerLink}>Accessibility</Link>
+                </nav>
+              </div>
+            </div>
             
             <div className={styles.footerContact}>
-              <a href="tel:1234567892" className={styles.footerPhone}>+254796789413</a>
-              <a href="mailto:haven@gmail.com" className={styles.footerEmail}>tenantease24@gmail.com</a>
+              <h3 className={styles.menuTitle}>Contact Us</h3>
+              <div className={styles.contactInfo}>
+                <div className={styles.contactItem}>
+                  <FaPhone className={styles.contactIcon} />
+                  <span>+254 796 789 413</span>
+                </div>
+                <div className={styles.contactItem}>
+                  <FaEnvelope className={styles.contactIcon} />
+                  <span>hello@tenantease.com</span>
+                </div>
+                <div className={styles.contactItem}>
+                  <FaClock className={styles.contactIcon} />
+                  <span>Mon-Fri: 9AM-6PM</span>
+                </div>
+              </div>
+              
+              <div className={styles.socialLinks}>
+                <a href="#" className={styles.socialLink}>Facebook</a>
+                <a href="#" className={styles.socialLink}>Twitter</a>
+                <a href="#" className={styles.socialLink}>Instagram</a>
+                <a href="#" className={styles.socialLink}>LinkedIn</a>
+              </div>
+            </div>
+          </div>
+          
+          <div className={styles.footerBottom}>
+            <p className={styles.copyright}>© {new Date().getFullYear()} TenantEase. All rights reserved.</p>
+            <div className={styles.footerLegal}>
+              <Link to="/Privacy" className={styles.legalLink}>Privacy Policy</Link>
+              <Link to="/Terms" className={styles.legalLink}>Terms of Service</Link>
+              <Link to="/Cookies" className={styles.legalLink}>Cookie Preferences</Link>
             </div>
           </div>
         </div>
-        <p className={styles.copyright}>Tenant Street | all rights reserved</p>
       </footer>
     </div>
   );
