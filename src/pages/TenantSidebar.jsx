@@ -36,7 +36,7 @@ const TenantSidebar = () => {
                 </nav>
                 <div className={styles.sidebarFooter}>
                   <p>Need help?</p>
-                  <button className={styles.supportButton}>Contact Support</button>
+                  <button className={styles.supportButton}><Link to='/Contact Us'> Contact Support</Link></button>
                 </div>
               </aside>
     </div>
