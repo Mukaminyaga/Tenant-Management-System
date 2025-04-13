@@ -3,6 +3,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { auth } from "../config/firebaseConfig"; // Import auth from the config file
 import './PaymentTenant.css'
+import TenantSidebar from "./TenantSidebar";
 
 const PaymentTenant = () => {
   const [tenant, setTenant] = useState(null);
@@ -67,34 +68,37 @@ const PaymentTenant = () => {
   }
 
   return (
-    <div className="PaymentTenant">
-      <h1>Rent Processing</h1>
-      <h2>Welcome, {tenant.name}</h2>
-      <p>Apartment: {tenant.apartmentNumber}</p>
-      <table border="1">
-        <thead>
-          <tr>
-            <th>Month</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Object.entries(tenant.rentPaid).map(([month, paid]) => (
-            <tr key={month}>
-              <td>{month}</td>
-              <td>{paid ? "Paid" : "Not Paid"}</td>
-              <td>
-                {paid ? (
-                  <button onClick={() => downloadReceipt(month)}>Download Receipt</button>
-                ) : (
-                  "N/A"
-                )}
-              </td>
+    <div className="mainContent">
+      <TenantSidebar />
+      <div className="PaymentTenant">
+        <h1>Rent Processing</h1>
+        <h2>Welcome, {tenant.name}</h2>
+        <p>Apartment: {tenant.apartmentNumber}</p>
+        <table border="1">
+          <thead>
+            <tr>
+              <th>Month</th>
+              <th>Status</th>
+              <th>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {Object.entries(tenant.rentPaid).map(([month, paid]) => (
+              <tr key={month}>
+                <td>{month}</td>
+                <td>{paid ? "Paid" : "Not Paid"}</td>
+                <td>
+                  {paid ? (
+                    <button onClick={() => downloadReceipt(month)}>Download Receipt</button>
+                  ) : (
+                    "N/A"
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

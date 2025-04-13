@@ -4,7 +4,7 @@ import { StatCard } from './components/StatCard1';
 import { ActionCard } from './components/ActionCard';
 import styles from './Dashboard.module.css';
 import { Link } from 'react-router-dom';
-
+import TenantSidebar from '../pages/TenantSidebar'
 // Import local images
 import profileIcon from './Images/profile.png';
 import termsIcon from './Images/terms.png';
@@ -40,21 +40,21 @@ const DashboardLayout = () => {
 
   return (
     <div className={styles.dashboardContainer}>
+      <TenantSidebar />
       <div className={styles.layoutWrapper}>
         {/* Sidebar Toggle Button */}
         <button className={styles.sidebarToggle} onClick={toggleSidebar}>
           <div className={styles.hamburger}></div>
         </button>
 
-        <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.sidebarOpen : ''}`}>
+        {/* <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.sidebarOpen : ''}`}>
           <h1 className={styles.sidebarTitle}>DASHBOARD</h1>
           {sidebarItems.map((item, index) => (
             <Link key={index} to={item.link} className={styles.sidebarLink}>
               <SidebarItem {...item} />
             </Link>
           ))}
-        </aside>
-
+        </aside> */}
         <main className={styles.mainContent}>
           <header className={styles.header}>
             <img

@@ -1,299 +1,162 @@
-/* Global Styles */
-body {
-    background-color: #fff; /* White background for the entire page */
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
 a {
     text-decoration: none !important; /* Removes underline */
     color: inherit !important; /* Inherits color from parent */
 }
 
-.messageDashboard {
-    background-color: #fff; /* White background */
-    overflow: hidden;
-    border: 1px solid #ddd; /* Lighter border for cleaner look */
-    min-height: 100vh;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow around the dashboard */
-}
 
-.container {
+.dashboard {
     display: flex;
-    gap: 20px;
-    height: 100%;
-    padding: 20px;
-    margin-left: 0; /* Prevents content from overlapping */
-}
-
-.sidebar {
-    background-color: rgb(29, 35, 52);
-    width: 22%;
-    max-height: 100vh;
-    position: fixed;
-    left: 0;
-    top: 0 ;
-    padding: 80px 32px 416px 11px;
-    color: rgb(217, 217, 217);
-    font: 400 18px Inter, sans-serif;
-    flex-direction: column; /* Arrange items vertically */
-    justify-content: flex-start; /* Align items at the top */
-    transition: transform 0.3s ease-in-out;
-    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.1); 
-}
-
-.sidebarOpen {
-    transform: translateX(0);
-}
-
-.mainColumn {
-    width: 78%; /* Adjust width when sidebar is present */
-    margin-left: 22%; /* Offset to avoid overlap with sidebar */
-    transition: margin-left 0.3s ease-in-out;
-    background-color: #fff; /* White background for main content */
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Add shadow to the main content */
-}
-
-.sidebarToggle {
-    display: none; /* Hide the button by default */
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 1000;
-    background: rgb(29, 35, 52);
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 4px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow to the toggle button */
-}
-
-.hamburger {
-    display: block;
-    width: 24px;
-    height: 2px;
-    background: white;
-    position: relative;
-}
-
-.hamburger::before,
-.hamburger::after {
-    content: '';
-    position: absolute;
-    width: 24px;
-    height: 2px;
-    background: white;
-    left: 0;
-}
-
-.hamburger::before {
-    top: -6px;
-}
-
-.hamburger::after {
-    bottom: -6px;
-}
-
-.headermessage {
+    min-height: 100vh;
+    background-color: #f5f7fa;
+  }
+  
+  .mainContent {
+    flex: 1;
+    padding: 2rem;
+  }
+  
+  .header {
     background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 0.5rem;
+  }
+  
+  .headerContent {
     display: flex;
     align-items: center;
-    gap: 11px;
-    padding: 19px 22px;
-    border-radius: 4px;
-    height: 45px;
-    width: 100%;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Light shadow for header */
-}
-
-.headermessageIcon {
+    gap: 1rem;
+  }
+  
+  .headerIcon {
     width: 32px;
     height: 32px;
-    object-fit: contain;
-}
-
-.headermessageTitle {
-    color: #333;
-    font-family: Inter, sans-serif;
-    font-size: 23px;
-    font-weight: 500;
-    padding-top: 10px;
-}
-
-.content {
-    padding: 40px 20px;
-}
-
-.contentTitle {
-    color: #021E38;
-    font-family: Inter, sans-serif;
-    font-size: 25px;
-    margin-bottom: 30px;
-}
-
-.notification {
-    line-height: 1.6;
-    margin-bottom: 40px;
-    color: rgb(37, 50, 92);
-}
-
-.link {
-    color: rgb(57, 122, 176);
-    text-decoration: underline;
-}
-
-.link:hover {
-    text-decoration: none;
-}
-
-.messageForm {
-    max-width: 865px;
-}
-
-.formGroup {
-    margin-bottom: 20px;
-}
-
-.visuallyHidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-}
-
-.formInput {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid rgb(200, 200, 200);
-    border-radius: 4px;
-    font-family: Inter, sans-serif;
-    font-size: 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow on input fields */
-}
-
-.formInput:focus {
-    outline: none;
-    border-color: rgb(57, 122, 176);
-    box-shadow: 0 0 0 2px rgba(57, 122, 176, 0.2);
-}
-
-.submitButton {
-    background-color: rgb(45, 100, 150);
-    color: rgb(255, 255, 255);
-    font-family: Inter, sans-serif;
+  }
+  
+  .headerTitle {
+    font-size: 1.5rem;
     font-weight: 600;
-    font-size: 16px;
-    padding: 12px 45px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow for submit button */
-}
-
-.submitButton:hover {
-    background-color: rgb(35, 80, 120);
-}
-
-.submitButton:focus {
+    color: #1a365d;
+    margin: 0;
+  }
+  
+  .content {
+    margin: 0 auto;
+    width: 80%;
+  }
+  
+  .notificationCard {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border-left: 4px solid #3182ce;
+  }
+  
+  .notificationTitle {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #1a365d;
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+  
+  .notificationText {
+    color: #4a5568;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  
+  .ctaLink {
+    color: #3182ce;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  
+  .ctaLink:hover {
+    color: #2c5282;
+    text-decoration: underline;
+  }
+  
+  .messageForm {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .formGroup {
+    margin-bottom: 1.5rem;
+  }
+  
+  .formLabel {
+    display: block;
+    font-weight: 500;
+    color: #4a5568;
+    margin-bottom: 0.5rem;
+  }
+  
+  .formInput {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.2s;
+  }
+  
+  .formInput:focus {
     outline: none;
-    box-shadow: 0 0 0 2px rgb(255, 255, 255), 0 0 0 4px rgb(57, 122, 176);
-}
-
-.sidebarItem {
+    border-color: #3182ce;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.2);
+  }
+  
+  .textarea {
+    min-height: 150px;
+    resize: vertical;
+  }
+  
+  .formActions {
     display: flex;
-    align-items: center;
-    gap: 40px;
-    padding: 15px 0;
-    transition: background-color 0.3s ease-in-out; /* Smooth background transition on hover */
-    border-radius: 4px;
-    background-color: rgb(29, 35, 52);
-}
-
-.sidebarItem:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* Add a subtle hover effect */
-}
-
-.sidebarItem img {
-    width: 30px;
-}
-
-.sidebarTitle {
-    font-size: 24px; /* Slightly larger title */
+    justify-content: flex-end;
+  }
+  
+  .submitButton {
+    background-color: #002f5c;
     color: white;
-    margin-bottom: 40px; /* Space between title and first item */
-}
-
-/* Media Queries for Responsiveness */
-@media (max-width: 991px) {
-    .container {
-        flex-direction: column;
+    border: none;
+    border-radius: 6px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .submitButton:hover {
+    background-color: #2c5282;
+  }
+  
+  .submitButton:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.3);
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .mainContent {
+      margin-left: 0;
+      padding: 1rem;
     }
-
-    /* Show the sidebar toggle button on smaller screens */
-    .sidebarToggle {
-        display: block;
-    }
-
-    /* Sidebar should be fixed, off-screen by default */
-    .sidebar {
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 80%;
-        max-width: 300px;
-        transform: translateX(-100%);
-        z-index: 999;
-        transition: transform 0.3s ease-in-out;
-        height: 100vh;
-        box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.1); /* Add shadow to sidebar */
-    }
-
-    /* Open sidebar when toggle button is clicked */
-    .sidebarOpen {
-        transform: translateX(0);
-    }
-
-    /* Adjust the main content width */
-    .mainColumn {
-        width: 100%;
-        margin-left: 0;
-        padding-top: 70px; /* Offset for fixed header */
-    }
-
-    .mainColumnShift {
-        margin-left: 0;
-    }
-
-    .sidebarColumn,
-    .mainColumn {
-        width: 100%;
-        margin-left: 0;
-    }
-
-    .sidebar {
-        padding: 20px;
-    }
-
-    .sidebarTitle {
-        margin-left: 10px;
-    }
-
-    .content {
-        padding: 20px;
-    }
-
+    
     .header {
-        margin-bottom: 20px;
+      padding: 1rem;
     }
-
-    .submitButton {
-        width: 100%;
+    
+    .content {
+      padding: 0;
     }
-}
+  }

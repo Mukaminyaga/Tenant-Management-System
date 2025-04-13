@@ -15,6 +15,7 @@ import logoutIcon from './Images/logout.png';
 import maintenance from './Images/maintenanceIcon.png';
 import messageIcon from './Images/messageIcon.png';
 import repair from './Images/repair.png';
+import TenantSidebar from './TenantSidebar';
 
 const sidebarItems = [
   { icon: profileIcon, label: 'PROFILE', link: '/DashboardTenant' },
@@ -87,20 +88,20 @@ const MaintenanceDashboard = () => {
     <div className={styles.dashboardContainer}>
       <div className={styles.layoutWrapper}>
         {/* Sidebar Toggle Button */}
-        <button className={styles.sidebarToggle} onClick={toggleSidebar}>
+        {/* <button className={styles.sidebarToggle} onClick={toggleSidebar}>
           <div className={styles.hamburger}></div>
-        </button>
+        </button> */}
 
         {/* Sidebar */}
-        <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.sidebarOpen : ''}`}>
+        {/* <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.sidebarOpen : ''}`}>
           <h1 className={styles.sidebarTitle}>DASHBOARD</h1>
           {sidebarItems.map((item, index) => (
             <Link key={index} to={item.link} className={styles.sidebarLink}>
               <SidebarItem {...item} />
             </Link>
           ))}
-        </aside>
-
+        </aside> */}
+        <TenantSidebar/>
         {/* Main Content */}
         <main className={styles.mainContent}>
           {/* Header with Icon and Title */}

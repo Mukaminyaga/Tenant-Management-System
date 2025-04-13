@@ -26,6 +26,7 @@ import paymentsIcon from './Images/payments.png';
 import settingsIcon from './Images/settings.png';
 import logoutIcon from './Images/logout.png';
 import styles from "./TermsAndDocs.module.css";
+import TenantSidebar from "./TenantSidebar";
 
 const sidebarItems = [
   { icon: profileIcon, label: 'PROFILE', link: '/DashboardTenant' },
@@ -207,20 +208,7 @@ const TermsAndDocs = () => {
 
   return (
     <div className={styles.container}>
-      <aside className={styles.sidebar}>
-        <h1 className={styles.sidebarTitle}>DASHBOARD</h1>
-        <nav>
-          {sidebarItems.map((item, index) => (
-            <SidebarItem
-              key={index}
-              icon={item.icon}
-              label={item.label}
-              link={item.link}
-            />
-          ))}
-        </nav>
-      </aside>
-
+      <TenantSidebar />
       <div className={styles.mainContent}>
         <header className={styles.headermessage}>
           <img

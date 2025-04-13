@@ -1,17 +1,16 @@
 import React from 'react'
-import { FiBell, FiDollarSign, FiHome, FiSettings, FiUsers } from 'react-icons/fi';
+import { FiDollarSign, FiHome, FiSettings, FiUsers, FiUploadCloud, FiTool } from 'react-icons/fi';
 import styles from './LandlordDashboardLayout.module.css';
 import { Link } from 'react-router-dom';
 
 
 const menuItems = [
-  { name: 'Dashboard', path: '/LandlordDashboard', icon: <FiHome /> },
-  { name: 'Properties', path: '/properties', icon: <FiHome /> },
-  { name: 'Tenants & Leases', path: '/TenantsPage', icon: <FiUsers /> },
-  // { name: 'Maintenance', path: '/MaintenanceDashboard', icon: <FiTool /> },
-  { name: 'Notices', path: '/Send Alert', icon: <FiBell /> },
-  { name: 'Payments', path: '/Payment', icon: <FiDollarSign /> },
-  { name: 'Settings', path: '/Profile Settings', icon: <FiSettings /> },
+  { name: 'Dashboard', path: '/Tenant Dashboard', icon: <FiHome /> },
+  { name: 'Terms & Docs', path: '/TermsAndDocs', icon: <FiUploadCloud /> },
+  { name: 'Messages', path: '/MessageTenant', icon: <FiUsers /> },
+  { name: 'Maintenance & Repairs', path: '/MaintenanceDashboard', icon: <FiTool /> },
+  { name: 'Payments', path: '/PaymentTenant', icon: <FiDollarSign /> },
+  { name: 'Settings', path: '/Settings', icon: <FiSettings /> },
   // { name: 'Logout', path: '/logout', icon: <FiLogOut /> },
 ];
 const TenantSidebar = () => {
@@ -19,7 +18,7 @@ const TenantSidebar = () => {
     <div className='Sidebar'>
         <aside className={styles.sidebar}>
                 <div className={styles.sidebarHeader}>
-                  <h2>Landlord Portal</h2>
+                  <h2>Tenant Dashboard</h2>
                 </div>
                 <nav className={styles.sidebarNav}>
                   {menuItems.map((item, index) => (

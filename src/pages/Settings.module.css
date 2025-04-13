@@ -2,13 +2,15 @@
   background: #fff;
   overflow: hidden;
   font-family: 'Inter', sans-serif;
-  height: 100vh;
+  height: 100%;
 }
 
 .contentWrapper {
   display: flex;
   gap: 20px;
   position: relative;
+  min-height: 100vh;
+  background-color: #f5f7fa;
 }
 
 .sidebar {
