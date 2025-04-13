@@ -13,7 +13,7 @@ const menuItems = [
   { name: 'Payments', path: '/Payment', icon: <FiDollarSign /> },
   { name: 'Settings', path: '/Profile Settings', icon: <FiSettings /> },
   // { name: 'Logout', path: '/logout', icon: <FiLogOut /> },
-];
+]; 
 const Sidebar = () => {
   return (
     <div className='Sidebar'>
@@ -37,7 +37,7 @@ const Sidebar = () => {
                 </nav>
                 <div className={styles.sidebarFooter}>
                   <p>Need help?</p>
-                  <button className={styles.supportButton}>Contact Support</button>
+                  <button className={styles.supportButton}><Link to="/Contact Us"> Contact Support</Link></button>
                 </div>
               </aside>
     </div>

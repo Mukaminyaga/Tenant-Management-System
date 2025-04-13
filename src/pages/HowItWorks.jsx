@@ -1,12 +1,13 @@
 import React from 'react';
 import { StepColumn } from './StepColumn';
 import styles from './HowItWorks.module.css';
+import NavBar from './NavBar';
 
 const firstColumnSteps = [
   {
     number: "1",
     title: "Create an account",
-    description: "Begin by signing up on our platform you will gain access to your personalized dashboard, where you can manage all aspects of your tenancy. You can do so by clicking"
+    description: "Begin by signing up on our platform you will gain access to your personalized dashboard, where you can manage all aspects of your tenancy. "
   },
   {
     number: "2",
@@ -40,6 +41,8 @@ const secondColumnSteps = [
 
 const HowItWorks = () => {
   return (
+    <>
+    <NavBar />
     <section className={styles.section}>
       <div className={styles.container}>
         <div className={styles.headerColumn}>
@@ -67,6 +70,7 @@ const HowItWorks = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 

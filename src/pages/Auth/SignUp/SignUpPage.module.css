@@ -5,7 +5,7 @@
   overflow: hidden;
   align-items: center;
   padding: 29px 70px 266px;
-  min-height: 100vh;
+  max-height: 100vh;
 }
 
 .contentWrapper {
@@ -157,6 +157,7 @@
   align-items: end;
   justify-content: center;
   gap: 3px;
+  visibility: hidden;
 }
 
 .menuLine {

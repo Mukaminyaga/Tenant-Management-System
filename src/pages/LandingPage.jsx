@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom';
 import { FaArrowRight, FaShieldAlt, FaWifi, FaHome, FaStar, FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
 import styles from './LandingPage.module.css';
 
+const Counter = ({ target, suffix }) => {
+  const [count, setCount] = useState(0);}
+
 const stats = [
   { number: '100', suffix: '+', label: 'Happy Tenants'},
   { number: '90', suffix: '+', label: 'Premium Properties'},
@@ -88,7 +91,7 @@ const LandingPage = () => {
             <Link to="/AboutUs" className={styles.navLink}>About Us</Link>
             <Link to="/Services" className={styles.navLink}>Our Services</Link>
             <Link to="/HowItWorks" className={styles.navLink}>How It Works</Link>
-            <Link to="/Contact" className={styles.navLink}>Contact</Link>
+            <Link to="/Contact Us" className={styles.navLink}>Contact Us</Link>
           </div>
           <div className={styles.authButtons}>
             <Link to="/Login" className={styles.signInButton}>
@@ -113,19 +116,17 @@ const LandingPage = () => {
               TenantEase redefines rental living with seamless digital solutions, premium properties, 
               and exceptional service—all designed to make your life easier.
             </p>
-          
-            {/* Stats Section */}
-            <div className={styles.statsSection}>
-              <div className={styles.statsContainer}>
-                {stats.map((stat, index) => (
-                  <div key={index} className={styles.statCard}>
-                    {stat.icon}
-                    <div className={styles.statNumber}>{stat.number}<span className={styles.suffix}>{stat.suffix}</span></div>
-                    <div className={styles.statLabel}>{stat.label}</div>
-                  </div>
-                ))}
+                      {/* Stats Section */}
+                      <div className={styles.statsContainer}>
+            {stats.map((stat, index) => (
+              <div key={index} className={styles.statCard}>
+                <div className={styles.statContent}>
+                  <Counter target={stat.number} suffix={stat.suffix} />
+                  <div className={styles.statLabel}>{stat.label}</div>
+                </div>
               </div>
-            </div>
+            ))}
+          </div>
 
             <div className={styles.ctaContainer}>
               <Link to="/SignUp" className={styles.primaryButton}>
@@ -230,10 +231,10 @@ const LandingPage = () => {
               Get started today and experience the difference.
             </p>
             <div className={styles.ctaButtons}>
-              <Link to="/signUp" className={styles.ctaPrimary}>
+              <Link to="/SignUp" className={styles.ctaPrimary}>
                 Sign Up
               </Link>
-              <Link to="/Contact" className={styles.ctaSecondary}>
+              <Link to="/Contact Us" className={styles.ctaSecondary}>
                 Contact Our Team
               </Link>
             </div>
@@ -257,9 +258,9 @@ const LandingPage = () => {
                 <h3 className={styles.menuTitle}>Company</h3>
                 <nav className={styles.menuLinks}>
                   <Link to="/AboutUs" className={styles.footerLink}>About Us</Link>
-                  <Link to="/Careers" className={styles.footerLink}>Careers</Link>
-                  <Link to="/Blog" className={styles.footerLink}>Blog</Link>
-                  <Link to="/Press" className={styles.footerLink}>Press</Link>
+                  <Link to="/SignUp" className={styles.footerLink}>Sign Up</Link>
+                  <Link to="/Login" className={styles.footerLink}>Sign In</Link>
+                  <Link to="/Contact Us" className={styles.footerLink}>Contact Us</Link>
                 </nav>
               </div>
               
@@ -273,14 +274,14 @@ const LandingPage = () => {
                 </nav>
               </div>
               
-              <div className={styles.footerMenu}>
+              {/* <div className={styles.footerMenu}>
                 <h3 className={styles.menuTitle}>Legal</h3>
                 <nav className={styles.menuLinks}>
                   <Link to="/Privacy" className={styles.footerLink}>Privacy Policy</Link>
                   <Link to="/Terms" className={styles.footerLink}>Terms of Service</Link>
                   <Link to="/Accessibility" className={styles.footerLink}>Accessibility</Link>
                 </nav>
-              </div>
+              </div> */}
             </div>
             
             <div className={styles.footerContact}>
@@ -288,12 +289,12 @@ const LandingPage = () => {
               <div className={styles.contactInfo}>
                 <div className={styles.contactItem}>
                   <FaPhone className={styles.contactIcon} />
-                  <span>+254 796 789 413</span>
+                  <a href='tel:+254796789413'>+254 796 789 413</a>
                 </div>
                 <div className={styles.contactItem}>
                   <FaEnvelope className={styles.contactIcon} />
-                  <span>hello@tenantease.com</span>
-                </div>
+                  <a href='mailto:tenantease24@gmail.com'>tenantease24@gmail.com</a>
+                  </div>
                 <div className={styles.contactItem}>
                   <FaClock className={styles.contactIcon} />
                   <span>Mon-Fri: 9AM-6PM</span>
