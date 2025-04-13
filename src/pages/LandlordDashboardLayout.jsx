@@ -9,6 +9,7 @@ import Nav from '../components/DashboardComponents/TenantNav';
 import { FiHome, FiUsers, FiTool, FiBell, FiDollarSign, FiSettings, FiLogOut } from 'react-icons/fi';
 
 const menuItems = [
+
   { name: 'Dashboard', path: '/LandlordDashboard', icon: <FiHome /> },
   { name: 'Properties', path: '/properties', icon: <FiHome /> },
   { name: 'Tenants & Leases', path: '/TenantsPage', icon: <FiUsers /> },
@@ -139,6 +140,7 @@ export default function LandlordDashboardLayout({ children }) {
               {metrics.map((metric, index) => (
                 <DashboardMetricCard key={index} {...metric} />
               ))}
+
             </div>
           </section>
 

@@ -1,19 +1,17 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-// import { Dashboard } from './pages';
 import SignInPage from "./pages/Auth/Login/SignInPage";
 import HowItWorks from "./pages/HowItWorks";
 import UserTypeSelection from "./pages/UserTypeSelection";
 import LandingPage from "./pages/LandingPage";
 import LogoutPage from "./pages/LogoutPage";
 import ResetPasswordForm from "./pages/ResetPasswordForm";
-import DashboardLayout from "./pages/DashboardLayout";
 import MessageDashboard from "./pages/MessageDashboard";
 import Settings from "./pages/Settings";
 import SuccessModal from "./pages/SuccessModal";
 import MaintenanceDashboard from "./pages/MaintenanceDashboard";
-import PaymentTenant from "./pages/PaymentTenant";
 import TermsAndDocs from "./pages/TermsAndDocs";
+import DashboardLayout from "./pages/DashboardLayout";
 import LandlordDashboardLayout from "./pages/LandlordDashboardLayout";
 import { useDispatch } from 'react-redux';
 import { checkIsLoggedIn } from './redux/ActionCreators/authActionsCreator';
@@ -27,6 +25,7 @@ import TenantsPage from './pages/TenantsPage';
 import SettingsManager from './pages/settingsManager';
 import PaymentAdmin from './pages/PaymentAdmin';
 import ContactUs from './pages/Contact';
+import PaymentTenant from './pages/PaymentTenant';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -52,7 +51,6 @@ const App = () => {
         <Route path="/Settings" element={<Settings/>} />
         <Route path="/ResetSuccess" element={<SuccessModal/>} />
         <Route path="/MaintenanceDashboard" element={<MaintenanceDashboard/>} />
-        <Route path="/PaymentTenant" element={<PaymentTenant/>} />
         <Route path="/TermsAndDocs" element={<TermsAndDocs/>} />
         <Route path='/Report Issue' element={<ReportMaintenance/>}/> 
         <Route path='/Send Alert' element={<SendAlert/>} />
@@ -63,6 +61,7 @@ const App = () => {
         <Route path='/LandLordHome' element={<LandLordHome/>}/> 
         <Route path='/Payment' element={<PaymentAdmin/>}/> 
         <Route path='/Contact Us' element={<ContactUs/>}/>
+        <Route path='/PaymentTenant' element={<PaymentTenant/>}/> 
       </Routes>
     </div>
   );
