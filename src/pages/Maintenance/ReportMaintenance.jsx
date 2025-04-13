@@ -3,6 +3,7 @@ import emailjs from 'emailjs-com';
 import { Link } from 'react-router-dom';
 import styles from '../../pages/MaintenanceDashboard.module.css';
 import { SidebarItem } from '../components/SideBarItem';
+import TenantSidebar from '../../pages/TenantSidebar'
 // Import local images
 import profileIcon from '../Images/profile.png';
 import termsIcon from '../Images/terms.png';
@@ -109,7 +110,7 @@ const ReportMaintenance = () => {
               <div className={styles.hamburger}></div>
             </button>
       {/* Sidebar */}
-         <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.sidebarOpen : ''}`}>
+         {/* <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.sidebarOpen : ''}`}>
             <div className={styles.sidebarContent}>
               <h1 className={styles.sidebarTitle}>DASHBOARD</h1>
               <nav>
@@ -123,8 +124,8 @@ const ReportMaintenance = () => {
                 ))}
               </nav>
             </div>
-          </aside>
-
+          </aside> */}
+          <TenantSidebar />
       {/* Main content */}
       <main className={styles.mainContent}>
         {/* Header */}

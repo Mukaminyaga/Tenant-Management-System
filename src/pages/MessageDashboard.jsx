@@ -1,32 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { firestore, auth } from "../config/firebase"; // Ensure proper Firebase config
+import { firestore, auth } from "../config/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import { SidebarItem } from './components/SideBarItem';
 import styles from './MessageDashboard.module.css';
-
-import profileIcon from './Images/profile.png';
-import termsIcon from './Images/terms.png';
+import TenantSidebar from '../pages/TenantSidebar';
 import messagesIcon from './Images/messages.png';
-import maintenanceIcon from './Images/maintenance.png';
-import paymentsIcon from './Images/payments.png';
-import settingsIcon from './Images/settings.png';
-import logoutIcon from './Images/logout.png';
-
-const sidebarItems = [
-  { icon: profileIcon, label: 'PROFILE', link: '/DashboardTenant' },
-  { icon: termsIcon, label: 'TERMS AND DOCS', link: '/TermsAndDocs' },
-  { icon: messagesIcon, label: 'MESSAGES', link: '/MessageTenant' },
-  { icon: maintenanceIcon, label: 'MAINT . & REPAIRS', link: '/MaintenanceDashboard' },
-  { icon: paymentsIcon, label: 'PAYMENTS', link: '/PaymentTenant' },
-  { icon: settingsIcon, label: 'SETTINGS', link: '/Settings' },
-  { icon: logoutIcon, label: 'LOGOUT', link: '/LogoutPage' }
-];
 
 const MessageDashboard = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [role, setRole] = useState(null); // To store user role
-  const [userId, setUserId] = useState(null); // To store user ID
+  const [role, setRole] = useState(null);
+  const [userId, setUserId] = useState(null);
+  const [message, setMessage] = useState('');
+  const [subject, setSubject] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -60,102 +44,75 @@ const MessageDashboard = () => {
     checkUserRole();
   }, [navigate]);
 
-  if (role !== "tenant") {
-    return null; // Optional: Add a loading spinner or placeholder
-  }
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Add your message submission logic here
+    console.log({ subject, message });
+    // Reset form
+    setSubject('');
+    setMessage('');
+    // Show success message
+    alert("Your message has been sent successfully!");
   };
 
+  if (role !== "tenant") {
+    return null;
+  }
+
   return (
-    <div className={styles.messageDashboard}>
-      <div className={styles.container}>
-        <button className={styles.sidebarToggle} onClick={toggleSidebar}>
-          <div className={styles.hamburger}></div>
-        </button>
+    <div className={styles.dashboard}>
+      <TenantSidebar />
+      
+      <main className={styles.mainContent}>
 
-        <aside
-          className={`${styles.sidebar} ${isSidebarOpen ? styles.sidebarOpen : ''}`}
-        >
-          <div className={styles.sidebarContent}>
-            <h1 className={styles.sidebarTitle}>DASHBOARD</h1>
-            <nav>
-              {sidebarItems.map((item, index) => (
-                <SidebarItem
-                  key={index}
-                  icon={item.icon}
-                  label={item.label}
-                  link={item.link}
-                />
-              ))}
-            </nav>
-          </div>
-        </aside>
-
-        <main className={styles.mainColumn}>
-          <header className={styles.headermessage}>
-            <img
-              loading="lazy"
-              src={messagesIcon}
-              alt="Messages Icon"
-              className={styles.headermessageIcon}
-            />
-            <h2 className={styles.headermessageTitle}>MESSAGES</h2>
-          </header>
-
-          <section className={styles.content}>
-            <h3 className={styles.contentTitle}>MESSAGES</h3>
-            <p className={styles.notification}>
-              Thank you for reaching out! <br />
-              We will respond to your inquiry within a few business hours.
-              <br />
-              If you have an emergency or fire-related situation, please
-              call 911 immediately. <br />
-              For any maintenance concerns, kindly submit a maintenance
-              request <a href="/Report Issue" className={styles.link}>here</a>.
+        <section className={styles.content}>
+          <div className={styles.notificationCard}>
+            <h1 className={styles.notificationTitle}>Talk To Us!</h1>
+            <p className={styles.notificationText}>
+              We typically respond to messages within 24 hours. For urgent matters 
+              or maintenance requests, please use the appropriate channels.
             </p>
+          </div>
 
-            <form onSubmit={handleSubmit} className={styles.messageForm}>
-              <div className={styles.formGroup}>
-                <label htmlFor="tenancyInput" className={styles.visuallyHidden}>
-                  Enter your tenancy and name
-                </label>
-                <input
-                  id="tenancyInput"
-                  type="text"
-                  className={styles.formInput}
-                  placeholder="Enter your name and apartment number first"
-                  required
-                  aria-required="true"
-                />
-              </div>
+          <form onSubmit={handleSubmit} className={styles.messageForm}>
+            <div className={styles.formGroup}>
+              <label htmlFor="subject" className={styles.formLabel}>
+                Subject
+              </label>
+              <input
+                id="subject"
+                type="text"
+                className={styles.formInput}
+                placeholder="What's your message about?"
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
+                required
+              />
+            </div>
 
-              <div className={styles.formGroup}>
-                <label htmlFor="messageInput" className={styles.visuallyHidden}>
-                  Message
-                </label>
-                <textarea
-                  id="messageInput"
-                  className={styles.formInput}
-                  placeholder="Message"
-                  required
-                  aria-required="true"
-                  rows={4}
-                />
-              </div>
+            <div className={styles.formGroup}>
+              <label htmlFor="message" className={styles.formLabel}>
+                Your Message
+              </label>
+              <textarea
+                id="message"
+                className={`${styles.formInput} ${styles.textarea}`}
+                placeholder="Type your message here..."
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                rows={6}
+                required
+              />
+            </div>
 
+            <div className={styles.formActions}>
               <button type="submit" className={styles.submitButton}>
-                Send
+                Send Message
               </button>
-            </form>
-          </section>
-        </main>
-      </div>
+            </div>
+          </form>
+        </section>
+      </main>
     </div>
   );
 };

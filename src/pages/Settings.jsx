@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SidebarItem } from './components/SideBarItem';
 import styles from './Settings.module.css';
 import { ProfileForm } from './ProfileForm';
-
+import TenantSidebar from './TenantSidebar'
 
 import profileIcon from './Images/profile.png';
 import termsIcon from './Images/terms.png';
@@ -33,7 +33,7 @@ const Settings = () => {
     <div className={styles.dashboardContainer}>
       <div className={styles.contentWrapper}>
         {/* Sidebar Toggle Button */}
-        <button className={styles.sidebarToggle} onClick={toggleSidebar}>
+        {/* <button className={styles.sidebarToggle} onClick={toggleSidebar}>
           <div className={styles.hamburger}></div>
         </button>
 
@@ -53,8 +53,8 @@ const Settings = () => {
               ))}
             </nav>
           </div>
-        </aside>
-
+        </aside> */}
+        <TenantSidebar />
         <main className={styles.mainContent}>
           <header className={styles.headerSettings}>
             <img
