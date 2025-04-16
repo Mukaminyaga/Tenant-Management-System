@@ -1,7 +1,7 @@
 .dashboardContainer {
     background-color: rgb(242, 240, 240);
-    overflow: hidden;
-    max-height: 100vh;
+    display: flex;
+    height: 100%;
   }
   
   .layoutWrapper {

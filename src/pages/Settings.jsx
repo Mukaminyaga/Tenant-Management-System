@@ -3,6 +3,7 @@ import Sidebar from './Sidebartenant';
 import { ProfileForm } from './ProfileForm';
 import styles from './Settings.module.css';
 
+
 const Settings = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -12,6 +13,7 @@ const Settings = () => {
 
   return (
     <div className={styles.dashboardContainer}>
+
       {/* Mobile Sidebar Toggle */}
       <button 
         className={styles.sidebarToggle} 
@@ -34,6 +36,7 @@ const Settings = () => {
         <section className={styles.settingsSection}>
           <div className={styles.settingsCard}>
             <h2 className={styles.sectionTitle}>Profile Settings</h2>
+
             <ProfileForm />
           </div>
         </section>

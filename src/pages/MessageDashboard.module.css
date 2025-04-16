@@ -1,3 +1,4 @@
+
 :root {
     /* Color palette */
     --color-primary: #3b82f6;
@@ -270,5 +271,6 @@
   
     .submitButton {
       width: 100%;
+
     }
   }

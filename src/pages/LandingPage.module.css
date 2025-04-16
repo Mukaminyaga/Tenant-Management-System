@@ -8,11 +8,11 @@
 /* Header Styles */
 .header {
   position: fixed;
-  top: 0;
+  top: 0px;
   width: 100%;
   z-index: 100;
   backdrop-filter: blur(15px);
-  padding: 4px 60px;
+  padding: 10px 60px;
 }
 
 .navigation {

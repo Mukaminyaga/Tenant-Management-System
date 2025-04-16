@@ -5,9 +5,11 @@ import { useNavigate } from "react-router-dom";
 import Sidebar from './Sidebartenant'; 
 import styles from './MessageDashboard.module.css';
 
+
 const MessageDashboard = () => {
   const [role, setRole] = useState(null);
   const [userId, setUserId] = useState(null);
+
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -85,6 +87,7 @@ const MessageDashboard = () => {
 
           <form onSubmit={handleSubmit} className={styles.messageForm}>
             <div className={styles.formGroup}>
+
               <label htmlFor="tenancyInput">
                 Your Information
               </label>
@@ -98,6 +101,7 @@ const MessageDashboard = () => {
             </div>
 
             <div className={styles.formGroup}>
+
               <label htmlFor="messageInput">
                 Message
               </label>
@@ -113,6 +117,7 @@ const MessageDashboard = () => {
             <button type="submit" className={styles.submitButton}>
               Send Message
             </button>
+
           </form>
         </section>
       </main>

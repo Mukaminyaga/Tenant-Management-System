@@ -20,6 +20,7 @@ import {
 } from "firebase/storage";
 import Sidebar from './Sidebartenant'; 
 import styles from "./TermsAndDocs.module.css";
+import TenantSidebar from "./TenantSidebar";
 
 const DOCUMENT_TYPES = [
   "All Documents",
@@ -188,6 +189,7 @@ const TermsAndDocs = () => {
   }
 
   return (
+
     <div className={styles.dashboardContainer}>
       <button 
         className={styles.sidebarToggle} 
@@ -201,6 +203,7 @@ const TermsAndDocs = () => {
       <main className={styles.mainContent}>
         <header className={styles.header}>
           <h1>TERMS AND DOCUMENTS</h1>
+
         </header>
 
         <div className={styles.documentSection}>

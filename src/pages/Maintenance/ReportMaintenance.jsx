@@ -81,6 +81,7 @@ const ReportMaintenance = () => {
 
   return (
     <div className={styles.dashboardContainer}>
+
       <Sidebar /> {/* Using your new Sidebar component */}
       
       <main className={styles.mainContent}>

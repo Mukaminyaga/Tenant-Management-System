@@ -24,6 +24,7 @@ import SendAlert from './pages/Notices';
 import TenantsPage from './pages/TenantsPage';
 import SettingsManager from './pages/settingsManager';
 import PaymentAdmin from './pages/PaymentAdmin';
+import ContactUs from './pages/Contact';
 import PaymentTenant from './pages/PaymentTenant';
 
 const App = () => {
@@ -59,6 +60,7 @@ const App = () => {
         <Route path='/TenantsPage' element={<TenantsPage/>}/> 
         <Route path='/LandLordHome' element={<LandLordHome/>}/> 
         <Route path='/Payment' element={<PaymentAdmin/>}/> 
+        <Route path='/Contact Us' element={<ContactUs/>}/>
         <Route path='/PaymentTenant' element={<PaymentTenant/>}/> 
       </Routes>
     </div>
