@@ -29,8 +29,8 @@ const TenantDashboard = () => {
 
   {/* Buttons container for proper alignment */}
   <div className="nav-buttons">
-    <Link className="dashboard-button" to="/DashboardTenant">
-      Dashboard
+    <Link className="dashboard-button" to="/Settings">
+      Profile
     </Link>
     <button
       className="logout-button"
@@ -51,6 +51,12 @@ const TenantDashboard = () => {
         <div className="dashboard-links">
           <Link to="/Report Issue" className="dashboard-link">
           Request Maintenance
+          </Link>
+          <Link to="/PaymentTenant" className="dashboard-link">
+          Payments
+          </Link>
+          <Link to="/TermsAndDocs" className="dashboard-link">
+          Terms and Docs
           </Link>
           <Link to="/MessageTenant" className="dashboard-link">
           Contact Property

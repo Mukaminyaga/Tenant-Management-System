@@ -1,162 +1,276 @@
-a {
-    text-decoration: none !important; /* Removes underline */
-    color: inherit !important; /* Inherits color from parent */
-}
 
-
-.dashboard {
+:root {
+    /* Color palette */
+    --color-primary: #3b82f6;
+    --color-primary-dark: #2563eb;
+    --color-text: #1e293b;
+    --color-text-light: #64748b;
+    --color-bg: #f8fafc;
+    --color-surface: #ffffff;
+    --color-border: #e2e8f0;
+    --color-info-bg: #f1f5f9;
+  
+    /* Spacing */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+  
+    /* Typography */
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+    --text-3xl: 1.75rem;
+  
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  
+    /* Border radius */
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+  
+    /* Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Base Styles */
+  .dashboardContainer {
     display: flex;
     min-height: 100vh;
-    background-color: #f5f7fa;
+    background-color: var(--color-bg);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--color-text);
+    line-height: 1.5;
   }
   
+  /* Sidebar Toggle - Modern Hamburger */
+  .sidebarToggle {
+    display: none;
+    position: fixed;
+    top: var(--space-lg);
+    left: var(--space-lg);
+    z-index: 100;
+    background: var(--color-primary-dark);
+    color: white;
+    border: none;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition-normal);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .sidebarToggle:hover {
+    background: var(--color-primary);
+    transform: translateY(-1px);
+  }
+  
+  .hamburger {
+    display: block;
+    width: 1.5rem;
+    height: 2px;
+    background: currentColor;
+    position: relative;
+    transition: var(--transition-fast);
+  }
+  
+  .hamburger::before,
+  .hamburger::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: currentColor;
+    transition: var(--transition-normal);
+  }
+  
+  .hamburger::before {
+    top: -6px;
+  }
+  
+  .hamburger::after {
+    bottom: -6px;
+  }
+  
+  /* Main Content Area */
   .mainContent {
     flex: 1;
-    padding: 2rem;
-  }
-  
-  .header {
-    background-color: #fff;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    margin-bottom: 0.5rem;
-  }
-  
-  .headerContent {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  
-  .headerIcon {
-    width: 32px;
-    height: 32px;
-  }
-  
-  .headerTitle {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #1a365d;
-    margin: 0;
-  }
-  
-  .content {
+    padding: var(--space-xl);
+    min-height: 100vh;
+    max-width: 1200px;
     margin: 0 auto;
-    width: 80%;
+    width: 100%;
   }
   
-  .notificationCard {
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    border-left: 4px solid #3182ce;
+  /* Header Styles */
+  .header {
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
   }
   
-  .notificationTitle {
-    font-size: 3rem;
+  .header h1 {
+    font-size: var(--text-3xl);
     font-weight: 700;
-    color: #1a365d;
-    margin-top: 0;
-    margin-bottom: 1rem;
+    color: var(--color-text);
+    margin: 0;
+    line-height: 1.25;
   }
   
-  .notificationText {
-    color: #4a5568;
+  /* Card Component */
+  .messageContent {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-border);
+  }
+  
+  /* Notification Component */
+  .notification {
+    color: var(--color-text);
     line-height: 1.6;
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-xl);
+    padding: var(--space-md);
+    background-color: var(--color-info-bg);
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--color-primary);
   }
   
-  .ctaLink {
-    color: #3182ce;
-    font-weight: 500;
+  /* Link Styles */
+  .link {
+    color: var(--color-primary);
     text-decoration: none;
-    transition: color 0.2s;
+    font-weight: 500;
+    transition: var(--transition-fast);
+    position: relative;
   }
   
-  .ctaLink:hover {
-    color: #2c5282;
-    text-decoration: underline;
+  .link:hover {
+    color: var(--color-primary-dark);
   }
   
+  .link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: currentColor;
+    transition: var(--transition-fast);
+  }
+  
+  .link:hover::after {
+    width: 100%;
+  }
+  
+  /* Form Styles */
   .messageForm {
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 2rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-top: var(--space-xl);
   }
   
   .formGroup {
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--space-lg);
   }
   
-  .formLabel {
+  .formGroup label {
     display: block;
+    margin-bottom: var(--space-sm);
     font-weight: 500;
-    color: #4a5568;
-    margin-bottom: 0.5rem;
+    color: var(--color-text);
+    font-size: var(--text-base);
   }
   
-  .formInput {
+  .formInput,
+  .formTextarea {
     width: 100%;
-    padding: 0.75rem 1rem;
-    border: 1px solid #e2e8f0;
-    border-radius: 6px;
-    font-size: 1rem;
-    transition: all 0.2s;
+    padding: var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: var(--text-base);
+    transition: var(--transition-normal);
+    background-color: var(--color-surface);
   }
   
-  .formInput:focus {
+  .formInput:focus,
+  .formTextarea:focus {
     outline: none;
-    border-color: #3182ce;
-    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.2);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
   }
   
-  .textarea {
-    min-height: 150px;
+  .formTextarea {
+    min-height: 10rem;
     resize: vertical;
   }
   
-  .formActions {
-    display: flex;
-    justify-content: flex-end;
-  }
-  
+  /* Button Styles */
   .submitButton {
-    background-color: #002f5c;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to right, var(--color-primary), var(--color-primary-dark));
     color: white;
     border: none;
-    border-radius: 6px;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    font-weight: 500;
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-md);
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: var(--transition-normal);
+    font-size: var(--text-base);
+    box-shadow: var(--shadow-sm);
   }
   
   .submitButton:hover {
-    background-color: #2c5282;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
   }
   
-  .submitButton:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.3);
+  .submitButton:active {
+    transform: translateY(0);
   }
   
-  /* Responsive styles */
+  /* Responsive Design */
   @media (max-width: 768px) {
+    :root {
+      --space-xl: 1.5rem;
+      --space-lg: 1rem;
+    }
+  
+    .sidebarToggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  
     .mainContent {
-      margin-left: 0;
-      padding: 1rem;
+      padding: var(--space-lg);
     }
-    
-    .header {
-      padding: 1rem;
+  
+    .messageContent {
+      padding: var(--space-lg);
     }
-    
-    .content {
-      padding: 0;
+  
+    .header h1 {
+      font-size: var(--text-2xl);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    :root {
+      --space-xl: 1.25rem;
+    }
+  
+    .submitButton {
+      width: 100%;
+
     }
   }
