@@ -29,6 +29,10 @@
   gap: 0.75rem;
 }
 
+.logoContainer a{
+  text-decoration: none;
+}
+
 .logoText {
   font-size: 1.5rem;
   font-weight: 700;
