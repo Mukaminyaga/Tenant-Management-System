@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { storage, firestore, auth } from "../config/firebase"; // Ensure auth is imported
+import { storage, firestore, auth } from "../config/firebase";
 import { 
   collection, 
   query, 
@@ -8,7 +8,8 @@ import {
   doc, 
   getDoc, 
   addDoc, 
-  serverTimestamp 
+  serverTimestamp,
+  deleteDoc 
 } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import {
@@ -17,25 +18,8 @@ import {
   getDownloadURL,
   deleteObject,
 } from "firebase/storage";
-import { SidebarItem } from './components/SideBarItem';
-import profileIcon from './Images/profile.png';
-import termsIcon from './Images/terms.png';
-import messagesIcon from './Images/messages.png';
-import maintenanceIcon from './Images/maintenance.png';
-import paymentsIcon from './Images/payments.png';
-import settingsIcon from './Images/settings.png';
-import logoutIcon from './Images/logout.png';
+import Sidebar from './Sidebartenant'; 
 import styles from "./TermsAndDocs.module.css";
-
-const sidebarItems = [
-  { icon: profileIcon, label: 'PROFILE', link: '/DashboardTenant' },
-  { icon: termsIcon, label: 'TERMS AND DOCS', link: '/TermsAndDocs' },
-  { icon: messagesIcon, label: 'MESSAGES', link: '/MessageTenant' },
-  { icon: maintenanceIcon, label: 'MAINT . & REPAIRS', link: '/Report Issue' },
-  { icon: paymentsIcon, label: 'PAYMENTS', link: '/PaymentTenant' },
-  { icon: settingsIcon, label: 'SETTINGS', link: '/Settings' },
-  { icon: logoutIcon, label: 'LOGOUT', link: '/LogoutPage' },
-];
 
 const DOCUMENT_TYPES = [
   "All Documents",
@@ -53,9 +37,10 @@ const TermsAndDocs = () => {
   const [progress, setProgress] = useState(0);
   const [message, setMessage] = useState("");
   const [uploadedFiles, setUploadedFiles] = useState([]);
-  const [userId, setUserId] = useState(null); // Store the userId
-  const [role, setRole] = useState(null); // Store the user role
-  const navigate = useNavigate(); // For redirection
+  const [userId, setUserId] = useState(null);
+  const [role, setRole] = useState(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const checkUserRole = async () => {
@@ -69,7 +54,7 @@ const TermsAndDocs = () => {
             setRole(userData.role);
             if (userData.role !== "tenant") {
               alert("Access denied. Tenants only.");
-              navigate("/"); // Redirect to login or tenant dashboard
+              navigate("/");
             }
           } else {
             alert("User not found.");
@@ -98,14 +83,11 @@ const TermsAndDocs = () => {
     try {
       const q =
         selectedDoc === "All Documents"
-          ? query(
-              collection(firestore, "documents"),
-              where("userId", "==", userId) // Filter by userId
-            )
+          ? query(collection(firestore, "documents"), where("userId", "==", userId))
           : query(
               collection(firestore, "documents"),
               where("documentType", "==", selectedDoc),
-              where("userId", "==", userId) // Filter by userId and document type
+              where("userId", "==", userId)
             );
 
       const querySnapshot = await getDocs(q);
@@ -171,7 +153,7 @@ const TermsAndDocs = () => {
             fileName: file.name,
             downloadURL,
             uploadedAt: serverTimestamp(),
-            userId, // Save the userId with the document
+            userId,
           });
           setMessage("File uploaded successfully!");
           fetchUploadedFiles();
@@ -202,34 +184,23 @@ const TermsAndDocs = () => {
   };
 
   if (role !== "tenant") {
-    return;
+    return null;
   }
 
   return (
-    <div className={styles.container}>
-      <aside className={styles.sidebar}>
-        <h1 className={styles.sidebarTitle}>DASHBOARD</h1>
-        <nav>
-          {sidebarItems.map((item, index) => (
-            <SidebarItem
-              key={index}
-              icon={item.icon}
-              label={item.label}
-              link={item.link}
-            />
-          ))}
-        </nav>
-      </aside>
-
-      <div className={styles.mainContent}>
-        <header className={styles.headermessage}>
-          <img
-            loading="lazy"
-            src={termsIcon}
-            alt="Terms Icon"
-            className={styles.headermessageIcon}
-          />
-          <h2 className={styles.headermessageTitle}>TERMS AND DOCUMENTS</h2>
+    <div className={styles.dashboardContainer}>
+      <button 
+        className={styles.sidebarToggle} 
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+      >
+        ☰
+      </button>
+      
+      <Sidebar className={sidebarOpen ? styles.sidebarOpen : ''} />
+      
+      <main className={styles.mainContent}>
+        <header className={styles.header}>
+          <h1>TERMS AND DOCUMENTS</h1>
         </header>
 
         <div className={styles.documentSection}>
@@ -293,27 +264,29 @@ const TermsAndDocs = () => {
                   loading="lazy"
                 />
                 <p className={styles.fileName}>{file.fileName}</p>
-                <a
-                  href={file.downloadURL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.viewButton}
-                >
-                  View
-                </a>
-                <button
-                  onClick={() =>
-                    handleDelete(file.id, `documents/${file.documentType}/${file.fileName}`)
-                  }
-                  className={styles.deleteButton}
-                >
-                  Delete
-                </button>
+                <div className={styles.buttonGroup}>
+                  <a
+                    href={file.downloadURL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.viewButton}
+                  >
+                    View
+                  </a>
+                  <button
+                    onClick={() =>
+                      handleDelete(file.id, `documents/${file.documentType}/${file.fileName}`)
+                    }
+                    className={styles.deleteButton}
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             ))}
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 };
