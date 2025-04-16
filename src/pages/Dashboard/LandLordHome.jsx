@@ -51,8 +51,8 @@ const LandLordHome = () => {
           <Link to="/Send Alert" className="dashboard-link">
             Send Alert
           </Link>
-          <Link to="/Manage Properties" className="dashboard-link">
-            Manage Properties
+          <Link to="/Payment" className="dashboard-link">
+            Manage Payments
           </Link>
           <Link to="/TenantsPage" className="dashboard-link">
             Manage Tenants

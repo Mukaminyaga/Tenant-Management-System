@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { firestore, auth } from "../config/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import Sidebar from './Sidebartenant'; 
 import styles from './MessageDashboard.module.css';
-import TenantSidebar from '../pages/TenantSidebar';
-import messagesIcon from './Images/messages.png';
+
 
 const MessageDashboard = () => {
   const [role, setRole] = useState(null);
   const [userId, setUserId] = useState(null);
-  const [message, setMessage] = useState('');
-  const [subject, setSubject] = useState('');
+
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,72 +44,80 @@ const MessageDashboard = () => {
     checkUserRole();
   }, [navigate]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add your message submission logic here
-    console.log({ subject, message });
-    // Reset form
-    setSubject('');
-    setMessage('');
-    // Show success message
-    alert("Your message has been sent successfully!");
-  };
-
   if (role !== "tenant") {
     return null;
   }
 
-  return (
-    <div className={styles.dashboard}>
-      <TenantSidebar />
-      
-      <main className={styles.mainContent}>
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission logic here
+  };
 
-        <section className={styles.content}>
-          <div className={styles.notificationCard}>
-            <h1 className={styles.notificationTitle}>Talk To Us!</h1>
-            <p className={styles.notificationText}>
-              We typically respond to messages within 24 hours. For urgent matters 
-              or maintenance requests, please use the appropriate channels.
+  return (
+    <div className={styles.dashboardContainer}>
+      {/* Mobile Sidebar Toggle */}
+      <button 
+        className={styles.sidebarToggle} 
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+      >
+        <div className={styles.hamburger}></div>
+      </button>
+
+      {/* Sidebar Component */}
+      <Sidebar className={sidebarOpen ? styles.sidebarOpen : ''} />
+      
+      {/* Main Content */}
+      <main className={styles.mainContent}>
+        <header className={styles.header}>
+          <h1>MESSAGES</h1>
+        </header>
+
+        <section className={styles.messageContent}>
+          <div className={styles.notification}>
+            <p>
+              Thank you for reaching out! <br />
+              We will respond to your inquiry within a few business hours.
+              <br />
+              If you have an emergency or fire-related situation, please
+              call 911 immediately. <br />
+              For any maintenance concerns, kindly submit a maintenance
+              request <a href="/Report Issue" className={styles.link}>here</a>.
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className={styles.messageForm}>
             <div className={styles.formGroup}>
-              <label htmlFor="subject" className={styles.formLabel}>
-                Subject
+
+              <label htmlFor="tenancyInput">
+                Your Information
               </label>
               <input
-                id="subject"
+                id="tenancyInput"
                 type="text"
                 className={styles.formInput}
-                placeholder="What's your message about?"
-                value={subject}
-                onChange={(e) => setSubject(e.target.value)}
+                placeholder="Enter your name and apartment number"
                 required
               />
             </div>
 
             <div className={styles.formGroup}>
-              <label htmlFor="message" className={styles.formLabel}>
-                Your Message
+
+              <label htmlFor="messageInput">
+                Message
               </label>
               <textarea
-                id="message"
-                className={`${styles.formInput} ${styles.textarea}`}
+                id="messageInput"
+                className={styles.formTextarea}
                 placeholder="Type your message here..."
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                rows={6}
                 required
+                rows={5}
               />
             </div>
 
-            <div className={styles.formActions}>
-              <button type="submit" className={styles.submitButton}>
-                Send Message
-              </button>
-            </div>
+            <button type="submit" className={styles.submitButton}>
+              Send Message
+            </button>
+
           </form>
         </section>
       </main>
