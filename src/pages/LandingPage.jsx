@@ -6,8 +6,50 @@ import { Link } from 'react-router-dom';
 import { FaArrowRight, FaShieldAlt, FaWifi, FaHome, FaStar, FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
 import styles from './LandingPage.module.css';
 
+// Counter Component
 const Counter = ({ target, suffix }) => {
-  const [count, setCount] = useState(0);}
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const targetNumber = parseInt(target);
+  const duration = 2000; // Animation duration in ms
+  const step = (targetNumber / duration) * 16; // 16ms per frame for 60fps
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          let start = 0;
+          const timer = setInterval(() => {
+            start += step;
+            if (start >= targetNumber) {
+              setCount(targetNumber);
+              clearInterval(timer);
+            } else {
+              setCount(Math.ceil(start));
+            }
+          }, 16);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, [targetNumber, step]);
+
+  return (
+    <div ref={ref} className={styles.counterNumber}>
+      {count}{suffix}
+    </div>
+  );
+};
 
 const stats = [
   { number: '100', suffix: '+', label: 'Happy Tenants'},
@@ -38,21 +80,21 @@ const services = [
 
 const reviews = [
   {
-    text: 'Moving into my TenantEase property was the best decision I made this year. The entire process was seamless and the management team is incredibly responsive to any needs.',
+    text: 'Moving into my TenantEase property was the best decision I made this year.',
     name: 'Sarah Johnson',
     title: 'Software Developer',
     rating: 5,
     date: 'March 2024'
   },
   {
-    text: 'Outstanding service and seamless experience! The maintenance team responds within hours, not days, and the online portal makes rent payments and requests so simple.',
+    text: 'Outstanding service and seamless experience! The maintenance team responds within hours.',
     name: 'Michael Chen',
     title: 'Marketing Director',
     rating: 5,
     date: 'February 2024'
   },
   {
-    text: 'After years of dealing with difficult landlords, TenantEase has been a breath of fresh air. Professional, transparent, and truly cares about tenant experience.',
+    text: 'After years of difficult landlords, TenantEase has been a breath of fresh air.',
     name: 'David Rodriguez',
     title: 'University Professor',
     rating: 5,
@@ -116,21 +158,22 @@ const LandingPage = () => {
               TenantEase redefines rental living with seamless digital solutions, premium properties, 
               and exceptional service—all designed to make your life easier.
             </p>
-                      {/* Stats Section */}
-                      <div className={styles.statsContainer}>
-            {stats.map((stat, index) => (
-              <div key={index} className={styles.statCard}>
-                <div className={styles.statContent}>
-                  <Counter target={stat.number} suffix={stat.suffix} />
-                  <div className={styles.statLabel}>{stat.label}</div>
+            
+            {/* Stats Section */}
+            <div className={styles.statsContainer}>
+              {stats.map((stat, index) => (
+                <div key={index} className={styles.statCard}>
+                  <h1 className={styles.statContent}>
+                    <Counter target={stat.number} suffix={stat.suffix} />
+                    <div className={styles.statLabel}>{stat.label}</div>
+                  </h1>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
 
             <div className={styles.ctaContainer}>
               <Link to="/SignUp" className={styles.primaryButton}>
-                 Get Started  <FaArrowRight className={styles.arrowIcon} />
+                Get Started <FaArrowRight className={styles.arrowIcon} />
               </Link>
               <Link to="/HowItWorks" className={styles.secondaryButton}>
                 Learn More
@@ -160,7 +203,6 @@ const LandingPage = () => {
         <section className={styles.trustSection}>
           <p className={styles.trustText}>Trusted by leading property managers and tenants nationwide</p>
           <div className={styles.trustLogos}>
-            {/* Replace with actual logo images */}
             <div className={styles.trustLogo}>REMAX</div>
             <div className={styles.trustLogo}>Coldwell Banker</div>
             <div className={styles.trustLogo}>Sotheby's</div>
@@ -178,7 +220,6 @@ const LandingPage = () => {
           <div className={styles.featuresGrid}>
             {features.map((feature, index) => (
               <div key={index} className={styles.featureCard}>
-                <div className={styles.featureIcon}>{feature.icon}</div>
                 <h3 className={styles.featureTitle}>{feature.title}</h3>
                 <p className={styles.featureDescription}>{feature.description}</p>
               </div>
@@ -197,7 +238,13 @@ const LandingPage = () => {
           
           <div className={styles.servicesGrid}>
             {services.map((service, index) => (
-              <ServiceCard key={index} {...service} />
+              <ServiceCard 
+                key={index}
+                icon={service.icon}
+                title={service.title}
+                description={service.description}
+                features={service.features}
+              />
             ))}
           </div>
         </section>
@@ -211,7 +258,14 @@ const LandingPage = () => {
           
           <div className={styles.reviewsGrid}>
             {reviews.map((review, index) => (
-              <ReviewCard key={index} {...review} />
+              <ReviewCard 
+                key={index}
+                text={review.text}
+                name={review.name}
+                title={review.title}
+                rating={review.rating}
+                date={review.date}
+              />
             ))}
           </div>
           
@@ -273,15 +327,6 @@ const LandingPage = () => {
                   <Link to="/Community" className={styles.footerLink}>Community</Link>
                 </nav>
               </div>
-              
-              {/* <div className={styles.footerMenu}>
-                <h3 className={styles.menuTitle}>Legal</h3>
-                <nav className={styles.menuLinks}>
-                  <Link to="/Privacy" className={styles.footerLink}>Privacy Policy</Link>
-                  <Link to="/Terms" className={styles.footerLink}>Terms of Service</Link>
-                  <Link to="/Accessibility" className={styles.footerLink}>Accessibility</Link>
-                </nav>
-              </div> */}
             </div>
             
             <div className={styles.footerContact}>
@@ -294,7 +339,7 @@ const LandingPage = () => {
                 <div className={styles.contactItem}>
                   <FaEnvelope className={styles.contactIcon} />
                   <a href='mailto:tenantease24@gmail.com'>tenantease24@gmail.com</a>
-                  </div>
+                </div>
                 <div className={styles.contactItem}>
                   <FaClock className={styles.contactIcon} />
                   <span>Mon-Fri: 9AM-6PM</span>
