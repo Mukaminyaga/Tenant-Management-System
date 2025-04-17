@@ -67,7 +67,7 @@ export const SendAlert = () => {
       return;
     }
 
-    const defaultMessage = "Friendly reminder: Rent is due by the 5th of this month. Please make your payment by the end of the month to avoid late fees.";
+    const defaultMessage = "Friendly reminder: Rent is due by the 5th of this month. Please make your payment by then to avoid late fees.";
     const rentSubject = "RENT REMINDER";
 
     try {
